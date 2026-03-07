@@ -1,6 +1,5 @@
 import type { Meta } from '@storybook/react-vite';
-import type LiveCodes from './livecodes';
-import { defaultMeta, livecodesStory } from './livecodes-story';
+import { defaultMeta, livecodesStory, type LiveCodes } from '../../src';
 
 const meta = {
   ...defaultMeta,

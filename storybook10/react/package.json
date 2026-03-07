@@ -12,6 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "dedent": "^1.7.2",
     "flat": "^6.0.1",
     "livecodes": "../../build/sdk",
     "react": "^19.2.0",
@@ -42,6 +43,7 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.48.0",
     "vite": "^8.0.0-beta.13",
+    "vite-plugin-ignore-dynamic-imports": "^1.0.2",
     "vitest": "^4.0.18"
   },
   "overrides": {

@@ -1,5 +1,5 @@
-import { languages } from '../../../../src/livecodes/languages/languages';
-import { processors } from '../../../../src/livecodes/languages/processors';
+import { languages } from '../../../src/livecodes/languages/languages';
+import { processors } from '../../../src/livecodes/languages/processors';
 
 declare global {
   interface Window {

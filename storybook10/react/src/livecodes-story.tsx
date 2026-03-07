@@ -7,10 +7,10 @@ import './deps';
 // prettier-ignore
 
 import type { Control } from '@storybook/addon-docs/blocks';
-import { defaultConfig } from '../../../../src/livecodes/config/default-config';
-import { appLanguages } from '../../../../src/livecodes/i18n/app-languages';
-import { languages } from '../../../../src/livecodes/languages/languages';
-import { starterTemplates } from '../../../../src/livecodes/templates/starter/index';
+import { defaultConfig } from '../../../src/livecodes/config/default-config';
+import { appLanguages } from '../../../src/livecodes/i18n/app-languages';
+import { languages } from '../../../src/livecodes/languages/languages';
+import { starterTemplates } from '../../../src/livecodes/templates/starter/index';
 import { themes } from './themes';
 
 const delimiter = '__';
@@ -235,19 +235,12 @@ const configArgTypes: Partial<
     control: 'inline-radio',
     options: ['vim', 'emacs'],
   },
-
-  attrs: {
-    description: 'Attributes to add to container element',
-    control: 'object',
-    required: false,
-    table: {
-      category: 'Container Element',
-    },
-  },
 };
 
 const argTypes: Partial<
-  ArgTypes<Props & Record<`config__${keyof Config}`, ReturnType<typeof getControlInfo>>>
+  ArgTypes<
+    Props & Record<`config__${keyof Config}`, ReturnType<typeof getControlInfo>> & { props: Props }
+  >
 > = {
   appUrl: {
     control: 'text',
@@ -297,32 +290,73 @@ const argTypes: Partial<
   config: {
     table: { disable: true },
   },
-  ...(Object.keys(defaultConfig) as Array<keyof Config>).reduce(
-    (acc, key) => {
-      if (key === 'version') return acc;
-      const defaultConfigValue = defaultConfig[key];
-      if (`config__${key}` in configArgTypes) {
-        // @ts-expect-error TODO
-        acc[`config__${key}`] = configArgTypes[`config__${key}`];
-      } else if (
-        defaultConfigValue &&
-        typeof defaultConfigValue === 'object' &&
-        !Array.isArray(defaultConfigValue)
-      ) {
-        Object.keys(defaultConfigValue).forEach((subkey) => {
+  ...(Object.keys(defaultConfig) as Array<keyof Config>)
+    .filter((key) => !key.includes('version'))
+    .reduce(
+      (acc, key) => {
+        const defaultConfigValue = defaultConfig[key];
+        if (`config__${key}` in configArgTypes) {
           // @ts-expect-error TODO
-          acc[`config__${key}__${subkey}`] =
+          acc[`config__${key}`] = configArgTypes[`config__${key}`];
+        } else if (
+          defaultConfigValue &&
+          typeof defaultConfigValue === 'object' &&
+          !Array.isArray(defaultConfigValue)
+        ) {
+          Object.keys(defaultConfigValue).forEach((subkey) => {
             // @ts-expect-error TODO
-            configArgTypes[`config__${key}__${subkey}`] ||
-            getControlInfo(`config__${key}__${subkey}`);
-        });
-      } else {
-        acc[`config__${key}`] = getControlInfo(`config__${key}`);
-      }
-      return acc;
+            acc[`config__${key}__${subkey}`] =
+              // @ts-expect-error TODO
+              configArgTypes[`config__${key}__${subkey}`] ||
+              getControlInfo(`config__${key}__${subkey}`);
+          });
+        } else {
+          acc[`config__${key}`] = getControlInfo(`config__${key}`);
+        }
+        return acc;
+      },
+      {} as Record<`config__${keyof Config}`, ReturnType<typeof getControlInfo>>,
+    ),
+
+  props: {
+    control: 'object',
+    required: false,
+    table: {
+      readonly: true,
+      category: 'Props',
     },
-    {} as Record<`config__${keyof Config}`, ReturnType<typeof getControlInfo>>,
-  ),
+  },
+
+  className: {
+    control: 'text',
+    required: false,
+    table: {
+      category: 'Styles',
+    },
+  },
+  style: {
+    control: 'object',
+    required: false,
+    table: {
+      category: 'Styles',
+    },
+  },
+  height: {
+    control: 'text',
+    required: false,
+    table: {
+      category: 'Styles',
+    },
+  },
+
+  // attrs: {
+  //   description: 'Attributes to add to container element',
+  //   control: 'object',
+  //   required: false,
+  //   table: {
+  //     category: 'Container Element',
+  //   },
+  // },
 };
 
 export const defaultMeta = {
@@ -333,18 +367,20 @@ export const defaultMeta = {
   argTypes,
 } satisfies Meta<typeof LiveCodes>;
 
-export type Story = StoryObj<Meta<typeof LiveCodes>>;
+type StoryProps = Props & { props: Props };
 
-export const livecodesStory = (props: Props): StoryObj<Meta<typeof LiveCodes>> => {
+export type Story = StoryObj<Meta<StoryProps>>;
+
+export const livecodesStory = (props: Props): Story => {
   const template = (args: Props) => <LiveCodes {...unflatten(args, { delimiter })} />;
-  const story = template.bind({}) as StoryObj<Meta<typeof LiveCodes>>;
-
-  story.argTypes = argTypes;
+  const story = template.bind({}) as Story;
 
   const { params, ...options } = { ...props };
   if (typeof options.config !== 'string') {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { version, ...config } = defaultConfig;
     options.config = {
-      ...defaultConfig,
+      ...config,
       ...(options.config || {}),
     };
   }
@@ -358,6 +394,8 @@ export const livecodesStory = (props: Props): StoryObj<Meta<typeof LiveCodes>> =
     appUrl,
     ...flatten(options, { delimiter }),
     ...(params ? { params } : {}),
+    height: options.height,
+    props,
   };
 
   const code = `
