@@ -8,6 +8,7 @@ import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import jsdoc from 'eslint-plugin-jsdoc';
 import noOnlyTests from 'eslint-plugin-no-only-tests';
+import storybook from 'eslint-plugin-storybook';
 import globals from 'globals';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -194,4 +195,5 @@ export default [
       'import/no-extraneous-dependencies': 'off',
     },
   },
+  ...storybook.configs['flat/recommended'],
 ];
