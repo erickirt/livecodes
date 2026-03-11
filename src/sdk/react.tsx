@@ -1,5 +1,5 @@
 // @ts-ignore
-// eslint-disable-next-line import/no-unresolved
+// eslint-disable-next-line import/no-extraneous-dependencies
 import React, { useEffect, useRef, useState } from 'react';
 import { createPlayground } from './index';
 // eslint-disable-next-line import/order
