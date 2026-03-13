@@ -40,7 +40,7 @@ import LiveCodes from 'livecodes/react';
 
 export default function App() {
   const options = ${stringify(options)};
-  return (<LiveCodes {...options}></LiveCodes>);
+  return (<LiveCodes {...options} />);
 }
 
 `.trimStart();
@@ -59,30 +59,23 @@ const options = ${stringify(options)};
 
   const svelteCode = `
 <script>
-import { onMount } from 'svelte';
-import { createPlayground } from 'livecodes';
+import LiveCodes from 'livecodes/svelte';
 
-let options = $state(${stringify(options)});
-let container = $state(null);
-onMount(() => {
-  createPlayground(container, options);
-});
+export default function App() {
+  const options = ${stringify(options)};
+}
 </script>
 
-<div bind:this="{container}"></div>
+<LiveCodes {...options} />
 
 `.trimStart();
 
   const solidCode = `
-import { createPlayground, type EmbedOptions } from 'livecodes';
+import LiveCodes from 'livecodes/solid';
 
 export default function App() {
-  const options: EmbedOptions = ${stringify(options)};
-  const onMounted = (container: HTMLElement) => {
-    createPlayground(container, options);
-  };
-
-  return <div ref={onMounted}></div>;
+  const options = ${stringify(options)};
+  return (<LiveCodes {...options} />);
 }
 
 `.trimStart();
