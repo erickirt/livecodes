@@ -2,7 +2,9 @@ const esbuild = require('esbuild');
 const { minify: minifyHTML, default: minifyHTMLPlugin } = require('esbuild-plugin-minify-html');
 const fs = require('fs');
 const path = require('path');
+const { exec } = require('child_process');
 
+const { bundleTypes } = require('./bundle-types');
 const { applyHash } = require('./hash');
 const { injectCss } = require('./inject-css');
 const { buildStyles } = require('./styles');
@@ -97,6 +99,7 @@ const sdkBuild = async () => {
     copyFile('LICENSE', sdkOutDir + 'LICENSE'),
     copyFile('README.md', sdkOutDir + 'README.md'),
     copyFile(sdkSrcDir + 'package.sdk.json', sdkOutDir + 'package.json'),
+    copyFile(sdkSrcDir + 'svelte.svelte', sdkOutDir + 'svelte.svelte'),
   ]);
 
   const sdkOptions = {
@@ -137,6 +140,12 @@ const sdkBuild = async () => {
     }),
     esbuild.build({
       ...sdkOptions,
+      entryPoints: [sdkSrcDir + 'svelte.ts'],
+      outdir: undefined,
+      outfile: path.resolve(outDir, sdkOutDir, 'svelte.js'),
+    }),
+    esbuild.build({
+      ...sdkOptions,
       entryPoints: [sdkSrcDir + 'vue.ts'],
       outdir: undefined,
       outfile: path.resolve(outDir, sdkOutDir, 'vue.js'),
@@ -145,6 +154,14 @@ const sdkBuild = async () => {
         '@vue/runtime-core': 'vue',
       },
     }),
+    /** @type {Promise<void>} */ (
+      new Promise((resolve) => {
+        exec('npx tsc --emitDeclarationOnly -p tsconfig.sdk.json', () => {
+          bundleTypes();
+          resolve();
+        });
+      })
+    ),
   ]);
 };
 

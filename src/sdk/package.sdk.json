@@ -23,6 +23,10 @@
     "./react": {
       "import": "./react.js"
     },
+    "./svelte": {
+      "svelte": "./svelte.svelte",
+      "default": "./svelte.js"
+    },
     "./vue": {
       "import": "./vue.js"
     },
