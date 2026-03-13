@@ -13,6 +13,14 @@ const dirname =
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
+  resolve: {
+    alias: {
+      vue: path.resolve(dirname, '../common/vue-mock.ts'),
+    },
+  },
+  define: {
+    process: '{ env: {} }',
+  },
   plugins: [solid()],
   test: {
     projects: [

@@ -140,6 +140,13 @@ const sdkBuild = async () => {
     }),
     esbuild.build({
       ...sdkOptions,
+      entryPoints: [sdkSrcDir + 'solid.ts'],
+      outdir: undefined,
+      outfile: path.resolve(outDir, sdkOutDir, 'solid.js'),
+      external: ['solid-js'],
+    }),
+    esbuild.build({
+      ...sdkOptions,
       entryPoints: [sdkSrcDir + 'svelte.ts'],
       outdir: undefined,
       outfile: path.resolve(outDir, sdkOutDir, 'svelte.js'),

@@ -23,6 +23,9 @@
     "./react": {
       "import": "./react.js"
     },
+    "./solid": {
+      "import": "./solid.js"
+    },
     "./svelte": {
       "svelte": "./LiveCodes.svelte",
       "default": "./svelte.js"
