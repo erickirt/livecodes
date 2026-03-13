@@ -7,7 +7,7 @@
     "storybook": "storybook dev -p 6007",
     "build-storybook": "storybook build"
   },
-    "imports": {
+  "imports": {
     "#src": "./src/index.ts"
   },
   "dependencies": {

@@ -4,6 +4,7 @@
 /// <reference types="vitest/config" />
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { defineConfig } from 'vite';
+import ignoreDynamicImports from 'vite-plugin-ignore-dynamic-imports';
 
 // https://vite.dev/config/
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
@@ -15,7 +16,20 @@ const dirname =
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
-  plugins: [svelte()],
+  resolve: {
+    alias: {
+      vue: path.resolve(dirname, '../common/vue-mock.ts'),
+    },
+  },
+  define: {
+    process: '{ env: {} }',
+  },
+  plugins: [
+    svelte(),
+    ignoreDynamicImports({
+      include: ['**/**/*.@(js|jsx|mjs|ts|tsx)'],
+    }),
+  ],
   test: {
     projects: [
       {

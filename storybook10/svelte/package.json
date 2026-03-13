@@ -4,12 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6008",
     "build-storybook": "storybook build"
+  },
+  "imports": {
+    "#src": "./src/index.ts"
+  },
+  "dependencies": {
+    "flat": "6.0.1",
+    "livecodes": "../../build/sdk"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.1",

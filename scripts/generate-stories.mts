@@ -4,7 +4,7 @@ import type { StoryDef } from '../storybook10/common';
 
 const basePath = 'storybook10';
 const definitionsPath = path.join(basePath, '_stories');
-const frameworks = ['react', 'vue'];
+const frameworks = ['react', 'svelte', 'vue'];
 
 const readDefs = async (dir: string) => {
   const definitions: Array<{ name: string; title: string; stories: StoryDef }> = [];
@@ -28,7 +28,7 @@ const readDefs = async (dir: string) => {
 };
 const storyDefs = await readDefs(definitionsPath);
 
-const createStories = (def: { name: string; title: string; stories: StoryDef }) =>
+const createStories = (def: { name: string; title: string; stories: StoryDef }): string =>
   `// AUTO-GENERATED — do not edit
 
 // eslint-disable-next-line import/no-unresolved
@@ -48,11 +48,12 @@ ${Object.entries(def.stories)
   .join('\n')}
 `;
 
-for (const fw of frameworks) {
-  for (const def of storyDefs) {
+for (const def of storyDefs) {
+  const stories = createStories(def);
+  for (const fw of frameworks) {
     const parentDir = path.dirname(def.title);
     const outPath = path.join(basePath, fw, 'stories', parentDir, `${def.name}.stories.ts`);
     fs.mkdirSync(path.dirname(outPath), { recursive: true });
-    fs.writeFileSync(outPath, createStories(def));
+    fs.writeFileSync(outPath, stories);
   }
 }

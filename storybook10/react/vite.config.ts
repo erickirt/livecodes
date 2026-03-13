@@ -18,7 +18,7 @@ const dirname =
 export default defineConfig({
   resolve: {
     alias: {
-      vue: path.resolve(__dirname, '../common/vue-mock.ts'),
+      vue: path.resolve(dirname, '../common/vue-mock.ts'),
     },
   },
   define: {

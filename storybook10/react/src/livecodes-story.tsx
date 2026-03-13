@@ -14,27 +14,27 @@ export const defaultMeta = {
 export type Story = StoryObj<Meta<Props & { props: Props }>>;
 
 export const livecodesStory = (props: Props): Story => {
-  const template = (args: Props) => <LiveCodes {...unflatten(args, { delimiter })} />;
-  const story = template.bind({}) as Story;
   const { params, ...options } = { ...props };
-  story.args = {
-    appUrl,
-    ...flatten(options, { delimiter }),
-    ...(params ? { params } : {}),
-    height: options.height,
-    props,
-  };
-  story.parameters = {
-    docs: {
-      source: {
-        code: getCode(props),
-        language: 'jsx',
-        type: 'auto',
-        format: true,
+  return {
+    args: {
+      appUrl,
+      ...flatten(options, { delimiter }),
+      ...(params ? { params } : {}),
+      height: options.height,
+      props,
+    },
+    render: (args) => <LiveCodes {...unflatten(args, { delimiter })} />,
+    parameters: {
+      docs: {
+        source: {
+          code: getCode(props),
+          language: 'jsx',
+          type: 'auto',
+          format: true,
+        },
       },
     },
   };
-  return story;
 };
 
 const getCode = (props: Props) =>
