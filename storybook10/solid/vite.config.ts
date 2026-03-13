@@ -7,7 +7,9 @@ import { playwright } from '@vitest/browser-playwright';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
+import ignoreDynamicImports from 'vite-plugin-ignore-dynamic-imports';
 import solid from 'vite-plugin-solid';
+
 const dirname =
   typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
@@ -21,7 +23,12 @@ export default defineConfig({
   define: {
     process: '{ env: {} }',
   },
-  plugins: [solid()],
+  plugins: [
+    solid(),
+    ignoreDynamicImports({
+      include: ['**/**/*.@(js|jsx|mjs|ts|tsx)'],
+    }),
+  ],
   test: {
     projects: [
       {

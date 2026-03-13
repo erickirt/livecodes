@@ -3,6 +3,7 @@ import type { Preview } from 'storybook-solidjs-vite';
 const preview: Preview = {
   parameters: {
     controls: {
+      disableSaveFromUI: true,
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
