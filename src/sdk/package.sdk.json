@@ -24,7 +24,7 @@
       "import": "./react.js"
     },
     "./svelte": {
-      "svelte": "./svelte.svelte",
+      "svelte": "./LiveCodes.svelte",
       "default": "./svelte.js"
     },
     "./vue": {

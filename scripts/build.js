@@ -99,7 +99,7 @@ const sdkBuild = async () => {
     copyFile('LICENSE', sdkOutDir + 'LICENSE'),
     copyFile('README.md', sdkOutDir + 'README.md'),
     copyFile(sdkSrcDir + 'package.sdk.json', sdkOutDir + 'package.json'),
-    copyFile(sdkSrcDir + 'svelte.svelte', sdkOutDir + 'svelte.svelte'),
+    copyFile(sdkSrcDir + 'LiveCodes.svelte', sdkOutDir + 'LiveCodes.svelte'),
   ]);
 
   const sdkOptions = {

@@ -1,6 +1,6 @@
 import type { EmbedOptions, Playground } from './models';
 export { createPlayground } from './index';
-export type { EmbedOptions, Playground };
+export type { Code, Config, EmbedOptions, Language, Playground } from './models';
 export interface Props extends EmbedOptions {
   class?: string;
   style?: Record<string, string>;

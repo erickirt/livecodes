@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createPlayground } from './index';
 // eslint-disable-next-line import/order
 import type { EmbedOptions, Playground } from './models';
+export type { Code, Config, EmbedOptions, Language, Playground } from './models';
 
 export interface Props extends EmbedOptions {
   className?: string;

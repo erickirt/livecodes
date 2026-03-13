@@ -6,7 +6,7 @@ The Svelte SDK is a thin wrapper around the [JavaScript SDK](js-ts.mdx) to provi
 
 It requires Svelte 5 and uses [runes](https://svelte.dev/docs/svelte/what-are-runes) for reactivity.
 
-It has a simple [implementation](https://github.com/live-codes/livecodes/blob/develop/src/sdk/svelte.svelte) which you can easily modify in case you need.
+It has a simple [implementation](https://github.com/live-codes/livecodes/blob/develop/src/sdk/LiveCodes.svelte) which you can easily modify in case you need.
 
 ## Demo
 
@@ -48,6 +48,9 @@ Prop types are exported as `Props` from `livecodes/svelte`.
 <LiveCodes {...options} />
 ```
 <p />
+
+For convenience, the following types are also exported from `livecodes/svelte`:<br />
+`Code`, `Config`, `EmbedOptions`, `Language`, `Playground`.
 
 TypeScript types are [documented here](../api/globals.md).
 

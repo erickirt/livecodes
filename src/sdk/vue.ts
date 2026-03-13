@@ -19,6 +19,7 @@ import { h, onMounted, onUnmounted, ref, watch } from '@vue/runtime-core';
 import { createPlayground } from './index';
 // eslint-disable-next-line import/order
 import type { EmbedOptions, Playground } from './models';
+export type { Code, Config, EmbedOptions, Language, Playground } from './models';
 
 export interface Props extends EmbedOptions {
   height?: string;
