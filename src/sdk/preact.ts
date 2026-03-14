@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-unresolved */
 // @ts-ignore
 import { useEffect, useRef, useState } from 'preact/hooks';
@@ -5,6 +6,8 @@ import { useEffect, useRef, useState } from 'preact/hooks';
 import { createPlayground } from './index';
 // @ts-ignore
 import type { JSX } from 'preact';
+// @ts-ignore
+import { jsx } from 'react/jsx-runtime';
 import type { EmbedOptions, Playground } from './models';
 export type { Code, Config, EmbedOptions, Language, Playground } from './models';
 
@@ -94,6 +97,5 @@ export default function LiveCodes(props: Props): JSX.Element {
     },
     [],
   );
-
-  return <div ref={containerRef} className={className} style={style} data-height={height}></div>;
+  return /* @__PURE__ */ jsx('div', { ref: containerRef, className, style, 'data-height': height });
 }

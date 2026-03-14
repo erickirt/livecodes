@@ -48,6 +48,6 @@
     "typeRoots": ["node_modules/@types"]
   },
   "compileOnSave": true,
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/sdk/react.tsx"],
   "exclude": ["**/node_modules/**"]
 }

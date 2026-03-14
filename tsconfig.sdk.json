@@ -46,5 +46,5 @@
   },
   "compileOnSave": true,
   "include": ["src/sdk/**/*.ts", "src/sdk/**/*.tsx"],
-  "exclude": ["**/node_modules/**", "**/__tests__/**"]
+  "exclude": ["**/node_modules/**", "**/__tests__/**", "**/*.umd.ts"]
 }
