@@ -132,6 +132,15 @@ const sdkBuild = async () => {
     }),
     esbuild.build({
       ...sdkOptions,
+      entryPoints: [sdkSrcDir + 'preact.tsx'],
+      outdir: undefined,
+      outfile: path.resolve(outDir, sdkOutDir, 'preact.js'),
+      external: ['preact'],
+      jsx: 'automatic',
+      jsxImportSource: 'preact',
+    }),
+    esbuild.build({
+      ...sdkOptions,
       entryPoints: [sdkSrcDir + 'react.tsx'],
       outdir: undefined,
       outfile: path.resolve(outDir, sdkOutDir, 'react.js'),

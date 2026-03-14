@@ -23,6 +23,9 @@
     "./react": {
       "import": "./react.js"
     },
+    "./preact": {
+      "import": "./preact.js"
+    },
     "./solid": {
       "import": "./solid.js"
     },

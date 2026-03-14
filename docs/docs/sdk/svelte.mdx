@@ -6,15 +6,13 @@ The Svelte SDK is a thin wrapper around the [JavaScript SDK](js-ts.mdx) to provi
 
 It requires Svelte 5 and uses [runes](https://svelte.dev/docs/svelte/what-are-runes) for reactivity.
 
-It has a simple [implementation](https://github.com/live-codes/livecodes/blob/develop/src/sdk/LiveCodes.svelte) which you can easily modify in case you need.
-
 ## Demo
 
 export const svelteSDKDemo = {
   svelte: `<script>\n  import LiveCodes from "livecodes/svelte";\n\n  const params = {\n    html: "<h1>Hello World!</h1>",\n    css: "h1 {color: blue;}",\n    js: 'console.log("Hello, World!")',\n    console: "open",\n  };\n</script>\n\n<LiveCodes {params} />\n`,
 };
 
-<LiveCodes params={svelteSDKDemo} height="80vh" />
+<LiveCodes params={svelteSDKDemo} height="60vh" />
 
 ## Installation
 
