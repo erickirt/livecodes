@@ -1,1 +1,1 @@
-export type { Meta, StoryObj } from '@storybook/svelte-vite';
+export type { Meta, StoryObj, SvelteRenderer } from '@storybook/svelte-vite';

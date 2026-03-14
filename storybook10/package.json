@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "format-stories": "run-p format-stories:*",
+    "format-stories:preact": "prettier preact/stories --write",
     "format-stories:react": "prettier react/stories --write",
     "format-stories:solid": "prettier solid/stories --write",
     "format-stories:svelte": "prettier svelte/stories --write",

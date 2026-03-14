@@ -18,12 +18,12 @@ export const livecodesStory = (props: Props): Story => {
   return {
     args: {
       appUrl,
-      ...(flatten(options, { delimiter }) as Record<string, unknown>),
+      ...flatten(options, { delimiter }),
       ...(params ? { params } : {}),
       height: options.height,
       props,
-    },
-    render: (args: Props) => <LiveCodes {...unflatten(args, { delimiter })} />,
+    } as Partial<Meta<Props & { props: Props }>>,
+    render: (args) => <LiveCodes {...unflatten(args, { delimiter })} />,
     parameters: {
       docs: {
         source: {
@@ -39,7 +39,7 @@ export const livecodesStory = (props: Props): Story => {
 
 const getCode = (props: Props) =>
   `
-import LiveCodes from "livecodes/solid";
+import LiveCodes from "livecodes/preact";
 
 export default function App() {
   const options = ${JSON.stringify(props, null, 2).split('\n').join('\n  ')};

@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
 import { flatten, unflatten } from 'flat';
 import { appUrl, argTypes, delimiter } from '../../common';
 import { LiveCodes, type Props } from './livecodes';
+import type { Meta, StoryObj } from './storybook';
 
 export const defaultMeta = {
   component: LiveCodes,
@@ -43,7 +43,7 @@ import LiveCodes from "livecodes/react";
 
 export default function App() {
   const options = ${JSON.stringify(props, null, 2).split('\n').join('\n  ')};
-  return <LiveCodes {...options}></LiveCodes>;
+  return <LiveCodes {...options} />;
 }
 
 `.trimStart();

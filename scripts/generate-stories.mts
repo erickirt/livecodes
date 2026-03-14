@@ -4,7 +4,7 @@ import type { StoryDef } from '../storybook10/common';
 
 const basePath = 'storybook10';
 const definitionsPath = path.join(basePath, '_stories');
-const frameworks = ['react', 'solid', 'svelte', 'vue'];
+const frameworks = ['preact', 'react', 'solid', 'svelte', 'vue'];
 
 const readDefs = async (dir: string) => {
   const definitions: Array<{ name: string; title: string; stories: StoryDef }> = [];

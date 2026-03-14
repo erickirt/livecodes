@@ -1,9 +1,9 @@
-import type { Meta, StoryObj, SvelteRenderer } from '@storybook/svelte-vite';
 import { flatten, unflatten } from 'flat';
 import type { ComponentAnnotations } from 'storybook/internal/types';
 import type { Component } from 'svelte';
 import { appUrl, argTypes, delimiter } from '../../common';
 import { LiveCodes, type Props } from './livecodes';
+import type { Meta, StoryObj, SvelteRenderer } from './storybook';
 
 export const defaultMeta = {
   component: LiveCodes,

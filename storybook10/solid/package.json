@@ -4,9 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "preview": "vite preview",
     "storybook": "storybook dev -p 6009",
     "build-storybook": "storybook build"
   },
@@ -16,8 +13,7 @@
   "dependencies": {
     "flat": "6.0.1",
     "livecodes": "../../build/sdk",
-    "solid-js": "^1.9.10",
-    "vite-plugin-ignore-dynamic-imports": "^1.0.2"
+    "solid-js": "^1.9.10"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.1",
@@ -32,6 +28,7 @@
     "storybook-solidjs-vite": "^10.0.9",
     "typescript": "~5.9.3",
     "vite": "^8.0.0-beta.13",
+    "vite-plugin-ignore-dynamic-imports": "^1.0.2",
     "vite-plugin-solid": "^2.11.10",
     "vitest": "^4.0.18"
   },

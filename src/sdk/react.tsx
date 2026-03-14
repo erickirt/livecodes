@@ -42,7 +42,7 @@ export interface Props extends EmbedOptions {
  *     content: '# Hello World!',
  *   },
  * };
- * export const Playground = () => <LiveCodes config={config} />;
+ * export default () => <LiveCodes config={config} />;
  * ```
  */
 export default function LiveCodes(props: Props): React.ReactElement<Props> {

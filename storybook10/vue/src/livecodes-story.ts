@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { flatten, unflatten } from 'flat';
 import { computed } from 'vue';
 import { appUrl, argTypes, delimiter } from '../../common';
 import { LiveCodes, type Props } from './livecodes';
+import type { Meta, StoryObj } from './storybook';
 
 export const defaultMeta = {
   component: LiveCodes as any,
