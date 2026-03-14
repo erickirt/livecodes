@@ -49,7 +49,6 @@ const getControlInfo = (name: string, defaultObj = defaultConfig) => {
 const configArgTypes: Partial<
   ArgTypes<Props & Record<`config__${keyof Config}`, ReturnType<typeof getControlInfo>>>
 > = {
-  // config__tags: getControlInfo('config__tags'),
   config__view: {
     ...getControlInfo('config__view'),
     control: 'inline-radio',
@@ -58,7 +57,7 @@ const configArgTypes: Partial<
   config__mode: {
     ...getControlInfo('config__mode'),
     control: 'inline-radio',
-    options: ['full', 'editor', 'codeblock', 'result'],
+    options: ['full', 'focus', 'lite', 'simple', 'editor', 'codeblock', 'result'],
   },
   config__theme: {
     ...getControlInfo('config__theme'),
@@ -219,7 +218,7 @@ const configArgTypes: Partial<
   config__editor: {
     ...getControlInfo('config__editor'),
     control: 'inline-radio',
-    options: ['monaco', 'codemirror', 'codejar'],
+    options: ['monaco', 'codemirror', 'codejar', 'auto'],
   },
   config__fontFamily: {
     ...getControlInfo('config__fontFamily'),
