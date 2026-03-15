@@ -39,16 +39,19 @@
     return opts as Omit<EmbedOptions, 'config'>;
   }
 
-  function styleToString(obj: Record<string, string>): string {
-    return Object.entries(obj)
-      .map(([key, val]) => {
-        const kebab = key.replace(/([A-Z])/g, '-$1').toLowerCase();
-        return `${kebab}: ${val}`;
-      })
-      .join('; ');
+  function styleToString(obj: Record<string, string>, height?: string): string {
+    return (
+      Object.entries(obj)
+        .filter(([key]) => (key === 'height' && height ? false : true))
+        .map(([key, val]) => {
+          const kebab = key.replace(/([A-Z])/g, '-$1').toLowerCase();
+          return `${kebab}: ${val}`;
+        })
+        .join('; ') + (height ? `; height: ${Number(height) ? `${height}px` : height}` : '')
+    );
   }
 
-  let styleString = $derived(styleToString(style));
+  let styleString = $derived(styleToString(style, height));
 
   $effect(() => {
     if (!container) return;

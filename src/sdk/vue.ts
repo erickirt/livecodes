@@ -95,7 +95,10 @@ const LiveCodes: LiveCodesComponent = {
       if (!containerRef.value || !playground.value) return;
       const { height: _height, ...options } = newProps;
 
-      height.value = _height || '';
+      if (_height) height.value = _height;
+      if (height.value) {
+        containerRef.value.style.height = Number(height.value) ? `${height.value}px` : height.value;
+      }
 
       // eslint-disable-next-line prefer-const
       let { config, ...otherOptions } = options;

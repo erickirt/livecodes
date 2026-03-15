@@ -71,6 +71,7 @@ class LiveCodesElement extends HTMLElement {
   public connectedCallback(): void {
     this._connected = true;
     this._scheduleUpdate();
+    this.style.display = 'block';
   }
 
   public disconnectedCallback(): void {
@@ -180,9 +181,12 @@ class LiveCodesElement extends HTMLElement {
 
     const height = this.getAttribute('height');
     if (height) {
-      this.dataset.height = height;
+      const ht = Number(height) ? `${height}px` : height;
+      this.dataset.height = ht;
+      this.style.height = ht;
     } else {
-      delete this.dataset.height;
+      this.dataset.height = '';
+      this.style.height = '';
     }
 
     if (!this._playground || this._otherOptionsCache !== otherOptionsStr) {

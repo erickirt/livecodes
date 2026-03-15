@@ -64,7 +64,7 @@ export default function LiveCodes(props: Props): JSX.Element {
     const { className, style, height, sdkReady, config, ...otherOptions } = props;
     setClassName(className || '');
     setStyle(style || {});
-    setHeight(height);
+    setHeight(props.height && Number(props.height) ? `${props.height}px` : props.height);
 
     if (!playground || otherOptionsCache !== JSON.stringify(otherOptions)) {
       setOtherOptionsCache(JSON.stringify(otherOptions));
@@ -97,5 +97,10 @@ export default function LiveCodes(props: Props): JSX.Element {
     },
     [],
   );
-  return /* @__PURE__ */ jsx('div', { ref: containerRef, className, style, 'data-height': height });
+  return /* @__PURE__ */ jsx('div', {
+    ref: containerRef,
+    className,
+    style: { ...style, ...(height ? { height } : {}) },
+    'data-height': height,
+  });
 }

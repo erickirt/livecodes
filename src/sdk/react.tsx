@@ -59,7 +59,7 @@ export default function LiveCodes(props: Props): React.ReactElement<Props> {
     const { className, style, height, sdkReady, config, ...otherOptions } = props;
     setClassName(className || '');
     setStyle(style || {});
-    setHeight(height);
+    setHeight(props.height && Number(props.height) ? `${props.height}px` : props.height);
 
     if (!playground || otherOptionsCache !== JSON.stringify(otherOptions)) {
       setOtherOptionsCache(JSON.stringify(otherOptions));
@@ -93,5 +93,12 @@ export default function LiveCodes(props: Props): React.ReactElement<Props> {
     [],
   );
 
-  return <div ref={containerRef} className={className} style={style} data-height={height}></div>;
+  return (
+    <div
+      ref={containerRef}
+      className={className}
+      style={{ ...style, ...(height ? { height } : {}) }}
+      data-height={height}
+    />
+  );
 }

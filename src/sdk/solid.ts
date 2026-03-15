@@ -1,7 +1,14 @@
-import { createComponent, type Props } from '@live-codes/solid-sdk';
-import { createPlayground } from './index';
+import { createComponent } from '@live-codes/solid-sdk';
+import type { Component, JSX } from 'solid-js';
+import { createPlayground, type EmbedOptions, type Playground } from './index';
 export type { Code, Config, EmbedOptions, Language, Playground } from './models';
-export { type Props };
+
+export interface Props extends EmbedOptions {
+  class?: string;
+  style?: JSX.CSSProperties;
+  height?: string;
+  sdkReady?: (sdk: Playground) => void;
+}
 
 /**
  * A SolidJS component that renders a LiveCodes playground.
@@ -36,6 +43,6 @@ export { type Props };
  * ```
  */
 
-const LiveCodes = createComponent(createPlayground as any);
+const LiveCodes = createComponent(createPlayground as any) as Component<Props>;
 
 export default LiveCodes;
