@@ -8,7 +8,8 @@
     "format-stories:react": "prettier react/stories --write",
     "format-stories:solid": "prettier solid/stories --write",
     "format-stories:svelte": "prettier svelte/stories --write",
-    "format-stories:vue": "prettier vue/stories --write"
+    "format-stories:vue": "prettier vue/stories --write",
+    "format-stories:web-components": "prettier web-components/stories --write"
   },
   "keywords": [],
   "author": "",
