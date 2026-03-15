@@ -36,6 +36,9 @@
     "./vue": {
       "import": "./vue.js"
     },
+    "./web-components": {
+      "import": "./web-components.js"
+    },
     "./package.json": "./package.json"
   }
 }

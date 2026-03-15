@@ -92,6 +92,7 @@ const sidebars: SidebarsConfig = {
             'sdk/svelte',
             'sdk/solid',
             'sdk/preact',
+            'sdk/web-components',
             'sdk/headless',
           ],
         },

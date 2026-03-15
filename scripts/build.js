@@ -134,9 +134,11 @@ const sdkBuild = async () => {
     }),
     esbuild.build({
       ...sdkOptions,
-      entryPoints: [sdkSrcDir + 'livecodes.umd.ts'],
-      outdir: undefined,
-      outfile: path.resolve(outDir, sdkOutDir, 'livecodes.umd.js'),
+      entryPoints: {
+        'livecodes.umd': sdkSrcDir + 'livecodes.umd.ts',
+        'web-components': sdkSrcDir + 'web-components.ts',
+      },
+      outdir: path.resolve(outDir, sdkOutDir),
       format: 'iife',
     }),
     /** @type {Promise<void>} */ (
