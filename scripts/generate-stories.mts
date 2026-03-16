@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import type { StoryDef } from '../storybook10/common';
+import type { StoryDef } from '../storybook/common';
 
-const basePath = 'storybook10';
+const basePath = 'storybook';
 const definitionsPath = path.join(basePath, '_stories');
 const frameworks = ['preact', 'react', 'solid', 'svelte', 'vue', 'web-components'];
 

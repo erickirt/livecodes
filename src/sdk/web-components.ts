@@ -180,13 +180,10 @@ class LiveCodesElement extends HTMLElement {
     const configStr = JSON.stringify(config || '');
 
     const height = this.getAttribute('height');
-    if (height) {
+    if (height != null) {
       const ht = Number(height) ? `${height}px` : height;
       this.dataset.height = ht;
       this.style.height = ht;
-    } else {
-      this.dataset.height = '';
-      this.style.height = '';
     }
 
     if (!this._playground || this._otherOptionsCache !== otherOptionsStr) {

@@ -1,34 +1,42 @@
 {
-  "name": "livecodes-storybook",
+  "name": "storybook",
   "version": "1.0.0",
-  "description": "Stories for LiveCodes",
+  "description": "",
   "scripts": {
-    "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
-    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider build-storybook -o ../build/stories",
-    "typecheck": "tsc --noEmit"
+    "postinstall": "run-p install:*",
+    "install:preact": "cd preact && npm ci --force",
+    "install:react": "cd react && npm ci --force",
+    "install:solid": "cd solid && npm ci --force",
+    "install:svelte": "cd svelte && npm ci --force",
+    "install:vue": "cd vue && npm ci --force",
+    "install:web-components": "cd web-components && npm ci --force",
+    "format-stories": "run-p format-stories:*",
+    "format-stories:preact": "prettier preact/stories --write",
+    "format-stories:react": "prettier react/stories --write",
+    "format-stories:solid": "prettier solid/stories --write",
+    "format-stories:svelte": "prettier svelte/stories --write",
+    "format-stories:vue": "prettier vue/stories --write",
+    "format-stories:web-components": "prettier web-components/stories --write",
+    "build": "run-p build:* && node ./scripts/copy-index.mjs",
+    "build:preact": "cd preact && npm run build-storybook -- -o ../../build/storybook/preact",
+    "build:react": "cd react && npm run build-storybook -- -o ../../build/storybook/react",
+    "build:solid": "cd solid && npm run build-storybook -- -o ../../build/storybook/solid",
+    "build:svelte": "cd svelte && npm run build-storybook -- -o ../../build/storybook/svelte",
+    "build:vue": "cd vue && npm run build-storybook -- -o ../../build/storybook/vue",
+    "build:web-components": "cd web-components && npm run build-storybook -- -o ../../build/storybook/web-components"
   },
-  "author": "Hatem Hosny",
-  "license": "MIT",
-  "devDependencies": {
-    "@babel/core": "7.20.12",
-    "@storybook/addon-actions": "6.5.15",
-    "@storybook/addon-essentials": "6.5.15",
-    "@storybook/addon-interactions": "6.5.15",
-    "@storybook/addon-links": "6.5.15",
-    "@storybook/addon-storysource": "6.5.15",
-    "@storybook/builder-webpack4": "6.5.15",
-    "@storybook/html": "6.5.15",
-    "@storybook/manager-webpack4": "6.5.15",
-    "@storybook/testing-library": "0.0.13",
-    "@types/dedent": "0.7.0",
-    "@types/flat": "5.0.2",
-    "@types/react": "18.3.18",
-    "babel-loader": "8.3.0",
-    "cross-env": "7.0.3",
-    "typescript": "5.4.5"
-  },
+  "keywords": [],
+  "author": "",
+  "type": "module",
   "dependencies": {
-    "dedent": "0.7.0",
-    "flat": "5.0.2"
+    "@storybook/addon-docs": "10.2.19",
+    "@storybook/react-vite": "10.2.19",
+    "dedent": "1.7.2",
+    "flat": "6.0.1",
+    "livecodes": "../build/sdk"
+  },
+  "devDependencies": {
+    "npm-run-all": "4.1.5",
+    "prettier": "3.8.1"
   }
 }
