@@ -1,4 +1,5 @@
 import { createComponent } from '@live-codes/solid-sdk';
+// @ts-ignore
 import type { Component, JSX } from 'solid-js';
 import { createPlayground, type EmbedOptions, type Playground } from './index';
 export type { Code, Config, EmbedOptions, Language, Playground } from './models';

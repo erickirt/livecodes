@@ -1,14 +1,8 @@
 import type { Control } from '@storybook/addon-docs/blocks';
 import type { ArgTypes } from '@storybook/react-vite';
 
-// prettier-ignore
 import './deps';
-// prettier-ignore
-
-import { defaultConfig } from '../../src/livecodes/config/default-config';
-import { appLanguages } from '../../src/livecodes/i18n/app-languages';
-import { languages } from '../../src/livecodes/languages/languages';
-import { starterTemplates } from '../../src/livecodes/templates/starter/index';
+import { appLanguages, defaultConfig, languages, starterTemplates } from './internal';
 import type { Config, ReactProps as Props } from './livecodes';
 import { themes } from './themes';
 

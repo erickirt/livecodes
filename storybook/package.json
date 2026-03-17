@@ -23,7 +23,15 @@
     "build:solid": "cd solid && npm run build-storybook -- -o ../../build/storybook/solid",
     "build:svelte": "cd svelte && npm run build-storybook -- -o ../../build/storybook/svelte",
     "build:vue": "cd vue && npm run build-storybook -- -o ../../build/storybook/vue",
-    "build:web-components": "cd web-components && npm run build-storybook -- -o ../../build/storybook/web-components"
+    "build:web-components": "cd web-components && npm run build-storybook -- -o ../../build/storybook/web-components",
+    "typecheck": "run-p typecheck:*",
+    "typecheck:root": "tsc --noEmit",
+    "typecheck:preact": "cd preact && npx tsc --noEmit",
+    "typecheck:react": "cd react && npx tsc --noEmit",
+    "typecheck:solid": "cd solid && npx tsc --noEmit",
+    "typecheck:svelte": "cd svelte && npx tsc --noEmit",
+    "typecheck:vue": "cd vue && npx tsc --noEmit",
+    "typecheck:web-components": "cd web-components && npx tsc --noEmit"
   },
   "keywords": [],
   "author": "",
@@ -37,6 +45,7 @@
   },
   "devDependencies": {
     "npm-run-all": "4.1.5",
-    "prettier": "3.8.1"
+    "prettier": "3.8.1",
+    "typescript": "^5.9.3"
   }
 }
