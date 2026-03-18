@@ -1,3 +1,3 @@
 import * as fs from 'fs';
 
-fs.promises.copyFile('index.html', '../build/storybook/index.html');
+fs.promises.copyFile('index.html', '../build/stories/index.html');
