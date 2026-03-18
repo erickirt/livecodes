@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged && startsWith(github.head_ref, 'releases/')
     env:
-      NODE_OPTIONS: "--max_old_space_size=4096"
+      NODE_OPTIONS: "--max_old_space_size=8192"
     steps:
       - name: Generate Github Token for CI Bot
         uses: actions/create-github-app-token@v1
