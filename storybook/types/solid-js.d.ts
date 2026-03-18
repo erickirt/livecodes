@@ -1,1 +1,3 @@
-declare type ContentVisibilityAutoStateChangeEvent = any;
+declare class ContentVisibilityAutoStateChangeEvent extends Event {
+  public readonly skipped: boolean;
+}

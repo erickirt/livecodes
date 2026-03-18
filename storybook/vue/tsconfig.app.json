@@ -5,6 +5,7 @@
     "types": ["vite/client"],
     "moduleResolution": "bundler",
     "resolvePackageJsonImports": true,
+    "skipLibCheck": true,
 
     /* Linting */
     "strict": true,

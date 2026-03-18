@@ -42,7 +42,8 @@
     "jsx": "react-jsx",
     "lib": ["es2020", "dom", "dom.iterable"],
     "types": ["node", "jest", "react"],
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": ["node_modules/@types"],
+    "skipLibCheck": true
   },
   "compileOnSave": true,
   "include": ["src/sdk/**/*.ts", "src/sdk/**/*.tsx"],
