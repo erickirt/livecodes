@@ -1,9 +1,9 @@
 import type { StoryDef } from '../../common';
 
-export const storyDef: StoryDef = {
-  Split: { options: { config: { view: 'split' } } },
-  Editor: { options: { config: { view: 'editor' } } },
-  Result: { options: { config: { view: 'result' } } },
+const storyDef: StoryDef = {
+  Split: { props: { config: { view: 'split' } } },
+  Editor: { props: { config: { view: 'editor' } } },
+  Result: { props: { config: { view: 'result' } } },
 };
 
 export default storyDef;

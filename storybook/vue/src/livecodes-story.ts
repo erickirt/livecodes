@@ -12,11 +12,10 @@ export const defaultMeta = {
   argTypes,
 } satisfies Meta<typeof LiveCodes>;
 
-type StoryProps = Props & { props: Props };
-
+type StoryProps = Props & { class?: string; style?: Record<string, string>; props: Props };
 export type Story = StoryObj<Meta<StoryProps>>;
 
-export const livecodesStory = (props: Props): Story => {
+export const livecodesStory = (props: StoryProps): Story => {
   const template = (args: Props) => ({
     components: { LiveCodes },
     setup() {
@@ -27,12 +26,14 @@ export const livecodesStory = (props: Props): Story => {
   });
   const story = template.bind({}) as Story;
   story.argTypes = argTypes;
-  const { params, ...options } = { ...props };
+  const { params, height, class: className, style, ...options } = props;
   story.args = {
     appUrl,
     ...flatten(options, { delimiter }),
     ...(params ? { params } : {}),
-    height: options.height,
+    height,
+    class: className,
+    style,
     props,
   };
   story.parameters = {

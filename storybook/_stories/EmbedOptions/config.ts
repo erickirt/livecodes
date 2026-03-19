@@ -1,20 +1,20 @@
 import type { StoryDef } from '../../common';
 
-export const storyDef: StoryDef = {
+const storyDef: StoryDef = {
   SelectLanguage: {
-    options: {
+    props: {
       config: { markup: { language: 'javascript' } },
     },
   },
 
   LanguageAndContent: {
-    options: {
+    props: {
       config: { script: { language: 'javascript', content: 'console.log("hi",' } },
     },
   },
 
   LanguagesAndContent: {
-    options: {
+    props: {
       config: {
         markup: { language: 'html', content: 'hello world!' },
         script: { language: 'javascript', content: 'console.log("hi",' },
@@ -23,13 +23,13 @@ export const storyDef: StoryDef = {
   },
 
   NonDefaultLanguage: {
-    options: {
+    props: {
       config: { script: { language: 'typescript' } },
     },
   },
 
   MultipleLanguages: {
-    options: {
+    props: {
       config: {
         markup: { language: 'mdx' },
         style: { language: 'stylus' },
@@ -39,7 +39,7 @@ export const storyDef: StoryDef = {
   },
 
   MultipleLanguagesAndContent: {
-    options: {
+    props: {
       config: {
         markup: { language: 'html', content: 'hi' },
         style: { language: 'scss' },
@@ -49,7 +49,7 @@ export const storyDef: StoryDef = {
   },
 
   MultipleWithSelectedLanguage: {
-    options: {
+    props: {
       config: {
         markup: { language: 'html', content: 'hi' },
         style: { language: 'scss', content: 'body {color:blue;}' },
@@ -61,7 +61,7 @@ export const storyDef: StoryDef = {
 
   // TODO: fix
   Languages: {
-    options: {
+    props: {
       config: {
         languages: ['html', 'md', 'css', 'ts'],
       },
@@ -69,7 +69,7 @@ export const storyDef: StoryDef = {
   },
 
   ActiveEditor: {
-    options: {
+    props: {
       config: {
         activeEditor: 'style',
       },
@@ -77,7 +77,7 @@ export const storyDef: StoryDef = {
   },
 
   Tags: {
-    options: {
+    props: {
       config: {
         tags: ['js', 'advanced', 'proof-of-concept'],
       },
@@ -85,7 +85,7 @@ export const storyDef: StoryDef = {
   },
 
   Stylesheets: {
-    options: {
+    props: {
       config: {
         stylesheets: [
           'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.css',
@@ -96,7 +96,7 @@ export const storyDef: StoryDef = {
   },
 
   Scripts: {
-    options: {
+    props: {
       config: {
         scripts: [
           'https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js',
@@ -107,7 +107,7 @@ export const storyDef: StoryDef = {
   },
 
   ToolsNone: {
-    options: {
+    props: {
       config: {
         tools: {
           enabled: [],
@@ -119,7 +119,7 @@ export const storyDef: StoryDef = {
   },
 
   ToolsOpen: {
-    options: {
+    props: {
       config: {
         tools: {
           enabled: 'all',
@@ -131,7 +131,7 @@ export const storyDef: StoryDef = {
   },
 
   ConsoleOpen: {
-    options: {
+    props: {
       config: {
         tools: {
           enabled: 'all',
@@ -143,7 +143,7 @@ export const storyDef: StoryDef = {
   },
 
   CompiledFull: {
-    options: {
+    props: {
       config: {
         tools: {
           enabled: 'all',
@@ -155,7 +155,7 @@ export const storyDef: StoryDef = {
   },
 
   ConsoleEnabled: {
-    options: {
+    props: {
       config: {
         tools: {
           enabled: ['console'],
@@ -167,7 +167,7 @@ export const storyDef: StoryDef = {
   },
 
   Tests: {
-    options: {
+    props: {
       template: 'jest',
       config: {
         tools: {
@@ -180,7 +180,7 @@ export const storyDef: StoryDef = {
   },
 
   TestsEnabled: {
-    options: {
+    props: {
       template: 'jest',
       config: {
         tools: {
@@ -193,7 +193,7 @@ export const storyDef: StoryDef = {
   },
 
   ModeResult: {
-    options: {
+    props: {
       template: 'javascript',
       config: {
         mode: 'result',
@@ -202,7 +202,7 @@ export const storyDef: StoryDef = {
   },
 
   ModeEditor: {
-    options: {
+    props: {
       template: 'javascript',
       config: {
         mode: 'editor',
@@ -211,7 +211,7 @@ export const storyDef: StoryDef = {
   },
 
   ModeCodeblock: {
-    options: {
+    props: {
       template: 'javascript',
       config: {
         mode: 'codeblock',
@@ -220,7 +220,7 @@ export const storyDef: StoryDef = {
   },
 
   ModeFull: {
-    options: {
+    props: {
       template: 'javascript',
       config: {
         mode: 'full',
@@ -229,7 +229,7 @@ export const storyDef: StoryDef = {
   },
 
   ModeResultConsoleClosed: {
-    options: {
+    props: {
       template: 'javascript',
       config: {
         mode: 'result',
@@ -243,7 +243,7 @@ export const storyDef: StoryDef = {
   },
 
   ModeResultConsoleOpen: {
-    options: {
+    props: {
       template: 'javascript',
       config: {
         mode: 'result',
@@ -257,7 +257,7 @@ export const storyDef: StoryDef = {
   },
 
   ModeResultCompiledOpen: {
-    options: {
+    props: {
       template: 'javascript',
       config: {
         mode: 'result',
@@ -271,7 +271,7 @@ export const storyDef: StoryDef = {
   },
 
   ConfigJsonURL: {
-    options: {
+    props: {
       config:
         'https://raw.githubusercontent.com/hatemhosny/typescript-demo-for-testing-import-/gh-pages/src/livecodes.json',
     },

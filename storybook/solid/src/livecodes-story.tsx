@@ -14,13 +14,15 @@ export const defaultMeta = {
 export type Story = StoryObj<Meta<Props & { props: Props }>>;
 
 export const livecodesStory = (props: Props): Story => {
-  const { params, ...options } = { ...props };
+  const { params, height, class: className, style, ...options } = props;
   return {
     args: {
       appUrl,
       ...(flatten(options, { delimiter }) as Record<string, unknown>),
       ...(params ? { params } : {}),
-      height: options.height,
+      height,
+      class: className,
+      style,
       props,
     },
     render: (args: Props) => <LiveCodes {...unflatten(args, { delimiter })} />,

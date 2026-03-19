@@ -1,8 +1,8 @@
 import type { StoryDef } from '../../common';
 
-export const storyDef: StoryDef = {
-  Lite: { options: { lite: true } },
-  Normal: { options: { lite: false } },
+const storyDef: StoryDef = {
+  Lite: { props: { lite: true } },
+  Normal: { props: { lite: false } },
 };
 
 export default storyDef;

@@ -1,8 +1,8 @@
 import type { StoryDef } from '../../common';
 
-export const storyDef: StoryDef = {
-  AppUrl: { options: { appUrl: 'https://dev.livecodes.io' } },
-  Default: { options: {} },
+const storyDef: StoryDef = {
+  AppUrl: { props: { appUrl: 'https://dev.livecodes.io' } },
+  Default: { props: {} },
 };
 
 export default storyDef;

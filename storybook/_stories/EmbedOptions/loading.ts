@@ -1,9 +1,9 @@
 import type { StoryDef } from '../../common';
 
-export const storyDef: StoryDef = {
-  Lazy: { options: { loading: 'lazy' } },
-  Click: { options: { loading: 'click' } },
-  Eager: { options: { loading: 'eager' } },
+const storyDef: StoryDef = {
+  Lazy: { props: { loading: 'lazy' } },
+  Click: { props: { loading: 'click' } },
+  Eager: { props: { loading: 'eager' } },
 };
 
 export default storyDef;

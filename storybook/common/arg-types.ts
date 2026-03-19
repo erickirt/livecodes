@@ -3,7 +3,7 @@ import type { ArgTypes } from '@storybook/react-vite';
 
 import './deps';
 import { appLanguages, defaultConfig, languages, starterTemplates } from './internal';
-import type { Config, ReactProps as Props } from './livecodes';
+import type { Config, Props } from './livecodes';
 import { themes } from './themes';
 
 export const delimiter = '__';
@@ -319,7 +319,7 @@ export const argTypes: Partial<
     },
   },
 
-  className: {
+  class: {
     control: 'text',
     required: false,
     table: {

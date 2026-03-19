@@ -1,9 +1,9 @@
 import dedent from 'dedent';
 import type { StoryDef } from '../common';
 
-export const storyDef: StoryDef = {
+const storyDef: StoryDef = {
   Introduction: {
-    options: {
+    props: {
       config: {
         markup: {
           language: 'markdown',
@@ -66,13 +66,13 @@ export const storyDef: StoryDef = {
       },
     },
   },
-  Default: { options: {} },
+  Default: { props: {} },
   ReactTemplate: {
-    options: {
+    props: {
       template: 'react',
     },
   },
-  // NoStyles: { options: { lite: false } },
+  // NoStyles: { props: { lite: false } },
 };
 
 export default storyDef;

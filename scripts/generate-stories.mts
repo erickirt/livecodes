@@ -42,7 +42,7 @@ export default {
 ${Object.entries(def.stories)
   .map(
     ([name, story]) =>
-      `export const ${name} = livecodesStory(${JSON.stringify(story.options)});` +
+      `export const ${name} = livecodesStory(${JSON.stringify(story.props)});` +
       (story.storyName ? `\n${name}.storyName = '${story.storyName}';` : ''),
   )
   .join('\n')}

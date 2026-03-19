@@ -3,6 +3,9 @@ import { appUrl, argTypes, delimiter } from '../../common';
 import { LiveCodes, type Props } from './livecodes';
 import type { Meta, StoryObj } from './storybook';
 
+(argTypes as any).className = argTypes.class;
+delete argTypes.class;
+
 export const defaultMeta = {
   component: LiveCodes,
   parameters: {
@@ -13,14 +16,16 @@ export const defaultMeta = {
 
 export type Story = StoryObj<Meta<Props & { props: Props }>>;
 
-export const livecodesStory = (props: Props): Story => {
-  const { params, ...options } = { ...props };
+export const livecodesStory = (props: Props & { class?: string }): Story => {
+  const { params, height, class: className, style, ...options } = props;
   return {
     args: {
       appUrl,
       ...flatten(options, { delimiter }),
       ...(params ? { params } : {}),
-      height: options.height,
+      height,
+      className,
+      style,
       props,
     },
     render: (args) => <LiveCodes {...unflatten(args, { delimiter })} />,

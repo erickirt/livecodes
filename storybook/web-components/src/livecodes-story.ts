@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { flatten, unflatten } from 'flat';
 import { html, nothing } from 'lit';
 import 'livecodes/web-components';
@@ -14,16 +13,19 @@ export const defaultMeta = {
   argTypes,
 } satisfies Meta;
 
-export type Story = StoryObj<Meta<Props & { props: Props }>>;
+type StoryProps = Props & { class?: string; style?: Record<string, string>; props: Props };
+export type Story = StoryObj<Meta<StoryProps>>;
 
-export const livecodesStory = (props: Props): Story => {
-  const { params, ...options } = { ...props };
+export const livecodesStory = (props: StoryProps): Story => {
+  const { params, height, class: className, style, ...options } = props;
   return {
     args: {
       appUrl,
       ...flatten(options, { delimiter }),
       ...(params ? { params } : {}),
-      height: options.height,
+      height,
+      class: className,
+      style,
       props,
     } as Partial<Meta<Props & { props: Props }>>,
     render: (args) => {

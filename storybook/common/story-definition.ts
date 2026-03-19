@@ -1,5 +1,5 @@
-import type { EmbedOptions } from 'livecodes';
+import type { Props } from './livecodes';
 
 export interface StoryDef {
-  [key: string]: { options: EmbedOptions; storyName?: string };
+  [key: string]: { props: Props; storyName?: string };
 }

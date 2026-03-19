@@ -26,13 +26,15 @@ type SvelteComponent = Component<
 export type Story = StoryObj<Meta<StoryProps>>;
 
 export const livecodesStory = (props: Props): Story => {
-  const { params, ...options } = { ...props };
+  const { params, height, class: className, style, ...options } = props;
   return {
     args: {
       appUrl,
       ...flatten(options, { delimiter }),
       ...(params ? { params } : {}),
-      height: options.height,
+      height,
+      class: className,
+      style,
       props,
     } as SvelteStoryArgs,
     render: (args) => ({

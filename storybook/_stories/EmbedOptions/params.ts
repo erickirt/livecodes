@@ -1,16 +1,16 @@
 import type { StoryDef } from '../../common';
 
-export const storyDef: StoryDef = {
+const storyDef: StoryDef = {
   SelectLanguage: {
-    options: { params: { js: '' } },
+    props: { params: { js: '' } },
   },
 
   LanguageAndContent: {
-    options: { params: { js: 'console.log("hi");' } },
+    props: { params: { js: 'console.log("hi");' } },
   },
 
   LanguagesAndContent: {
-    options: {
+    props: {
       params: {
         js: 'console.log("hi");',
         html: 'hello world!',
@@ -19,7 +19,7 @@ export const storyDef: StoryDef = {
   },
 
   NonDefaultLanguage: {
-    options: {
+    props: {
       params: {
         ts: '',
       },
@@ -27,7 +27,7 @@ export const storyDef: StoryDef = {
   },
 
   Lang: {
-    options: {
+    props: {
       params: {
         lang: 'scss',
       },
@@ -35,7 +35,7 @@ export const storyDef: StoryDef = {
   },
 
   Language: {
-    options: {
+    props: {
       params: {
         language: 'md',
       },
@@ -43,7 +43,7 @@ export const storyDef: StoryDef = {
   },
 
   MultipleLanguages: {
-    options: {
+    props: {
       params: {
         stylus: '',
         jsx: '',
@@ -53,7 +53,7 @@ export const storyDef: StoryDef = {
   },
 
   MultipleLanguagesAndContent: {
-    options: {
+    props: {
       params: {
         html: 'hi',
         scss: '',
@@ -63,7 +63,7 @@ export const storyDef: StoryDef = {
   },
 
   MultipleWithSelectedLanguage: {
-    options: {
+    props: {
       params: {
         html: 'hi',
         scss: 'body{color:blue;}',
@@ -74,7 +74,7 @@ export const storyDef: StoryDef = {
   },
 
   LanguagesInSameEditor: {
-    options: {
+    props: {
       params: {
         html: 'hi',
         md: '# hello',
@@ -83,7 +83,7 @@ export const storyDef: StoryDef = {
   },
 
   LanguagesInSameEditorOrder: {
-    options: {
+    props: {
       params: {
         md: '# hello',
         html: 'hi',
@@ -92,49 +92,49 @@ export const storyDef: StoryDef = {
   },
   // TODO: fix
   Languages: {
-    options: {
+    props: {
       params: {
         languages: 'html,md,css,ts',
       },
     },
   },
   ActiveEditor: {
-    options: {
+    props: {
       params: {
         activeEditor: 'style',
       },
     },
   },
   ActiveEditorIndex: {
-    options: {
+    props: {
       params: {
         activeEditor: 1,
       },
     },
   },
   Active: {
-    options: {
+    props: {
       params: {
         active: 'style',
       },
     },
   },
   ActiveIndex: {
-    options: {
+    props: {
       params: {
         active: 1,
       },
     },
   },
   Tags: {
-    options: {
+    props: {
       params: {
         tags: 'js,advanced,proof-of-concept',
       },
     },
   },
   Stylesheets: {
-    options: {
+    props: {
       params: {
         stylesheets:
           'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.css,https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap-grid.css',
@@ -142,7 +142,7 @@ export const storyDef: StoryDef = {
     },
   },
   Scripts: {
-    options: {
+    props: {
       params: {
         scripts:
           'https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js,https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js',
@@ -150,49 +150,49 @@ export const storyDef: StoryDef = {
     },
   },
   ToolsNone: {
-    options: {
+    props: {
       params: {
         tools: 'none',
       },
     },
   },
   ToolsOpen: {
-    options: {
+    props: {
       params: {
         tools: 'open',
       },
     },
   },
   Console: {
-    options: {
+    props: {
       params: {
         console: '',
       },
     },
   },
   ConsoleTrue: {
-    options: {
+    props: {
       params: {
         console: 'true',
       },
     },
   },
   ConsoleOpen: {
-    options: {
+    props: {
       params: {
         console: 'open',
       },
     },
   },
   CompiledFull: {
-    options: {
+    props: {
       params: {
         compiled: 'full',
       },
     },
   },
   CompiledOpenConsoleOpen: {
-    options: {
+    props: {
       params: {
         compiled: 'open',
         console: 'open',
@@ -200,7 +200,7 @@ export const storyDef: StoryDef = {
     },
   },
   CompiledOpenConsoleNone: {
-    options: {
+    props: {
       params: {
         compiled: 'open',
         console: 'none',
@@ -208,14 +208,14 @@ export const storyDef: StoryDef = {
     },
   },
   ConsoleNone: {
-    options: {
+    props: {
       params: {
         console: 'none',
       },
     },
   },
   ToolsConsoleCompiled: {
-    options: {
+    props: {
       params: {
         tools: 'open',
         console: 'none',
@@ -224,7 +224,7 @@ export const storyDef: StoryDef = {
     },
   },
   TestsConsoleCompiled: {
-    options: {
+    props: {
       template: 'jest',
       params: {
         tests: 'open',
@@ -234,7 +234,7 @@ export const storyDef: StoryDef = {
     },
   },
   ModeResult: {
-    options: {
+    props: {
       template: 'javascript',
       params: {
         mode: 'result',
@@ -242,7 +242,7 @@ export const storyDef: StoryDef = {
     },
   },
   ModeEditor: {
-    options: {
+    props: {
       template: 'javascript',
       params: {
         mode: 'editor',
@@ -250,7 +250,7 @@ export const storyDef: StoryDef = {
     },
   },
   ModeCodeblock: {
-    options: {
+    props: {
       template: 'javascript',
       params: {
         mode: 'codeblock',
@@ -258,7 +258,7 @@ export const storyDef: StoryDef = {
     },
   },
   ModeFull: {
-    options: {
+    props: {
       template: 'javascript',
       params: {
         mode: 'full',
@@ -266,7 +266,7 @@ export const storyDef: StoryDef = {
     },
   },
   ModeResultConsoleClosed: {
-    options: {
+    props: {
       template: 'javascript',
       params: {
         mode: 'result',
@@ -275,7 +275,7 @@ export const storyDef: StoryDef = {
     },
   },
   ModeResultConsoleOpen: {
-    options: {
+    props: {
       template: 'javascript',
       params: {
         mode: 'result',
@@ -284,7 +284,7 @@ export const storyDef: StoryDef = {
     },
   },
   ModeResultCompiledOpen: {
-    options: {
+    props: {
       template: 'javascript',
       params: {
         mode: 'result',
@@ -293,7 +293,7 @@ export const storyDef: StoryDef = {
     },
   },
   ModeResultToolsOpen: {
-    options: {
+    props: {
       template: 'javascript',
       params: {
         mode: 'result',
