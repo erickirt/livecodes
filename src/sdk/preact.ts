@@ -7,7 +7,7 @@ import { createPlayground } from './index';
 // @ts-ignore
 import type { JSX } from 'preact';
 // @ts-ignore
-import { jsx } from 'react/jsx-runtime';
+import { jsx } from 'preact/jsx-runtime';
 import type { EmbedOptions, Playground } from './models';
 export type { Code, Config, EmbedOptions, Language, Playground } from './models';
 
@@ -50,7 +50,7 @@ export interface Props extends EmbedOptions {
  * export default () => <LiveCodes config={config} />;
  * ```
  */
-export default function LiveCodes(props: Props): JSX.Element {
+export default function LiveCodes(props: Props): JSX.Element<Props> {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [className, setClassName] = useState(props.className || '');
   const [style, setStyle] = useState(props.style || {});

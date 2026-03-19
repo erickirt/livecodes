@@ -26,8 +26,8 @@
   let configCache = '';
   let otherOptionsCache = '';
 
-  function buildOtherOptions(): Omit<EmbedOptions, 'config'> {
-    const opts: Record<string, unknown> = {};
+  function buildOtherOptions() {
+    const opts: Omit<EmbedOptions, 'config'> = {};
     if (appUrl !== undefined) opts.appUrl = appUrl;
     if (importUrl !== undefined) opts.import = importUrl;
     if (headless !== undefined) opts.headless = headless;
@@ -36,7 +36,7 @@
     if (params !== undefined) opts.params = params;
     if (template !== undefined) opts.template = template;
     if (view !== undefined) opts.view = view;
-    return opts as Omit<EmbedOptions, 'config'>;
+    return opts;
   }
 
   function styleToString(obj: Record<string, string>, height?: string): string {
@@ -78,7 +78,7 @@
       if (typeof currentConfig === 'string') {
         fetch(currentConfig)
           .then((res) => res.json())
-          .then((json: Parameters<Playground['setConfig']>[0]) => {
+          .then((json) => {
             playground?.setConfig(json);
           });
       } else if (currentConfig) {
