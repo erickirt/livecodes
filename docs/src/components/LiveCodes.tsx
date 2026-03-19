@@ -80,6 +80,60 @@ export default function App() {
 
 `.trimStart();
 
+  const preactCode = `
+import LiveCodes from 'livecodes/preact';
+
+export default function App() {
+  const options = ${stringify(options)};
+  return (<LiveCodes {...options} />);
+}
+
+`.trimStart();
+
+  const getWebComponentsCode = (options: EmbedOptions) => {
+    const { config, params, ...attrs } = options;
+
+    // Build HTML attributes from simple props
+    const attrEntries = Object.entries(attrs)
+      .filter(([, v]) => v != null)
+      .map(([key, value]) => {
+        const attr = key.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`);
+        if (typeof value === 'boolean') return value ? attr : null;
+        return `${attr}="${value}"`;
+      })
+      .filter(Boolean);
+
+    const attrString = attrEntries.length > 0 ? '\n  ' + attrEntries.join('\n  ') : '';
+
+    // Build property assignments for complex values
+    const assignments: string[] = [];
+    if (config) {
+      assignments.push(
+        `playground.config = ${JSON.stringify(config, null, 2).split('\n').join('\n  ')};`,
+      );
+    }
+    if (params) {
+      assignments.push(
+        `playground.params = ${JSON.stringify(params, null, 2).split('\n').join('\n  ')};`,
+      );
+    }
+
+    const scriptBody =
+      assignments.length > 0
+        ? `\n\n  const playground = document.querySelector("live-codes");\n  ${assignments.join('\n  ')}`
+        : '';
+
+    return `
+<live-codes${attrString}></live-codes>
+
+<script type="module">
+  import "livecodes/web-components";${scriptBody}
+</script>
+`.trimStart();
+  };
+
+  const webComponentsCode = getWebComponentsCode(options);
+
   return (
     <>
       <LiveCodesReact
@@ -104,6 +158,8 @@ export default function App() {
           vue={vueCode}
           svelte={svelteCode}
           solid={solidCode}
+          preact={preactCode}
+          webComponents={webComponentsCode}
         ></ShowCode>
       )}
     </>

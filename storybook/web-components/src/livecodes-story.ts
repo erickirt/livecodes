@@ -5,6 +5,9 @@ import { appUrl, argTypes, delimiter } from '../../common';
 import type { Props } from './livecodes';
 import type { Meta, StoryObj } from './storybook';
 
+delete argTypes.class;
+delete argTypes.style;
+
 export const defaultMeta = {
   component: 'live-codes',
   parameters: {
@@ -24,8 +27,6 @@ export const livecodesStory = (props: StoryProps): Story => {
       ...flatten(options, { delimiter }),
       ...(params ? { params } : {}),
       height,
-      class: className,
-      style,
       props,
     } as Partial<Meta<Props & { props: Props }>>,
     render: (args) => {
@@ -39,7 +40,6 @@ export const livecodesStory = (props: StoryProps): Story => {
           ?headless=${resolved.headless}
           .config=${resolved.config || nothing}
           .params=${resolved.params || nothing}
-          .sdkReady=${resolved.sdkReady || nothing}
         ></live-codes>
       `;
     },
@@ -57,7 +57,7 @@ export const livecodesStory = (props: StoryProps): Story => {
 };
 
 const getCode = (props: Props) => {
-  const { config, params, sdkReady, ...attrs } = props;
+  const { config, params, ...attrs } = props;
 
   // Build HTML attributes from simple props
   const attrEntries = Object.entries(attrs)

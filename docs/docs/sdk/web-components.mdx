@@ -7,7 +7,7 @@ The Web Components SDK is a thin wrapper around the [JavaScript SDK](js-ts.mdx) 
 ## Demo
 
 export const webComponentsSDKDemo = {
-  html: `<live-codes\n  template="javascript"\n  loading="lazy"\n></live-codes>\n\n<script type="module">\n  import "livecodes/web-components";\n\n  const playground = document.querySelector("live-codes");\n  playground.params = {\n    html: "<h1>Hello World!</h1>",\n    css: "h1 {color: blue;}",\n    js: 'console.log("Hello, World!")',\n    console: "open",\n  };\n</script>`,
+  html: `<live-codes height="60vh"></live-codes>\n\n<script type="module">\n  import "livecodes/web-components";\n\n  const playground = document.querySelector("live-codes");\n  playground.params = {\n    html: "<h1>Hello World!</h1>",\n    css: "h1 {color: blue;}",\n    js: 'console.log("Hello, World!")',\n    console: "open",\n  };\n</script>`,
 };
 
 <LiveCodes params={webComponentsSDKDemo} height="80vh" />
@@ -20,6 +20,8 @@ Please refer to the [SDK installation](./index.mdx#installation) section.
 
 The custom element is registered by importing `livecodes/web-components`.
 
+### Using a bundler
+
 ```html title="HTML"
 <live-codes></live-codes>
 
@@ -28,17 +30,37 @@ The custom element is registered by importing `livecodes/web-components`.
 </script>
 ```
 
+### Using a CDN
+
+Alternatively, you can load the web components SDK directly from a CDN using a script tag:
+
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import CodeBlock from '@theme/CodeBlock';
+
+export const UMDCode = () => {
+  const { siteConfig } = useDocusaurusContext();
+  return (
+    <CodeBlock title="HTML" language="html">
+      {`<script src="https://cdn.jsdelivr.net/npm/livecodes@${siteConfig.customFields.sdkVersion}/web-components.js"></script>
+
+<live-codes></live-codes>
+`}
+    </CodeBlock>
+  );
+};
+
+<UMDCode />
+
 ### TypeScript Support
 
-The `LiveCodesElement` class and related types are exported from `livecodes/web-components`.
+Types are exported from `livecodes/web-components` for convenience:
 
 ```ts title="TypeScript"
-import { LiveCodesElement } from 'livecodes/web-components';
 import type { EmbedOptions, Playground } from 'livecodes/web-components';
 ```
 <p />
 
-For convenience, the following types are also exported from `livecodes/web-components`:<br />
+The following types are available:<br />
 `Code`, `Config`, `EmbedOptions`, `Language`, `Playground`.
 
 TypeScript types are [documented here](../api/globals.md).
@@ -47,21 +69,34 @@ TypeScript types are [documented here](../api/globals.md).
 
 The following HTML attributes are supported and correspond to [embed options](js-ts.mdx#embed-options):
 
-| Attribute    | Type      | Description                                                                                                           |
-| ------------ | --------- | --------------------------------------------------------------------------------------------------------------------- |
-| `app-url`    | `string`  | The URL of the LiveCodes app.                                                                                         |
-| `import`     | `string`  | A resource to [import](https://livecodes.io/docs/features/import).                                                    |
-| `loading`    | `string`  | When to load the playground (`"click"`, `"lazy"`, or `"eager"`).                                                      |
-| `template`   | `string`  | A [starter template](https://livecodes.io/docs/features/templates) to load.                                           |
-| `view`       | `string`  | Deprecated! The `view` option has been moved to `config.view`. For headless mode use the `headless` attribute.         |
-| `headless`   | `boolean` | Whether to use the headless mode of LiveCodes.                                                                        |
-| `lite`       | `boolean` | Deprecated! Use `config.mode = "lite"` instead.                                                                       |
-| `height`     | `string`  | Sets the [height of playground container](js-ts.mdx#height) element.                                                  |
+| Attribute              | Type      | Description                                                                                                           |
+| ---------------------- | --------- | --------------------------------------------------------------------------------------------------------------------- |
+| `app-url`              | `string`  | The URL of the LiveCodes app.                                                                                         |
+| `import`               | `string`  | A resource to [import](https://livecodes.io/docs/features/import).                                                    |
+| `loading`              | `string`  | When to load the playground (`"click"`, `"lazy"`, or `"eager"`).                                                      |
+| `template`             | `string`  | A [starter template](https://livecodes.io/docs/features/templates) to load.                                           |
+| `view`                 | `string`  | Deprecated! The `view` option has been moved to `config.view`. For headless mode use the `headless` attribute.         |
+| `headless`             | `boolean` | Whether to use the headless mode of LiveCodes.                                                                        |
+| `lite`                 | `boolean` | Deprecated! Use `config.mode = "lite"` instead.                                                                       |
+| `height`               | `string`  | Sets the [height of playground container](js-ts.mdx#height) element.                                                  |
+| `data-default-styles`  | `string`  | If set to `"false"`, disables the [default styles](js-ts.mdx#default-styles) applied to the playground container.     |
 
 Example:
 
 ```html title="HTML"
 <live-codes template="react" loading="lazy"></live-codes>
+
+<script type="module">
+  import 'livecodes/web-components';
+</script>
+```
+
+#### Default Styles
+
+By default, the `<live-codes>` element is styled when the playground is initialized (including height, border, etc.). To disable default styles, set the `data-default-styles` attribute to `"false"`.
+
+```html title="HTML"
+<live-codes data-default-styles="false" class="custom"></live-codes>
 
 <script type="module">
   import 'livecodes/web-components';
@@ -118,45 +153,11 @@ For complex values that cannot be expressed as HTML attributes, use JavaScript p
   </script>
   ```
 
-- `sdkReady`
-
-  Type: `(sdk: Playground) => void`.
-
-  A callback function, that is provided with an instance of the [JavaScript SDK](js-ts.mdx) representing the current playground. This allows making use of full capability of the SDK by calling [SDK methods](js-ts.mdx#sdk-methods).
-
-  Example:
-
-  ```html title="HTML"
-  <live-codes></live-codes>
-  <button id="run">Run</button>
-
-  <script type="module">
-    import 'livecodes/web-components';
-
-    let sdk;
-
-    const playground = document.querySelector('live-codes');
-    playground.config = {
-      markup: {
-        language: 'html',
-        content: '<h1>Hello World!</h1>',
-      },
-    };
-    playground.sdkReady = (s) => {
-      sdk = s;
-    };
-
-    document.getElementById('run').addEventListener('click', async () => {
-      await sdk?.run();
-    });
-  </script>
-  ```
-
 - `sdk`
 
   Type: `Playground | undefined` (read-only).
 
-  The playground SDK instance. Available after the playground has been initialized.
+  The playground SDK instance. Available after the playground has been initialized. This allows making use of the full capability of the SDK by calling [SDK methods](js-ts.mdx#sdk-methods).
 
   Example:
 
@@ -178,7 +179,7 @@ For complex values that cannot be expressed as HTML attributes, use JavaScript p
 
 - `sdkready`
 
-  Fired when the SDK is ready. The SDK instance is available via `event.detail.sdk`. This is the event-driven alternative to the `sdkReady` property callback.
+  Fired when the SDK is ready. The SDK instance is available via `event.detail.sdk` or via the [`sdk`](#properties) property on the element. Use this event to access the [SDK methods](js-ts.mdx#sdk-methods).
 
   Example:
 
@@ -213,6 +214,8 @@ For complex values that cannot be expressed as HTML attributes, use JavaScript p
 Changing any attribute or property will cause the playground to reload with the new options.
 However, changing the `config` property is an exception — it updates the playground in place using the SDK method [`setConfig`](js-ts.mdx#setconfig), without triggering a full reload.
 This allows for a smooth update experience when only the configuration changes.
+
+Similarly, changing the `height` attribute also updates the playground height without triggering a full reload.
 
 Example:
 

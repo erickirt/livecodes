@@ -7,7 +7,6 @@ export type { Code, Config, EmbedOptions, Language, Playground } from './models'
 
 export interface Props extends EmbedOptions {
   height?: string;
-  sdkReady?: (sdk: Playground) => void;
   sdk?: Playground;
 }
 
@@ -25,10 +24,10 @@ export interface Props extends EmbedOptions {
  * @attr {string} template - A [starter template](https://livecodes.io/docs/features/templates) to load.
  * @attr {string} view - Deprecated! The `view` option has been moved to `config.view`. For headless mode use `headless` attribute - The [default view](https://livecodes.io/docs/features/default-view) for the playground.
  * @attr {string} height - Sets the [height of playground container](https://livecodes.io/docs/sdk/js-ts#height) element.
+ * @attr {string} data-default-styles - If set to `"false"`, disables the default styles applied to the playground container element.
  *
  * @prop {object|string} config - The [config object](https://livecodes.io/docs/api/interfaces/Config) for the playground or the URL of the config file.
  * @prop {object} params - An object that represents [URL Query parameters](https://livecodes.io/docs/configuration/query-params).
- * @prop {function} sdkReady - A callback function that will be called when the SDK is ready.
  * @prop {Playground} sdk - (Read-only) The playground SDK instance, if initialized.
  *
  * @fires sdkready - Fired when the SDK is ready. Access the SDK via `event.detail.sdk`.
@@ -58,7 +57,6 @@ class LiveCodesElement extends HTMLElement {
   private _playground: Playground | undefined;
   private _config: EmbedOptions['config'];
   private _params: EmbedOptions['params'];
-  private _sdkReady: ((sdk: Playground) => void) | undefined;
   private _configCache = '';
   private _otherOptionsCache = '';
   private _connected = false;
@@ -112,15 +110,6 @@ class LiveCodesElement extends HTMLElement {
     if (this._connected) {
       this._scheduleUpdate();
     }
-  }
-
-  /** A callback function that will be called when the SDK is ready. */
-  public get sdkReady(): ((sdk: Playground) => void) | undefined {
-    return this._sdkReady;
-  }
-
-  public set sdkReady(value: ((sdk: Playground) => void) | undefined) {
-    this._sdkReady = value;
   }
 
   /** The playground SDK instance (read-only). Available after initialization. */
@@ -193,10 +182,6 @@ class LiveCodesElement extends HTMLElement {
 
       createPlayground(this, { config, ...otherOptions }).then((sdk: Playground) => {
         this._playground = sdk;
-
-        if (typeof this._sdkReady === 'function') {
-          this._sdkReady(sdk);
-        }
 
         this.dispatchEvent(
           new CustomEvent('sdkready', {
