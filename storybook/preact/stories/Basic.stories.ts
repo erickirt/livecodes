@@ -1,6 +1,6 @@
 // AUTO-GENERATED — do not edit
 
-// eslint-disable-next-line import/no-unresolved
+/* eslint-disable */
 import { defaultMeta, livecodesStory, type LiveCodes, type Meta } from '#src';
 
 export default {
@@ -13,17 +13,17 @@ export const Introduction = livecodesStory({
     markup: {
       language: 'markdown',
       content:
-        '# Welcome to LiveCodes\n\n## Code Playground That Just Works!\n\nAn open-source **client-side** code playground that runs in the browser.\n\nSupports [**90+ languages/frameworks**](https://livecodes.io/docs/languages)!\n\n[App](https://livecodes.io)\n[About](https://livecodes.io/docs)\n[Docs](https://livecodes.io/docs/overview)\n[GitHub](https://github.com/live-codes/livecodes)',
+        '# 👋 Welcome to LiveCodes\n\n> An open-source, **client-side** code playground that runs entirely in your browser.\n\n---\n\n### 📝 Markup\n\nHTML, Markdown, Pug, and more\n\n### 🎨 Styling\n\nCSS, SCSS, Tailwind, and more\n\n### ⚡ Logic\n\nJS, TS, React, Vue, Python, PHP, and more\n\n---\n\nSupports [**90+ languages/frameworks**](https://livecodes.io/docs/languages)!\n\n[App](https://livecodes.io) · [Docs](https://livecodes.io/docs/overview) · [SDK](https://livecodes.io/docs/sdk) · [GitHub](https://github.com/live-codes/livecodes)\n',
     },
     style: {
       language: 'css',
       content:
-        'body {\n  color: #494949;\n  font-family: Arial, Helvetica, sans-serif;\n  font-size: 12px;\n}\n\na {\n  color: #0080ff;\n}\n\na.button {\n  background-color: #f5f4f4;\n  border: 1px solid grey;\n  border-radius: 3px;\n  color: #383838;\n  display: inline-block;\n  margin: 3px;\n  padding: 2px;\n  text-align: center;\n  text-decoration: none;\n  width: 5em;\n}\n\na.button:hover {\n  background-color: #666;\n  color: #fff;\n}',
+        '* {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n\nbody {\n  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;\n  color: #1a1a2e;\n  background: linear-gradient(135deg, #f0f4ff 0%, #fef6ff 100%);\n  padding: 2rem;\n  min-height: 100vh;\n}\n\nh1 {\n  font-size: 2rem;\n  background: linear-gradient(135deg, #667eea, #764ba2);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n  background-clip: text;\n  margin-bottom: 0.5rem;\n}\n\nblockquote {\n  border-left: 4px solid #667eea;\n  padding: 0.75rem 1rem;\n  margin: 1rem 0;\n  background: rgba(102, 126, 234, 0.08);\n  border-radius: 0 8px 8px 0;\n  font-size: 1.05rem;\n  color: #444;\n}\n\nblockquote p {\n  margin: 0;\n}\n\nhr {\n  border: none;\n  height: 1px;\n  background: linear-gradient(to right, #667eea, #764ba2, transparent);\n  margin: 1.5rem 0;\n}\n\n.features {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));\n  gap: 1rem;\n  margin: 1.5rem 0;\n}\n\n.card {\n  background: white;\n  border-radius: 12px;\n  padding: 1.25rem;\n  text-align: center;\n  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);\n  border: 1px solid rgba(102, 126, 234, 0.15);\n  transition: transform 0.3s ease, box-shadow 0.3s ease;\n  cursor: default;\n}\n\n.card:hover {\n  transform: translateY(-4px);\n  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.18);\n}\n\n.card h3 {\n  font-size: 1.1rem;\n  margin-bottom: 0.25rem;\n}\n\n.card p {\n  font-size: 0.85rem;\n  color: #666;\n  margin: 0;\n}\n\np {\n  margin: 0.75rem 0;\n  line-height: 1.6;\n}\n\na {\n  color: #667eea;\n  text-decoration: none;\n}\n\na strong {\n  color: #764ba2;\n}\n\n.links {\n  text-align: center;\n  margin: 1.5rem 0;\n}\n\n.links a {\n  display: inline-block;\n  padding: 0.5rem 1.25rem;\n  margin: 0.25rem;\n  border-radius: 8px;\n  font-weight: 600;\n  font-size: 0.9rem;\n  background: linear-gradient(135deg, #667eea, #764ba2);\n  color: white;\n  transition: opacity 0.2s ease, transform 0.2s ease;\n}\n\n.links a:hover {\n  opacity: 0.88;\n  transform: translateY(-2px);\n}\n\n#status {\n  text-align: center;\n  font-size: 0.85rem;\n  color: #999;\n  margin-top: 1.5rem;\n}\n',
     },
     script: {
       language: 'javascript',
       content:
-        "document.querySelectorAll('a').forEach((link) => {\n  link.target = '_blank';\n  if (link.childNodes[0].tagName !== 'STRONG') {\n    link.classList.add('button');\n  }\n});\nconsole.log('Hello from JS!');",
+        'document.querySelectorAll("a").forEach((link) => {\n  link.target = "_blank";\n});\n\nconst headings = document.querySelectorAll("h3");\nif (headings.length) {\n  const grid = document.createElement("div");\n  grid.className = "features";\n\n  headings.forEach((h3) => {\n    const p = h3.nextElementSibling;\n    const card = document.createElement("div");\n    card.className = "card";\n    h3.parentNode.insertBefore(card, h3);\n    card.appendChild(h3);\n    if (p && p.tagName === "P") {\n      card.appendChild(p);\n    }\n    grid.appendChild(card);\n  });\n\n  const secondHr = document.querySelectorAll("hr")[1];\n  if (secondHr) {\n    secondHr.parentNode.insertBefore(grid, secondHr);\n  }\n}\n\nconst paragraphs = document.querySelectorAll("p");\nconst lastP = paragraphs[paragraphs.length - 1];\nif (lastP && lastP.querySelectorAll("a").length >= 3) {\n  lastP.className = "links";\n}\n\ndocument.querySelectorAll(".card").forEach((card, i) => {\n  card.style.opacity = "0";\n  card.style.transform = "translateY(20px)";\n  setTimeout(() => {\n    card.style.transition = "opacity 0.5s ease, transform 0.5s ease";\n    card.style.opacity = "1";\n    card.style.transform = "translateY(0)";\n  }, 200 + i * 150);\n});\n\nconst status = document.createElement("p");\nstatus.id = "status";\nstatus.textContent = `✨ Rendered client-side at ${new Date().toLocaleTimeString()}`;\ndocument.body.appendChild(status);\n\nconsole.log("🚀 LiveCodes is ready!");\n',
     },
   },
 });

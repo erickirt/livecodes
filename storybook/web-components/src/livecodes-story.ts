@@ -14,9 +14,9 @@ export const defaultMeta = {
     layout: 'fullscreen',
   },
   argTypes,
-} satisfies Meta;
+} satisfies Meta<StoryProps>;
 
-type StoryProps = Props & { class?: string; style?: Record<string, string>; props: Props };
+export type StoryProps = Props & { class?: string; style?: Record<string, string>; props?: Props };
 export type Story = StoryObj<Meta<StoryProps>>;
 
 export const livecodesStory = (props: StoryProps): Story => {
@@ -28,7 +28,7 @@ export const livecodesStory = (props: StoryProps): Story => {
       ...(params ? { params } : {}),
       height,
       props,
-    } as Partial<Meta<Props & { props: Props }>>,
+    } as Partial<Meta<StoryProps>>,
     render: (args) => {
       const resolved = unflatten(args, { delimiter }) as Props;
       return html`

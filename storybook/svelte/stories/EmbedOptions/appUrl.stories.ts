@@ -1,6 +1,6 @@
 // AUTO-GENERATED — do not edit
 
-// eslint-disable-next-line import/no-unresolved
+/* eslint-disable */
 import { defaultMeta, livecodesStory, type LiveCodes, type Meta } from '#src';
 
 export default {

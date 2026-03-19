@@ -31,7 +31,7 @@ const storyDefs = await readDefs(definitionsPath);
 const createStories = (def: { name: string; title: string; stories: StoryDef }): string =>
   `// AUTO-GENERATED — do not edit
 
-// eslint-disable-next-line import/no-unresolved
+/* eslint-disable */
 import { defaultMeta, livecodesStory, type LiveCodes, type Meta } from '#src';
 
 export default {
