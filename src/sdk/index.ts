@@ -119,6 +119,9 @@ export async function createPlayground(
         containerElement.style.flexGrow = '1';
         containerElement.style.overflow ||= 'hidden';
         containerElement.style.resize ||= 'vertical';
+        if (getComputedStyle(containerElement).getPropertyValue('display') === 'inline') {
+          containerElement.style.display = 'block';
+        }
       }
 
       const className = 'livecodes';
