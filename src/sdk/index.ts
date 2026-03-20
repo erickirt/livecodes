@@ -15,6 +15,15 @@ import type {
 
 export type { Code, Config, EmbedOptions, Language, Playground };
 
+const API_TIMEOUT = 60_000;
+
+function hideElement(el: HTMLElement) {
+  el.style.position = 'absolute';
+  el.style.top = '0';
+  el.style.visibility = 'hidden';
+  el.style.opacity = '0';
+}
+
 /**
  * Creates a LiveCodes playground.
  *
@@ -91,10 +100,10 @@ export async function createPlayground(
 
   let destroyed = false;
   const alreadyDestroyedMessage = 'Cannot call API methods after calling `destroy()`.';
-  type EventHandler = (event: MessageEventInit<any>) => void | Promise<void>;
+  type EventHandler = (event: MessageEvent<any>) => void | Promise<void>;
   const eventHandlers: EventHandler[] = [];
   const registerEventHandler = (handler: EventHandler, eventType = 'message') => {
-    addEventListener(eventType, handler);
+    addEventListener(eventType, handler as EventListener);
     eventHandlers.push(handler);
   };
 
@@ -154,7 +163,7 @@ export async function createPlayground(
         frame.style.borderRadius = containerElement.style.borderRadius;
       }
       registerEventHandler(function initHandler(
-        e: MessageEventInit<{ type: CustomEvents['init']; payload: { appVersion: string } }>,
+        e: MessageEvent<{ type: CustomEvents['init']; payload: { appVersion: string } }>,
       ) {
         if (
           e.source !== frame.contentWindow ||
@@ -170,7 +179,7 @@ export async function createPlayground(
       // for backward-compatibility
       if (!appVersion || appVersion < 46) {
         registerEventHandler(function configHandler(
-          e: MessageEventInit<{ type: CustomEvents['getConfig'] }>,
+          e: MessageEvent<{ type: CustomEvents['getConfig'] }>,
         ) {
           if (
             e.source !== frame.contentWindow ||
@@ -195,9 +204,7 @@ export async function createPlayground(
   const iframe = await createIframe();
 
   const livecodesReady: Promise<void> & { settled?: boolean } = new Promise((resolve) => {
-    registerEventHandler(function readyHandler(
-      e: MessageEventInit<{ type: CustomEvents['ready'] }>,
-    ) {
+    registerEventHandler(function readyHandler(e: MessageEvent<{ type: CustomEvents['ready'] }>) {
       if (
         e.source !== iframe.contentWindow ||
         e.origin !== origin ||
@@ -230,8 +237,13 @@ export async function createPlayground(
       await loadLivecodes();
       const id = getRandomString();
 
-      registerEventHandler(function handler(
-        e: MessageEventInit<{
+      const timeoutId = setTimeout(() => {
+        removeEventListener('message', handler);
+        reject(new Error(`SDK call "${method}" timed out after ${API_TIMEOUT}ms.`));
+      }, API_TIMEOUT);
+
+      function handler(
+        e: MessageEvent<{
           type: CustomEvents['apiResponse'];
           method: keyof API;
           id: string;
@@ -248,6 +260,7 @@ export async function createPlayground(
         }
 
         if (e.data.method === method) {
+          clearTimeout(timeoutId);
           removeEventListener('message', handler);
           const payload = e.data.payload;
           if (payload?.error) {
@@ -256,7 +269,9 @@ export async function createPlayground(
             resolve(payload);
           }
         }
-      });
+      }
+
+      registerEventHandler(handler);
       iframe.contentWindow?.postMessage({ method, id, args }, origin);
     });
 
@@ -296,7 +311,7 @@ export async function createPlayground(
     })[event] as SDKEvent | undefined;
 
   registerEventHandler(async function watchHandler(
-    e: MessageEventInit<{
+    e: MessageEvent<{
       type: CustomEvents[keyof CustomEvents];
       payload?: any;
     }>,
@@ -343,13 +358,6 @@ export async function createPlayground(
       { rootMargin: '150px' },
     );
     observer.observe(containerElement);
-  }
-
-  function hideElement(el: HTMLElement) {
-    el.style.position = 'absolute';
-    el.style.top = '0';
-    el.style.visibility = 'hidden';
-    el.style.opacity = '0';
   }
 
   const getRandomString = () => (String(Math.random()) + Date.now().toFixed()).replace('0.', '');
