@@ -17,6 +17,8 @@ const bundleTypes = () => {
     main: outDir + '**/*.d.ts',
     out: outFile,
     removeSource: true,
+    exclude: (/** @type {string} */ file) =>
+      file.includes('.umd') || file.includes('use-') || file.includes('__tests__'),
   };
 
   dts.bundle(options);

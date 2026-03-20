@@ -1,9 +1,8 @@
 // @ts-ignore
 // eslint-disable-next-line import/no-extraneous-dependencies
-import React, { useEffect, useRef, useState } from 'react';
-import { createPlayground } from './index';
-// eslint-disable-next-line import/order
+import React, { useEffect, useRef } from 'react';
 import type { EmbedOptions, Playground } from './models';
+import { createUsePlayground } from './use-playground';
 export type { Code, Config, EmbedOptions, Language, Playground } from './models';
 
 export interface Props extends EmbedOptions {
@@ -12,6 +11,8 @@ export interface Props extends EmbedOptions {
   height?: string;
   sdkReady?: (sdk: Playground) => void;
 }
+
+const usePlayground = createUsePlayground({ useEffect, useRef });
 
 /**
  * A React component that renders a LiveCodes playground.
@@ -46,52 +47,7 @@ export interface Props extends EmbedOptions {
  * ```
  */
 export default function LiveCodes(props: Props): React.ReactElement<Props> {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const [className, setClassName] = useState(props.className || '');
-  const [style, setStyle] = useState(props.style || {});
-  const [height, setHeight] = useState(props.height);
-  const [playground, setPlayground] = useState<Playground | undefined>();
-  const [configCache, setConfigCache] = useState(JSON.stringify(props.config || ''));
-  const [otherOptionsCache, setOtherOptionsCache] = useState('');
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const { className, style, height, sdkReady, config, ...otherOptions } = props;
-    setClassName(className || '');
-    setStyle(style || {});
-    setHeight(props.height && Number(props.height) ? `${props.height}px` : props.height);
-
-    if (!playground || otherOptionsCache !== JSON.stringify(otherOptions)) {
-      setOtherOptionsCache(JSON.stringify(otherOptions));
-      playground?.destroy();
-      createPlayground(containerRef.current, { config, ...otherOptions }).then((sdk) => {
-        setPlayground(sdk);
-        if (typeof sdkReady === 'function') {
-          sdkReady(sdk);
-        }
-      });
-    } else {
-      if (configCache === JSON.stringify(config)) return;
-      setConfigCache(JSON.stringify(config));
-
-      if (typeof config === 'string') {
-        fetch(config)
-          .then((res) => res.json())
-          .then((json) => {
-            playground?.setConfig(json);
-          });
-      } else if (config) {
-        playground.setConfig(config);
-      }
-    }
-  }, [props]);
-
-  useEffect(
-    () => () => {
-      playground?.destroy();
-    },
-    [],
-  );
+  const { containerRef, className, style, height } = usePlayground(props);
 
   return (
     <div
