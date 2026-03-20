@@ -26,7 +26,7 @@ const usePlayground = createUsePlayground({ useEffect, useRef });
  * @see {@link https://livecodes.io/docs/sdk/react}
  *
  * @prop {string} [appUrl] - The URL of the LiveCodes app. Defaults to `https://livecodes.io/`.
- * @prop {object | string} [config] - The [config object](https://livecodes.io/docs/api/interfaces/Config) for the playground or the URL of the config file.
+ * @prop {object | string} [config] - The [config object](https://livecodes.io/docs/configuration/configuration-object) for the playground or the URL of the config file.
  * @prop {string} [import] - A resource to [import](https://livecodes.io/docs/features/import) (from any of the supported [sources](https://livecodes.io/docs/features/import#sources)).
  * @prop {boolean} [headless=false] - Whether to use the headless mode of LiveCodes.
  * @prop {boolean} [lite=false] - Deprecated! Use `config={{ mode: "lite" }}` instead - Whether to use the lite mode of LiveCodes.
@@ -51,7 +51,7 @@ const usePlayground = createUsePlayground({ useEffect, useRef });
  * export default () => <LiveCodes config={config} />;
  * ```
  */
-export default function LiveCodes(props: Props): JSX.Element<Props> {
+export default function LiveCodes(props: Props): JSX.Element {
   const { containerRef, className, style, height } = usePlayground(props);
 
   return /* @__PURE__ */ jsx('div', {
