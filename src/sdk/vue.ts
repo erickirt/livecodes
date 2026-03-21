@@ -25,6 +25,12 @@ export interface Props extends EmbedOptions {
   height?: string;
 }
 
+type VuePropConstructor =
+  | StringConstructor
+  | BooleanConstructor
+  | ObjectConstructor
+  | Array<StringConstructor | ObjectConstructor>;
+
 const props = {
   appUrl: String,
   config: [Object, String],
@@ -36,9 +42,10 @@ const props = {
   template: String,
   view: String,
   height: String,
-} satisfies { [key in keyof Required<Props>]: any };
+} satisfies Record<keyof Required<Props>, VuePropConstructor>;
 
-// remove functions added to objects by vue ref
+// Strips reactive wrappers (functions, symbols) added by Vue's ref(),
+// preserving only the plain serializable data needed by createPlayground.
 const clone = <T>(obj: T): T => JSON.parse(JSON.stringify(obj));
 
 /**
@@ -82,45 +89,63 @@ const LiveCodes: LiveCodesComponent = {
     const { config, ...otherOptions } = options;
     let configCache = JSON.stringify(config);
     let otherOptionsCache = JSON.stringify(otherOptions);
+    let generation = 0;
+
+    // avoid race conditions if props change while doing async operations
+    // (e.g. creating playground or fetching config json)
+    const isStale = (gen: number) => gen !== generation;
 
     onMounted(() => {
       if (!containerRef.value) return;
+      const currentGeneration = ++generation;
       createPlayground(containerRef.value, clone(options)).then((sdk) => {
+        if (isStale(currentGeneration)) {
+          sdk.destroy();
+          return;
+        }
         playground.value = sdk;
         ctx.emit('sdkReady', sdk);
       });
     });
 
     watch(props, async (newProps) => {
-      if (!containerRef.value || !playground.value) return;
+      if (!containerRef.value) return;
       const { height: _height, ...options } = newProps;
-
+      const currentGeneration = ++generation;
       if (_height) height.value = _height;
-      if (height.value) {
-        containerRef.value.style.height = Number(height.value) ? `${height.value}px` : height.value;
-      }
 
       // eslint-disable-next-line prefer-const
       let { config, ...otherOptions } = options;
-      if (typeof config === 'string') {
-        config = await fetch(config).then((res) => res.json());
-      }
 
-      if (JSON.stringify(otherOptions) !== otherOptionsCache) {
-        await playground.value?.destroy();
+      if (!playground.value || JSON.stringify(otherOptions) !== otherOptionsCache) {
+        otherOptionsCache = JSON.stringify(otherOptions);
+        configCache = JSON.stringify(config);
+        playground.value?.destroy();
+        playground.value = undefined;
+
         createPlayground(containerRef.value, clone(options)).then((sdk) => {
+          if (isStale(currentGeneration)) {
+            sdk.destroy();
+            return;
+          }
           playground.value = sdk;
           ctx.emit('sdkReady', sdk);
         });
       } else if (JSON.stringify(config) !== configCache) {
-        playground.value.setConfig((clone(config) as any) || {});
-      }
+        configCache = JSON.stringify(config);
 
-      configCache = JSON.stringify(config);
-      otherOptionsCache = JSON.stringify(otherOptions);
+        if (typeof config === 'string') {
+          const json = await fetch(config).then((res) => res.json());
+          if (isStale(currentGeneration)) return;
+          playground.value?.setConfig(json);
+        } else if (config) {
+          playground.value.setConfig((clone(config) as any) || {});
+        }
+      }
     });
 
     onUnmounted(() => {
+      ++generation; // invalidate any pending async callbacks
       playground.value?.destroy();
     });
 
@@ -129,7 +154,9 @@ const LiveCodes: LiveCodesComponent = {
         'div',
         {
           ref: containerRef,
-          'data-height': height.value,
+          style: height.value
+            ? { height: Number(height.value) ? `${height.value}px` : height.value }
+            : undefined,
         },
         ctx.slots.default?.() || '',
       );
