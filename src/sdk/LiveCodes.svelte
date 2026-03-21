@@ -53,6 +53,8 @@
 
   let styleString = $derived(styleToString(style, height));
 
+  let generation = 0;
+
   $effect(() => {
     if (!container) return;
 
@@ -61,11 +63,23 @@
     const otherOptions = buildOtherOptions();
     const otherOptionsStr = JSON.stringify(otherOptions);
     const configStr = JSON.stringify(currentConfig || '');
+    const currentGeneration = ++generation;
+
+    // avoid race conditions if props change while doing async operations
+    // (e.g. creating playground or fetching config json)
+    const isStale = () => currentGeneration !== generation;
 
     if (!playground || otherOptionsCache !== otherOptionsStr) {
       otherOptionsCache = otherOptionsStr;
+      configCache = configStr;
       playground?.destroy();
+      playground = undefined;
+
       createPlayground(container, { config: currentConfig, ...otherOptions }).then((sdk) => {
+        if (isStale()) {
+          sdk.destroy();
+          return;
+        }
         playground = sdk;
         if (typeof currentSdkReady === 'function') {
           currentSdkReady(sdk);
@@ -79,6 +93,7 @@
         fetch(currentConfig)
           .then((res) => res.json())
           .then((json) => {
+            if (isStale()) return;
             playground?.setConfig(json);
           });
       } else if (currentConfig) {
@@ -87,11 +102,9 @@
     }
   });
 
-  // Destroy the playground on component teardown.
-  // No reactive dependencies are read in the body, so this
-  // runs once on mount and its cleanup runs only on unmount.
   $effect(() => {
     return () => {
+      ++generation;
       playground?.destroy();
     };
   });
