@@ -1,10 +1,10 @@
 /* eslint-disable no-redeclare */
 import { compressToEncodedURIComponent } from 'lz-string';
+import type { CustomEvents } from './internal';
 import type {
   API,
   Code,
   Config,
-  CustomEvents,
   EmbedOptions,
   Language,
   Playground,
