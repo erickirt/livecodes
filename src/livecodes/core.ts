@@ -1,4 +1,5 @@
 import { getPlaygroundUrl } from '../sdk';
+import { getIframeAllowAttribute } from '../sdk/internal';
 import {
   addTemplateToIndex,
   createLoginContainer,
@@ -282,10 +283,7 @@ const createIframe = (container: HTMLElement, result = '', service = sandboxServ
       if (isHeadless) {
         iframe.setAttribute('sandbox', 'allow-same-origin allow-forms allow-scripts');
       } else {
-        iframe.setAttribute(
-          'allow',
-          'accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share',
-        );
+        iframe.setAttribute('allow', getIframeAllowAttribute());
         iframe.setAttribute('allowtransparency', 'true');
         iframe.setAttribute('allowpaymentrequest', 'true');
         iframe.setAttribute('allowfullscreen', 'true');

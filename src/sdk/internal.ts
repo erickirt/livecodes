@@ -1,4 +1,4 @@
-// types that should not be exported from the SDK
+// these should not be exported from the SDK
 
 export interface CustomEvents {
   init: 'livecodes-init';
@@ -17,3 +17,67 @@ export interface CustomEvents {
   apiResponse: 'livecodes-api-response';
   i18n: 'livecodes-i18n';
 }
+
+// https://blog.codepen.io/2025/10/20/google-chrome-iframe-allow-permissions-problems/
+// https://blog.codepen.io/2025/11/18/417-iframe-allow-attribute-saga/
+const allowAttributes: Record<'chrome' | 'firefox' | 'default', string[]> = {
+  chrome: [
+    'accelerometer',
+    'bluetooth',
+    'camera',
+    'clipboard-read',
+    'clipboard-write',
+    'display-capture',
+    'encrypted-media',
+    'geolocation',
+    'gyroscope',
+    'language-detector',
+    'language-model',
+    'local-network-access',
+    'microphone',
+    'midi',
+    'proofreader',
+    'rewriter',
+    'serial',
+    'summarizer',
+    'translator',
+    'web-share',
+    'writer',
+    'window-placement',
+    'xr-spatial-tracking',
+  ],
+  firefox: ['camera', 'display-capture', 'geolocation', 'microphone', 'web-share'],
+  default: [
+    'accelerometer',
+    'ambient-light-sensor',
+    'camera',
+    'display-capture',
+    'encrypted-media',
+    'geolocation',
+    'gyroscope',
+    'microphone',
+    'midi',
+    'payment',
+    'serial',
+    'vr',
+    'web-share',
+    'xr-spatial-tracking',
+  ],
+};
+
+export const detectBrowser = (): 'chrome' | 'firefox' | 'default' => {
+  if (typeof navigator === 'undefined') return 'default';
+  const ua = navigator.userAgent;
+  if (/Firefox\//i.test(ua)) return 'firefox';
+  if (/Chrome\//i.test(ua)) return 'chrome';
+  return 'default';
+};
+
+export const getIframeAllowAttribute = (): string =>
+  allowAttributes[detectBrowser()]
+    .filter((feature) => {
+      const supportedFeatures = (globalThis.document as any)?.featurePolicy?.features?.();
+      if (supportedFeatures === undefined) return true;
+      return supportedFeatures.includes(feature);
+    })
+    .join('; ');

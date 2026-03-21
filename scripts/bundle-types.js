@@ -19,8 +19,8 @@ const bundleTypes = () => {
     removeSource: true,
     exclude: (/** @type {string} */ file) =>
       file.includes('internal') ||
-      file.includes('.umd') ||
       file.includes('use-') ||
+      file.includes('.umd') ||
       file.includes('__tests__'),
   };
 

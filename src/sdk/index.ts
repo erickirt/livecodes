@@ -1,6 +1,6 @@
 /* eslint-disable no-redeclare */
 import { compressToEncodedURIComponent } from 'lz-string';
-import type { CustomEvents } from './internal';
+import { getIframeAllowAttribute, type CustomEvents } from './internal';
 import type {
   API,
   Code,
@@ -14,15 +14,6 @@ import type {
 } from './models';
 
 export type { Code, Config, EmbedOptions, Language, Playground };
-
-const API_TIMEOUT = 60_000;
-
-function hideElement(el: HTMLElement) {
-  el.style.position = 'absolute';
-  el.style.top = '0';
-  el.style.visibility = 'hidden';
-  el.style.opacity = '0';
-}
 
 /**
  * Creates a LiveCodes playground.
@@ -53,11 +44,19 @@ export async function createPlayground(
     container = null as any;
   }
 
+  const API_TIMEOUT = 60_000;
   const { config = {}, headless, loading = 'lazy', view } = options;
   const isHeadless = headless || view === 'headless'; // for backwards compatibility;
 
   let containerElement: HTMLElement | null = null;
   let appVersion: number | null = null;
+
+  const hideElement = (el: HTMLElement) => {
+    el.style.position = 'absolute';
+    el.style.top = '0';
+    el.style.visibility = 'hidden';
+    el.style.opacity = '0';
+  };
 
   if (typeof container === 'string') {
     containerElement = document.querySelector(container);
@@ -146,10 +145,7 @@ export async function createPlayground(
       );
       const frame = preExistingIframe || document.createElement('iframe');
       frame.classList.add(className);
-      frame.setAttribute(
-        'allow',
-        'accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share',
-      );
+      frame.setAttribute('allow', getIframeAllowAttribute());
       frame.setAttribute('allowtransparency', 'true');
       frame.setAttribute('allowpaymentrequest', 'true');
       frame.setAttribute('allowfullscreen', 'true');

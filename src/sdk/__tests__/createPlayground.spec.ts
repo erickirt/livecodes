@@ -216,17 +216,92 @@ describe('createPlayground – iframe creation', () => {
     await playground.destroy();
   });
 
-  test('creates an iframe with correct allow attributes', async () => {
+  test('creates an iframe with default allow attributes', async () => {
     const container = document.createElement('div');
     document.body.appendChild(container);
 
     const { iframe, playground } = await createReadyPlayground(container);
 
-    expect(iframe.getAttribute('allow')).toContain('clipboard-read');
-    expect(iframe.getAttribute('allow')).toContain('clipboard-write');
-    expect(iframe.getAttribute('allow')).toContain('camera');
-    expect(iframe.getAttribute('allow')).toContain('microphone');
+    const allow = iframe.getAttribute('allow')!;
+    // jsdom userAgent does not match Chrome or Firefox, so defaults are used
+    expect(allow).toContain('camera');
+    expect(allow).toContain('microphone');
+    expect(allow).toContain('geolocation');
+    expect(allow).toContain('display-capture');
+    expect(allow).toContain('web-share');
+    expect(allow).toContain('encrypted-media');
+    expect(allow).toContain('accelerometer');
+    expect(allow).toContain('gyroscope');
+    expect(allow).toContain('midi');
+    expect(allow).toContain('serial');
+    expect(allow).toContain('ambient-light-sensor');
+    expect(allow).toContain('payment');
+    expect(allow).toContain('vr');
+    expect(allow).toContain('xr-spatial-tracking');
     expect(iframe.getAttribute('allowfullscreen')).toBe('true');
+    await playground.destroy();
+  });
+
+  test('creates an iframe with Chrome allow attributes when Chrome UA is detected', async () => {
+    const originalUA = navigator.userAgent;
+    Object.defineProperty(navigator, 'userAgent', {
+      value:
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      configurable: true,
+    });
+
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+
+    const { iframe, playground } = await createReadyPlayground(container);
+
+    const allow = iframe.getAttribute('allow')!;
+    expect(allow).toContain('clipboard-read');
+    expect(allow).toContain('clipboard-write');
+    expect(allow).toContain('bluetooth');
+    expect(allow).toContain('language-model');
+    expect(allow).toContain('translator');
+    expect(allow).toContain('summarizer');
+    expect(allow).toContain('writer');
+    expect(allow).toContain('rewriter');
+    expect(allow).toContain('language-detector');
+    // Should not contain Firefox/default-only attributes
+    expect(allow).not.toContain('ambient-light-sensor');
+    expect(allow).not.toContain('payment');
+    expect(allow).not.toContain('vr');
+
+    Object.defineProperty(navigator, 'userAgent', {
+      value: originalUA,
+      configurable: true,
+    });
+    await playground.destroy();
+  });
+
+  test('creates an iframe with Firefox allow attributes when Firefox UA is detected', async () => {
+    const originalUA = navigator.userAgent;
+    Object.defineProperty(navigator, 'userAgent', {
+      value: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0',
+      configurable: true,
+    });
+
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+
+    const { iframe, playground } = await createReadyPlayground(container);
+
+    const allow = iframe.getAttribute('allow')!;
+    expect(allow).toBe('camera; display-capture; geolocation; microphone; web-share');
+    // Should not contain Chrome/default-only attributes
+    expect(allow).not.toContain('accelerometer');
+    expect(allow).not.toContain('encrypted-media');
+    expect(allow).not.toContain('gyroscope');
+    expect(allow).not.toContain('midi');
+    expect(allow).not.toContain('clipboard-read');
+
+    Object.defineProperty(navigator, 'userAgent', {
+      value: originalUA,
+      configurable: true,
+    });
     await playground.destroy();
   });
 
