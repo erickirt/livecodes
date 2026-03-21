@@ -106,6 +106,13 @@ export async function createPlayground(
     addEventListener(eventType, handler as EventListener);
     eventHandlers.push(handler);
   };
+  const unregisterEventHandler = (handler: EventHandler, eventType = 'message') => {
+    removeEventListener(eventType, handler as EventListener);
+    const index = eventHandlers.indexOf(handler);
+    if (index > -1) {
+      eventHandlers.splice(index, 1);
+    }
+  };
 
   const createIframe = () =>
     new Promise<HTMLIFrameElement>((resolve) => {
@@ -172,7 +179,7 @@ export async function createPlayground(
         ) {
           return;
         }
-        removeEventListener('message', initHandler);
+        unregisterEventHandler(initHandler);
         appVersion = Number(e.data.payload.appVersion.replace(/^v/, ''));
       });
 
@@ -188,7 +195,7 @@ export async function createPlayground(
           ) {
             return;
           }
-          removeEventListener('message', configHandler);
+          unregisterEventHandler(configHandler);
           frame.contentWindow?.postMessage({ type: 'livecodes-config', payload: config }, origin);
         });
       }
@@ -212,7 +219,7 @@ export async function createPlayground(
       ) {
         return;
       }
-      removeEventListener('message', readyHandler);
+      unregisterEventHandler(readyHandler);
       resolve();
       livecodesReady.settled = true;
     });
@@ -238,7 +245,7 @@ export async function createPlayground(
       const id = getRandomString();
 
       const timeoutId = setTimeout(() => {
-        removeEventListener('message', handler);
+        unregisterEventHandler(handler);
         reject(new Error(`SDK call "${method}" timed out after ${API_TIMEOUT}ms.`));
       }, API_TIMEOUT);
 
@@ -261,7 +268,7 @@ export async function createPlayground(
 
         if (e.data.method === method) {
           clearTimeout(timeoutId);
-          removeEventListener('message', handler);
+          unregisterEventHandler(handler);
           const payload = e.data.payload;
           if (payload?.error) {
             reject(payload.error);
