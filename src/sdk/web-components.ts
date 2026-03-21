@@ -61,6 +61,7 @@ class LiveCodesElement extends HTMLElement {
   private _otherOptionsCache = '';
   private _connected = false;
   private _updateScheduled = false;
+  private _generation = 0;
 
   public static get observedAttributes(): string[] {
     return ['app-url', 'import', 'loading', 'template', 'view', 'height', 'headless', 'lite'];
@@ -74,6 +75,7 @@ class LiveCodesElement extends HTMLElement {
 
   public disconnectedCallback(): void {
     this._connected = false;
+    ++this._generation; // invalidate pending async callbacks
     this._playground?.destroy();
     this._playground = undefined;
   }
@@ -121,6 +123,7 @@ class LiveCodesElement extends HTMLElement {
    * Destroys the playground instance and cleans up resources.
    */
   public destroy(): void {
+    ++this._generation;
     this._playground?.destroy();
     this._playground = undefined;
   }
@@ -176,11 +179,17 @@ class LiveCodesElement extends HTMLElement {
     }
 
     if (!this._playground || this._otherOptionsCache !== otherOptionsStr) {
+      const currentGeneration = ++this._generation;
       this._otherOptionsCache = otherOptionsStr;
       this._configCache = configStr;
       this._playground?.destroy();
+      this._playground = undefined;
 
       createPlayground(this, { config, ...otherOptions }).then((sdk: Playground) => {
+        if (this._generation !== currentGeneration) {
+          sdk.destroy();
+          return;
+        }
         this._playground = sdk;
 
         this.dispatchEvent(
@@ -196,9 +205,11 @@ class LiveCodesElement extends HTMLElement {
       this._configCache = configStr;
 
       if (typeof config === 'string') {
+        const gen = this._generation;
         fetch(config)
           .then((res) => res.json())
           .then((json) => {
+            if (this._generation !== gen) return;
             this._playground?.setConfig(json);
           });
       } else if (config) {
