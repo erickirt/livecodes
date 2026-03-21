@@ -23,7 +23,7 @@ const usePlayground = createUsePlayground({ useEffect, useRef });
  * A Preact component that renders a LiveCodes playground.
  *
  * Acts as a wrapper for the [LiveCodes JS SDK](https://livecodes.io/docs/sdk/js-ts).
- * @see {@link https://livecodes.io/docs/sdk/react}
+ * @see {@link https://livecodes.io/docs/sdk/preact}
  *
  * @prop {string} [appUrl] - The URL of the LiveCodes app. Defaults to `https://livecodes.io/`.
  * @prop {object | string} [config] - The [config object](https://livecodes.io/docs/configuration/configuration-object) for the playground or the URL of the config file.
