@@ -1,4 +1,4 @@
-import type { StoryDef } from '../common';
+import type { StoryDef } from '../../common';
 
 const storyDef: StoryDef = {
   Height: { props: { height: '85vh' }, storyName: 'height' },

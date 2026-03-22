@@ -5,7 +5,7 @@ import { defaultMeta, livecodesStory, type LiveCodes, type Meta } from '#src';
 
 export default {
   ...defaultMeta,
-  title: 'Styles',
+  title: 'Styles/Styles',
 } satisfies Meta<typeof LiveCodes>;
 
 export const Height = livecodesStory({ height: '85vh' });

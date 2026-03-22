@@ -1,3 +1,4 @@
+import { exec } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import type { StoryDef } from '../storybook/common';
@@ -62,3 +63,12 @@ for (const def of storyDefs) {
     fs.writeFileSync(outPath, stories);
   }
 }
+
+exec('npx prettier --write storybook/**/*.stories.ts', (error, stdout, stderr) => {
+  if (error) {
+    console.error(`failed to format stories: ${error}`);
+    return;
+  }
+  console.log(stdout);
+  console.error(stderr);
+});

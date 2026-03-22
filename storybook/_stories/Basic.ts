@@ -221,6 +221,95 @@ console.log("🚀 LiveCodes is ready!");
       template: 'react',
     },
   },
+  SimpleMode: {
+    props: {
+      config: {
+        mode: 'simple',
+        activeEditor: 'script',
+        script: {
+          language: 'vue',
+          content: `<script setup lang="tsx">
+  import { ref } from 'vue';
+
+  interface Props {
+    name?: string
+  }
+  const props = defineProps<Props>();
+  const count = ref(0);
+  const align = 'center';
+
+  // define inline component
+  function Greeting(props: Props) {
+    return <h1>Hello, { props.name || 'World' }!</h1>
+  }
+</script>
+
+<template>
+  <div class="container">
+    <Greeting :name="props.name" />
+    <img class="logo" alt="logo" src="https://livecodes.io/livecodes/assets/templates/vue.svg" />
+    <p>You clicked {{ count }} times.</p>
+    <button @click="count++">Click me</button>
+  </div>
+</template>
+
+<style scoped>
+  .container,
+  .container button {
+    text-align: v-bind("align");
+    font: 1em sans-serif;
+  }
+  .logo {
+    width: 150px;
+  }
+</style>
+`,
+        },
+      },
+    },
+  },
+  Theme: {
+    props: {
+      config: {
+        theme: 'light',
+        themeColor: '#F63C00',
+        activeEditor: 'script',
+        markup: { language: 'html', hideTitle: true },
+        style: { language: 'css', hideTitle: true },
+        script: {
+          title: 'App.svelte',
+          language: 'svelte',
+          content: `<script>
+  let { title = "World" } = $props();
+  let counter = $state(0);
+  function increment() {
+    counter += 1;
+  }
+</script>
+
+<style>
+  .container,
+  .container button {
+    text-align: center;
+    font: 1em sans-serif;
+  }
+  .logo {
+    width: 150px;
+  }
+</style>
+
+<div class="container">
+  <h1>Hello, {title}!</h1>
+  <img class="logo" alt="logo" src="https://livecodes.io/livecodes/assets/templates/svelte.svg" />
+  <p>You clicked {counter} times.</p>
+  <button on:click={increment}>Click me</button>
+</div>
+`,
+        },
+      },
+      height: '450',
+    },
+  },
 };
 
 export default storyDef;

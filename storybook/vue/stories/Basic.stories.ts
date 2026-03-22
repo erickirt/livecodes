@@ -30,3 +30,30 @@ export const Introduction = livecodesStory({
 });
 export const Default = livecodesStory({});
 export const ReactTemplate = livecodesStory({ template: 'react' });
+export const SimpleMode = livecodesStory({
+  config: {
+    mode: 'simple',
+    activeEditor: 'script',
+    script: {
+      language: 'vue',
+      content:
+        '<script setup lang="tsx">\n  import { ref } from \'vue\';\n\n  interface Props {\n    name?: string\n  }\n  const props = defineProps<Props>();\n  const count = ref(0);\n  const align = \'center\';\n\n  // define inline component\n  function Greeting(props: Props) {\n    return <h1>Hello, { props.name || \'World\' }!</h1>\n  }\n</script>\n\n<template>\n  <div class="container">\n    <Greeting :name="props.name" />\n    <img class="logo" alt="logo" src="https://livecodes.io/livecodes/assets/templates/vue.svg" />\n    <p>You clicked {{ count }} times.</p>\n    <button @click="count++">Click me</button>\n  </div>\n</template>\n\n<style scoped>\n  .container,\n  .container button {\n    text-align: v-bind("align");\n    font: 1em sans-serif;\n  }\n  .logo {\n    width: 150px;\n  }\n</style>\n',
+    },
+  },
+});
+export const Theme = livecodesStory({
+  config: {
+    theme: 'light',
+    themeColor: '#F63C00',
+    activeEditor: 'script',
+    markup: { language: 'html', hideTitle: true },
+    style: { language: 'css', hideTitle: true },
+    script: {
+      title: 'App.svelte',
+      language: 'svelte',
+      content:
+        '<script>\n  let { title = "World" } = $props();\n  let counter = $state(0);\n  function increment() {\n    counter += 1;\n  }\n</script>\n\n<style>\n  .container,\n  .container button {\n    text-align: center;\n    font: 1em sans-serif;\n  }\n  .logo {\n    width: 150px;\n  }\n</style>\n\n<div class="container">\n  <h1>Hello, {title}!</h1>\n  <img class="logo" alt="logo" src="https://livecodes.io/livecodes/assets/templates/svelte.svg" />\n  <p>You clicked {counter} times.</p>\n  <button on:click={increment}>Click me</button>\n</div>\n',
+    },
+  },
+  height: '450',
+});
