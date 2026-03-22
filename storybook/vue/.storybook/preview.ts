@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/vue3-vite';
-import DocsTemplate from '../../common/DocsTemplate.mdx';
+import DocsTemplate from '../src/DocsTemplate.mdx';
 
 const preview: Preview = {
   tags: ['autodocs'],
