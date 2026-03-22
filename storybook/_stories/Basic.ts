@@ -212,6 +212,7 @@ console.log("🚀 LiveCodes is ready!");
 `.trimStart(),
         },
       },
+      height: '80vh',
     },
   },
   Default: { props: {} },

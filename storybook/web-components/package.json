@@ -16,12 +16,12 @@
     "livecodes": "../../build/sdk"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^5.0.1",
-    "@storybook/addon-a11y": "^10.2.19",
-    "@storybook/addon-docs": "^10.2.19",
-    "@storybook/addon-vitest": "^10.2.19",
-    "@storybook/web-components-vite": "^10.2.19",
-    "storybook": "^10.2.19",
+    "@chromatic-com/storybook": "^5.0.2",
+    "@storybook/addon-a11y": "^10.3.1",
+    "@storybook/addon-docs": "^10.3.1",
+    "@storybook/addon-vitest": "^10.3.1",
+    "@storybook/web-components-vite": "^10.3.1",
+    "storybook": "^10.3.1",
     "typescript": "~5.9.3",
     "vite": "^8.0.0",
     "vite-plugin-ignore-dynamic-imports": "^1.0.2",
