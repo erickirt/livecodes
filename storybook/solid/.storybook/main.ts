@@ -9,5 +9,18 @@ const config: StorybookConfig = {
     '@storybook/addon-docs',
   ],
   framework: 'storybook-solidjs-vite',
+  async viteFinal(config) {
+    config.build ??= {};
+    config.build.rolldownOptions ??= {};
+    config.build.rolldownOptions.output ??= {
+      strictExecutionOrder: true,
+    };
+    config.optimizeDeps ??= {};
+    config.optimizeDeps.rolldownOptions ??= {};
+    config.optimizeDeps.rolldownOptions.output ??= {
+      strictExecutionOrder: true,
+    };
+    return config;
+  },
 };
 export default config;

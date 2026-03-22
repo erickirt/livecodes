@@ -6,6 +6,11 @@ const basePath = 'storybook';
 const definitionsPath = path.join(basePath, '_stories');
 const frameworks = ['preact', 'react', 'solid', 'svelte', 'vue', 'web-components'];
 
+// TODO: fix this
+const solidSDK = fs.readFileSync(path.join('src', 'sdk', 'solid.ts'), 'utf8');
+const patchedSolidSDK = solidSDK.replace('./index', 'livecodes').replace('./models', 'livecodes');
+fs.writeFileSync(path.join(basePath, 'solid', 'src', 'solid.ts'), patchedSolidSDK, 'utf8');
+
 const readDefs = async (dir: string) => {
   const definitions: Array<{ name: string; title: string; stories: StoryDef }> = [];
   const items = fs
