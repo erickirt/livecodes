@@ -77,7 +77,7 @@ export const getIframeAllowAttribute = (): string =>
   allowAttributes[detectBrowser()]
     .filter((feature) => {
       const supportedFeatures = (globalThis.document as any)?.featurePolicy?.features?.();
-      if (supportedFeatures === undefined) return true;
+      if (!supportedFeatures) return true;
       return supportedFeatures.includes(feature);
     })
     .join('; ');

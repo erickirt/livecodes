@@ -8,18 +8,15 @@ export default {
   title: 'EmbedOptions/config',
 } satisfies Meta<typeof LiveCodes>;
 
-export const SelectLanguage = livecodesStory({ config: { markup: { language: 'javascript' } } });
-export const LanguageAndContent = livecodesStory({
-  config: { script: { language: 'javascript', content: 'console.log("hi",' } },
-});
 export const LanguagesAndContent = livecodesStory({
   config: {
     markup: { language: 'html', content: 'hello world!' },
-    script: { language: 'javascript', content: 'console.log("hi",' },
+    style: { language: 'css', content: 'body{color:blue;}' },
+    script: { language: 'javascript', content: 'console.log("hi")' },
   },
 });
 export const NonDefaultLanguage = livecodesStory({
-  config: { script: { language: 'typescript' } },
+  config: { markup: { language: 'markdown', content: '# Hello World!' } },
 });
 export const MultipleLanguages = livecodesStory({
   config: {
@@ -30,14 +27,14 @@ export const MultipleLanguages = livecodesStory({
 });
 export const MultipleLanguagesAndContent = livecodesStory({
   config: {
-    markup: { language: 'html', content: 'hi' },
+    markup: { language: 'html', content: 'hello world!' },
     style: { language: 'scss' },
     script: { language: 'livescript' },
   },
 });
 export const MultipleWithSelectedLanguage = livecodesStory({
   config: {
-    markup: { language: 'html', content: 'hi' },
+    markup: { language: 'html', content: 'hello world!' },
     style: { language: 'scss', content: 'body {color:blue;}' },
     script: { language: 'typescript' },
     activeEditor: 'style',
@@ -48,6 +45,7 @@ export const ActiveEditor = livecodesStory({ config: { activeEditor: 'style' } }
 export const Tags = livecodesStory({ config: { tags: ['js', 'advanced', 'proof-of-concept'] } });
 export const Stylesheets = livecodesStory({
   config: {
+    markup: { language: 'html', content: 'hello world!' },
     stylesheets: [
       'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.css',
       'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap-grid.css',
@@ -56,10 +54,9 @@ export const Stylesheets = livecodesStory({
 });
 export const Scripts = livecodesStory({
   config: {
-    scripts: [
-      'https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js',
-      'https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js',
-    ],
+    markup: { language: 'html', content: '<div id="container"></div>' },
+    script: { language: 'javascript', content: '$("#container").html("hi");' },
+    scripts: ['https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js'],
   },
 });
 export const ToolsNone = livecodesStory({

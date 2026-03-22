@@ -1,7 +1,14 @@
 import type { Preview } from '@storybook/svelte-vite';
+import DocsTemplate from '../../common/DocsTemplate.mdx';
 
 const preview: Preview = {
+  tags: ['autodocs'],
+
   parameters: {
+    docs: {
+      page: DocsTemplate,
+    },
+
     controls: {
       matchers: {
         color: /(background|color)$/i,

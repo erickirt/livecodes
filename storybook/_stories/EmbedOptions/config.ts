@@ -1,30 +1,19 @@
 import type { StoryDef } from '../../common';
 
 const storyDef: StoryDef = {
-  SelectLanguage: {
-    props: {
-      config: { markup: { language: 'javascript' } },
-    },
-  },
-
-  LanguageAndContent: {
-    props: {
-      config: { script: { language: 'javascript', content: 'console.log("hi",' } },
-    },
-  },
-
   LanguagesAndContent: {
     props: {
       config: {
         markup: { language: 'html', content: 'hello world!' },
-        script: { language: 'javascript', content: 'console.log("hi",' },
+        style: { language: 'css', content: 'body{color:blue;}' },
+        script: { language: 'javascript', content: 'console.log("hi")' },
       },
     },
   },
 
   NonDefaultLanguage: {
     props: {
-      config: { script: { language: 'typescript' } },
+      config: { markup: { language: 'markdown', content: '# Hello World!' } },
     },
   },
 
@@ -41,7 +30,7 @@ const storyDef: StoryDef = {
   MultipleLanguagesAndContent: {
     props: {
       config: {
-        markup: { language: 'html', content: 'hi' },
+        markup: { language: 'html', content: 'hello world!' },
         style: { language: 'scss' },
         script: { language: 'livescript' },
       },
@@ -51,7 +40,7 @@ const storyDef: StoryDef = {
   MultipleWithSelectedLanguage: {
     props: {
       config: {
-        markup: { language: 'html', content: 'hi' },
+        markup: { language: 'html', content: 'hello world!' },
         style: { language: 'scss', content: 'body {color:blue;}' },
         script: { language: 'typescript' },
         activeEditor: 'style',
@@ -87,6 +76,7 @@ const storyDef: StoryDef = {
   Stylesheets: {
     props: {
       config: {
+        markup: { language: 'html', content: 'hello world!' },
         stylesheets: [
           'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.css',
           'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap-grid.css',
@@ -98,10 +88,9 @@ const storyDef: StoryDef = {
   Scripts: {
     props: {
       config: {
-        scripts: [
-          'https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js',
-          'https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js',
-        ],
+        markup: { language: 'html', content: '<div id="container"></div>' },
+        script: { language: 'javascript', content: '$("#container").html("hi");' },
+        scripts: ['https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js'],
       },
     },
   },

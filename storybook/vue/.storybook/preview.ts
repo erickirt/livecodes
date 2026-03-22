@@ -1,7 +1,14 @@
 import type { Preview } from '@storybook/vue3-vite';
+import DocsTemplate from '../../common/DocsTemplate.mdx';
 
 const preview: Preview = {
+  tags: ['autodocs'],
+
   parameters: {
+    docs: {
+      page: DocsTemplate,
+    },
+
     controls: {
       disableSaveFromUI: true,
       matchers: {

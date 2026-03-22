@@ -1,9 +1,14 @@
 import type { Preview } from '@storybook/react-vite';
+import DocsTemplate from '../../common/DocsTemplate.mdx';
 
 const preview: Preview = {
-  // tags: ['autodocs'],
+  tags: ['autodocs'],
 
   parameters: {
+    docs: {
+      page: DocsTemplate,
+    },
+
     controls: {
       disableSaveFromUI: true,
       matchers: {
