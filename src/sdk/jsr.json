@@ -1,0 +1,16 @@
+{
+  "name": "@livecodes/sdk",
+  "version": "0.13.0",
+  "exports": {
+    ".": "./index.ts",
+    "./preact": "./preact.ts",
+    "./react": "./react.ts",
+    "./solid": "./solid.ts",
+    "./svelte": "./svelte.ts",
+    "./vue": "./vue.ts",
+    "./web-components": "./web-components.ts"
+  },
+  "include": ["**/*.ts", "**/*.tsx", "**/*.svelte", "README.md", "LICENSE"],
+  "exclude": ["**/*.test.ts", "**/*.spec.ts", "**/*.umd.ts"],
+  "license": "MIT"
+}

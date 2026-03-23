@@ -1,5 +1,4 @@
 import { createComponent } from '@live-codes/solid-sdk';
-// @ts-ignore
 import type { Component, JSX } from 'solid-js';
 import { createPlayground } from './index';
 // eslint-disable-next-line import/order
@@ -46,6 +45,8 @@ export interface Props extends EmbedOptions {
  * ```
  */
 
-const LiveCodes = createComponent(createPlayground as any) as Component<Props>;
+const LiveCodes: Component<Props> = createComponent(
+  createPlayground as Parameters<typeof createComponent>[0],
+) as Component<Props>;
 
 export default LiveCodes;

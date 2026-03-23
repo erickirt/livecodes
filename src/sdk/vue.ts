@@ -77,11 +77,17 @@ const clone = <T>(obj: T): T => JSON.parse(JSON.stringify(obj));
  * </template>
  * ```
  */
-// @ts-ignore
+
 const LiveCodes: LiveCodesComponent = {
   props,
   emits: ['sdkReady'],
-  setup(props, ctx) {
+  setup(
+    props: Props,
+    ctx: {
+      emit: (ev: string, data: Playground) => void;
+      slots: { default: () => string | number | boolean | undefined };
+    },
+  ) {
     const { height: _height, ...options } = props;
     const containerRef = ref<HTMLElement>();
     const height = ref(_height || '');
@@ -161,7 +167,7 @@ const LiveCodes: LiveCodesComponent = {
         ctx.slots.default?.() || '',
       );
   },
-};
+} as unknown as LiveCodesComponent;
 
 export default LiveCodes;
 

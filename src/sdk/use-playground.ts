@@ -25,7 +25,12 @@ interface PlaygroundHandle {
   height: string | undefined;
 }
 
-export function createUsePlayground(hooks: Hooks) {
+/**
+ * Creates a framework-agnostic hook to provide the LiveCodes SDK implementation.
+ * @param hooks - React/Preact hooks (useEffect, useRef) to use for the integration
+ * @returns A hook function that manages the playground instance
+ */
+export function createUsePlayground(hooks: Hooks): (props: Props) => PlaygroundHandle {
   const { useEffect, useRef } = hooks;
 
   return function usePlayground(props: Props): PlaygroundHandle {
