@@ -5,6 +5,7 @@ const path = require('path');
 const { exec } = require('child_process');
 
 const { bundleTypes } = require('./bundle-types');
+const { cleanTypes } = require('./clean-types');
 const { applyHash } = require('./hash');
 const { injectCss } = require('./inject-css');
 const { buildStyles } = require('./styles');
@@ -143,8 +144,13 @@ const sdkBuild = async () => {
     }),
     /** @type {Promise<void>} */ (
       new Promise((resolve) => {
-        exec('npx tsc --emitDeclarationOnly -p tsconfig.sdk.json', () => {
-          bundleTypes();
+        exec('npx tsc -p tsconfig.sdk.json', () => {
+          cleanTypes();
+          if (!devMode) {
+            // for backward compatibility
+            // and to provide a bundled file for use as custom types in livecodes if needed
+            bundleTypes();
+          }
           resolve();
         });
       })

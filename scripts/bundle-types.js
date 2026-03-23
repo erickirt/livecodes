@@ -3,8 +3,11 @@ const path = require('path');
 const dts = require('dts-bundle');
 
 const bundleTypes = () => {
+  const srcDir = 'build/sdk/types/';
   const outDir = 'build/sdk/';
   const outFile = 'livecodes.d.ts';
+  const tempFile = 'temp.d.ts';
+  const tempPath = srcDir + tempFile;
   const outPath = outDir + outFile;
 
   // delete if exists
@@ -14,20 +17,14 @@ const bundleTypes = () => {
 
   const options = {
     name: 'livecodes',
-    main: outDir + '**/*.d.ts',
-    out: outFile,
-    removeSource: true,
-    exclude: (/** @type {string} */ file) =>
-      file.includes('internal') ||
-      file.includes('use-') ||
-      file.includes('.umd') ||
-      file.includes('__tests__'),
+    main: srcDir + '**/*.d.ts',
+    out: tempFile,
   };
 
   dts.bundle(options);
 
   // patch
-  const content = fs.readFileSync(path.resolve(outPath), 'utf8');
+  const content = fs.readFileSync(path.resolve(tempPath), 'utf8');
   const patched = content
     .replace(/export \* from 'livecodes\/.*;/g, '')
     .replace(/livecodes\/index/g, 'livecodes')
@@ -36,6 +33,7 @@ const bundleTypes = () => {
     .trimStart();
 
   fs.writeFileSync(path.resolve(outPath), patched, 'utf8');
+  fs.unlinkSync(path.resolve(tempPath));
 };
 
 module.exports = { bundleTypes };
