@@ -1,5 +1,13 @@
-// these should not be exported from the SDK
+/**
+ * This module contains internal functions and types used by the LiveCodes SDK.
+ * These are not part of the public API and should not be exported from SDK modules.
+ *
+ * @module
+ */
 
+/**
+ * Custom events emitted by LiveCodes playground.
+ */
 export interface CustomEvents {
   init: 'livecodes-init';
   /** @deprecated config is sent in hash params */
@@ -65,6 +73,11 @@ const allowAttributes: Record<'chrome' | 'firefox' | 'default', string[]> = {
   ],
 };
 
+/**
+ * Detects the current browser type.
+ *
+ * @returns 'chrome', 'firefox', or 'default' based on user agent detection
+ */
 export const detectBrowser = (): 'chrome' | 'firefox' | 'default' => {
   if (typeof navigator === 'undefined') return 'default';
   const ua = navigator.userAgent;
@@ -73,6 +86,11 @@ export const detectBrowser = (): 'chrome' | 'firefox' | 'default' => {
   return 'default';
 };
 
+/**
+ * Generates the iframe allow attribute value based on detected browser capabilities.
+ *
+ * @returns A semicolon-separated string of allowed features for the iframe
+ */
 export const getIframeAllowAttribute = (): string =>
   allowAttributes[detectBrowser()]
     .filter((feature) => {

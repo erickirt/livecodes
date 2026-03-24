@@ -1,3 +1,11 @@
+/**
+ * LiveCodes Web Components
+ *
+ * This module provides Web Components for embedding LiveCodes playgrounds.
+ *
+ * @module
+ */
+
 /* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable no-underscore-dangle */
 import { createPlayground } from './index';
@@ -5,8 +13,13 @@ import { createPlayground } from './index';
 import type { EmbedOptions, Playground, TemplateName } from './models';
 export type { Code, Config, EmbedOptions, Language, Playground } from './models';
 
+/**
+ * Props for the LiveCodes Web Component.
+ */
 export interface Props extends EmbedOptions {
+  /** Height of the playground container. */
   height?: string;
+  /** The SDK instance. */
   sdk?: Playground;
 }
 

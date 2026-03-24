@@ -2,6 +2,9 @@ import { createPlayground } from './index';
 // eslint-disable-next-line import/order
 import type { EmbedOptions, Playground } from './models';
 
+/**
+ * Props for the usePlayground hook.
+ */
 interface Props extends EmbedOptions {
   className?: string;
   style?: Record<string, string>;
@@ -9,15 +12,24 @@ interface Props extends EmbedOptions {
   sdkReady?: (sdk: Playground) => void;
 }
 
+/**
+ * A reference to a value.
+ */
 interface Ref<T> {
   current: T;
 }
 
+/**
+ * Hooks interface for framework integration.
+ */
 interface Hooks {
   useEffect(effect: () => void | (() => void), deps?: unknown[]): void;
   useRef<T>(initial: T): Ref<T>;
 }
 
+/**
+ * Handle returned by the usePlayground hook.
+ */
 interface PlaygroundHandle {
   containerRef: Ref<HTMLDivElement | null>;
   className: string;

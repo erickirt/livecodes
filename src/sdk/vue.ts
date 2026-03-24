@@ -1,3 +1,11 @@
+/**
+ * LiveCodes Vue Component
+ *
+ * This module provides a Vue component wrapper for embedding LiveCodes playgrounds.
+ *
+ * @module
+ */
+
 /* eslint-disable no-duplicate-imports */
 /* eslint-disable import/no-extraneous-dependencies */
 
@@ -21,7 +29,11 @@ import { createPlayground } from './index';
 import type { EmbedOptions, Playground } from './models';
 export type { Code, Config, EmbedOptions, Language, Playground } from './models';
 
+/**
+ * Props for the LiveCodes Vue component.
+ */
 export interface Props extends EmbedOptions {
+  /** Height of the playground container. */
   height?: string;
 }
 

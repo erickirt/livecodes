@@ -1,9 +1,27 @@
+/**
+ * LiveCodes Type Definitions
+ *
+ * This module contains all TypeScript types, interfaces, and type aliases
+ * used by the LiveCodes SDK, including configuration objects, editor types,
+ * and API definitions.
+ *
+ * @module
+ */
+
+/**
+ * Converts a union type to an intersection type.
+ * @typeParam U - The union type to convert
+ */
 export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
   k: infer I,
 ) => void
   ? I
   : never;
 
+/**
+ * Makes nested object types more readable by flattening intersecting types.
+ * @typeParam T - The type to prettify
+ */
 export type Prettify<T> = {
   [K in keyof T]: T[K] extends object ? Prettify<T[K]> : T[K];
 } & {};
@@ -226,15 +244,31 @@ export type Language =
   | 'xml'
   | 'pintora';
 
+/**
+ * The identifier for each code editor pane in the playground.
+ */
 export type EditorId = 'markup' | 'style' | 'script';
 
+/**
+ * Represents a position in a code editor,
+ * with 1-based line number and (optional) 1-based column number.
+ */
 export interface EditorPosition {
+  /** 1-based line number */
   lineNumber: number;
+
+  /** 1-based column number (optional) */
   column?: number;
 }
 
+/**
+ * The app theme mode.
+ */
 export type Theme = 'light' | 'dark';
 
+/**
+ * CSS preprocessors and PostCSS plugins.
+ */
 export type Processor =
   | 'postcss'
   | 'postcssImportUrl'
@@ -249,8 +283,14 @@ export type Processor =
   | 'purgecss'
   | 'cssnano';
 
+/**
+ * CSS presets.
+ */
 export type CssPresetId = '' | 'normalize.css' | 'reset-css';
 
+/**
+ * CDN providers for external resources.
+ */
 export type CDN =
   | 'jspm'
   | 'skypack'
@@ -277,6 +317,9 @@ export type CDN =
   | 'npmcdn'
   | 'statically';
 
+/**
+ * Supported UI/app languages for localization.
+ */
 export type AppLanguage =
   | 'auto'
   | 'ar'
@@ -297,6 +340,9 @@ export type AppLanguage =
   | 'ur'
   | 'zh-CN';
 
+/**
+ * Starter template names.
+ */
 export type TemplateName =
   | 'blank'
   | 'javascript'
@@ -368,12 +414,24 @@ export type TemplateName =
   | 'blockly'
   | 'diagrams';
 
+/**
+ * Tools in the tools pane.
+ */
 export type ToolName = 'console' | 'compiled' | 'tests';
 
+/**
+ * Status of the tools pane.
+ */
 export type ToolsPaneStatus = 'closed' | 'open' | 'full' | 'none' | '';
 
+/**
+ * API commands for the SDK.
+ */
 export type APICommands = 'setBroadcastToken' | 'showVersion';
 
+/**
+ * Screen names in the app.
+ */
 export type ScreenName =
   | 'login'
   | 'info'
@@ -399,6 +457,9 @@ export type ScreenName =
   | 'test-editor'
   | 'keyboard-shortcuts';
 
+/**
+ * Themes for the Monaco editor.
+ */
 export type MonacoTheme =
   | 'active4d'
   | 'all-hallows-eve'
@@ -466,6 +527,9 @@ export type MonacoTheme =
   | 'xcode-default'
   | 'zenburnesque';
 
+/**
+ * Themes for the CodeMirror editor.
+ */
 export type CodemirrorTheme =
   | 'amy'
   | 'aura'
@@ -506,6 +570,9 @@ export type CodemirrorTheme =
   | 'tokyo-night-storm'
   | 'tomorrow';
 
+/**
+ * Themes for the CodeJar editor.
+ */
 export type CodejarTheme =
   | 'a11y-dark'
   | 'atom-dark'
@@ -559,6 +626,11 @@ export type CodejarTheme =
   | 'xonokai'
   | 'z-touchs';
 
+/**
+ * Editor theme that can be a Monaco, CodeMirror, or CodeJar theme,
+ * optionally with editor prefix and/or a theme suffix (light/dark).
+ * See [docs](https://livecodes.io/docs/configuration/configuration-object#editortheme) for details.
+ */
 export type EditorTheme =
   | MonacoTheme
   | CodemirrorTheme
@@ -573,14 +645,25 @@ export type EditorTheme =
   | `codemirror:${CodemirrorTheme}@${Theme}`
   | `codejar:${CodejarTheme}@${Theme}`;
 
+/**
+ * Represents the result of a single test.
+ */
 export interface TestResult {
+  /** Time taken to run the test in milliseconds. */
   duration: number;
+  /** Array of error messages if the test failed. */
   errors: string[];
+  /** The status of the test. */
   status: 'pass' | 'fail' | 'skip';
+  /** The path to the test in the test suite. */
   testPath: string[];
 }
 
+/**
+ * Custom type declarations for module imports.
+ */
 export interface Types {
+  /** The module name and its type declaration URL */
   [key: string]:
     | string
     | {
@@ -591,6 +674,9 @@ export interface Types {
       };
 }
 
+/**
+ * Configuration for each code editor pane in the playground.
+ */
 export interface Editor {
   /**
    * A language name, extension or alias (as defined in [language documentations](https://livecodes.io/docs/languages/)).
@@ -666,6 +752,9 @@ export interface Editor {
   position?: EditorPosition;
 }
 
+/**
+ * Custom settings for the playground.
+ */
 export type CustomSettings = Partial<
   {
     [key in Language | Processor]: any;
@@ -710,6 +799,9 @@ export type CustomSettings = Partial<
   }
 >;
 
+/**
+ * Configuration for code formatting options.
+ */
 export interface FormatterConfig {
   /**
    * If `true`, lines are indented with tabs instead of spaces.
@@ -741,6 +833,9 @@ export interface FormatterConfig {
   trailingComma: boolean;
 }
 
+/**
+ * Configuration for code editor settings.
+ */
 export interface EditorConfig {
   /**
    * Selects the [code editor](https://livecodes.io/docs/features/editor-settings#code-editor) to use.
@@ -852,6 +947,9 @@ export interface EditorConfig {
   editorMode: 'vim' | 'emacs' | undefined;
 }
 
+/**
+ * User preferences and settings for the playground.
+ */
 export interface UserConfig extends EditorConfig, FormatterConfig {
   /**
    * If `true`, the result page is automatically updated on code change,
@@ -1161,6 +1259,10 @@ export interface ContentConfig {
  *
  * See [docs](https://livecodes.io/docs/configuration/configuration-object) for details.
  */
+
+/**
+ * The playground configuration interface combining content, app, and user settings.
+ */
 export interface Config extends ContentConfig, AppConfig, UserConfig {}
 
 /**
@@ -1170,24 +1272,40 @@ export interface Config extends ContentConfig, AppConfig, UserConfig {}
  * See [docs](https://livecodes.io/docs/api/interfaces/Code) for details.
  */
 export interface Code {
+  /** Markup editor code. */
   markup: {
+    /** The language of the code. */
     language: Language;
+    /** The source code. */
     content: string;
+    /** The compiled code. */
     compiled: string;
   };
+  /** Style editor code. */
   style: {
+    /** The language of the code. */
     language: Language;
+    /** The source code. */
     content: string;
+    /** The compiled code. */
     compiled: string;
   };
+  /** Script editor code. */
   script: {
+    /** The language of the code. */
     language: Language;
+    /** The source code. */
     content: string;
+    /** The compiled code. */
     compiled: string;
   };
+  /** The HTML content of the result page. */
   result: string;
 }
 
+/**
+ * Union of all watch function types for playground events.
+ */
 export type WatchFns =
   | WatchLoad
   | WatchReady
@@ -1222,28 +1340,54 @@ export type WatchReady = (
  * - Project title
  * - [Test](https://livecodes.io/docs/features/tests) code
  */
+
+/**
+ * Watch function type for code changes in the playground.
+ */
 export type WatchCode = (
   event: 'code',
   fn: (data: { code: Code; config: Config }) => void,
 ) => { remove: () => void };
 
+/**
+ * Called when console methods are called in the result page.
+ */
 export type WatchConsole = (
   event: 'console',
   fn: (data: { method: string; args: any[] }) => void,
 ) => { remove: () => void };
 
+/**
+ * Called when test results are available.
+ */
 export type WatchTests = (
   event: 'tests',
   fn: (data: { results: TestResult[]; error?: string }) => void,
 ) => { remove: () => void };
 
+/**
+ * Called when the playground is destroyed.
+ */
 export type WatchDestroy = (event: 'destroy', fn: () => void) => { remove: () => void };
 
+/**
+ * The event name type for SDK watch functions.
+ */
 export type SDKEvent = Parameters<WatchFns>[0];
+
+/**
+ * The event handler type for SDK watch functions.
+ */
 export type SDKEventHandler = Parameters<WatchFns>[1];
 
+/**
+ * The combined watch function type that handles all events.
+ */
 export type WatchFn = UnionToIntersection<WatchFns>;
 
+/**
+ * The SDK API interface for playground interaction.
+ */
 export interface API {
   /**
    * Runs the [result page](https://livecodes.io/docs/features/result) (after any required compilation for code).
@@ -1476,13 +1620,29 @@ export interface Playground extends API {
   load: () => Promise<void>;
 }
 
+/**
+ * A CSS selector for importing code from DOM.
+ *
+ * See [docs](https://livecodes.io/docs/features/import/#import-code-from-dom) for details.
+ */
 export type languageSelector = `${Language}-selector`;
+
+/**
+ * Tool names concatenated with commas, for use in `UrlQueryParams`.
+ */
 export type ToolNames =
   | `${ToolName}`
   | `${ToolName},${ToolName}`
   | `${ToolName},${ToolName},${ToolName}`;
+
+/**
+ * Tools status string combining tool names with their status for use in `UrlQueryParams`.
+ */
 export type ToolsStatus = `${ToolNames}|${Config['tools']['status']}`;
 
+/**
+ * URL query parameters for playground configuration.
+ */
 export type UrlQueryParams = Partial<
   EmbedOptions &
     Omit<
@@ -1576,11 +1736,12 @@ export interface EmbedOptions {
   import?: string;
 
   /**
+   * If `true`, the playground is loaded in [lite mode](https://livecodes.io/docs/features/lite).
+   *
    * @deprecated
    *
    * Use `{ config: { mode: "lite" } }` instead
    *
-   * If `true`, the playground is loaded in [lite mode](https://livecodes.io/docs/features/lite).
    * @default false
    */
   lite?: boolean;
@@ -1602,14 +1763,14 @@ export interface EmbedOptions {
   template?: TemplateName;
 
   /**
-   * @deprecated
-   *
-   * The `view` option has been moved to `config.view`.
-   * For headless mode use `headless: true`.
-   *
    * The [default view](https://livecodes.io/docs/features/default-view) for the playground.
    *
    * When set to `"headless"`, the playground is loaded in [headless mode](https://livecodes.io/docs/sdk/headless).
+   *
+   * @deprecated
+   *
+   * The `view` option has been moved to `config.view`. For headless mode use `headless: true`.
+   *
    * @default "split"
    */
   view?: 'split' | 'editor' | 'result' | 'headless';

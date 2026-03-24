@@ -1,3 +1,11 @@
+/**
+ * LiveCodes Preact Component
+ *
+ * This module provides a Preact component wrapper for embedding LiveCodes playgrounds.
+ *
+ * @module
+ */
+
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-unresolved */
 // @ts-ignore
@@ -10,10 +18,17 @@ import type { EmbedOptions, Playground } from './models';
 import { createUsePlayground } from './use-playground';
 export type { Code, Config, EmbedOptions, Language, Playground } from './models';
 
+/**
+ * Props for the LiveCodes Preact component.
+ */
 export interface Props extends EmbedOptions {
+  /** CSS class name for the container element. */
   className?: string;
+  /** CSS styles for the container element. */
   style?: Record<string, string>;
+  /** Height of the playground container. */
   height?: string;
+  /** Callback function that receives the SDK instance when ready. */
   sdkReady?: (sdk: Playground) => void;
 }
 
