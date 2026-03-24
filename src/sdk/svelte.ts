@@ -1,11 +1,26 @@
+/**
+ * LiveCodes Svelte Component
+ *
+ * This module provides a Svelte component wrapper for embedding LiveCodes playgrounds.
+ *
+ * @module
+ */
+
 import type { EmbedOptions, Playground } from './models';
 export { createPlayground } from './index';
 export type { Code, Config, EmbedOptions, Language, Playground } from './models';
 
+/**
+ * Props for the LiveCodes Svelte component.
+ */
 export interface Props extends EmbedOptions {
+  /** CSS class name for the container element. */
   class?: string;
+  /** CSS styles for the container element. */
   style?: Record<string, string>;
+  /** Height of the playground container. */
   height?: string;
+  /** Callback function that receives the SDK instance when ready. */
   sdkReady?: (sdk: Playground) => void;
 }
 

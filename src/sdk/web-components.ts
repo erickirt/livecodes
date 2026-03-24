@@ -1,3 +1,11 @@
+/**
+ * LiveCodes Web Components
+ *
+ * This module provides Web Components for embedding LiveCodes playgrounds.
+ *
+ * @module
+ */
+
 /* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable no-underscore-dangle */
 import { createPlayground } from './index';
@@ -5,8 +13,13 @@ import { createPlayground } from './index';
 import type { EmbedOptions, Playground, TemplateName } from './models';
 export type { Code, Config, EmbedOptions, Language, Playground } from './models';
 
+/**
+ * Props for the LiveCodes Web Component.
+ */
 export interface Props extends EmbedOptions {
+  /** Height of the playground container. */
   height?: string;
+  /** The SDK instance. */
   sdk?: Playground;
 }
 
@@ -63,16 +76,19 @@ class LiveCodesElement extends HTMLElement {
   private _updateScheduled = false;
   private _generation = 0;
 
+  /** The list of attributes that trigger an update. */
   public static get observedAttributes(): string[] {
     return ['app-url', 'import', 'loading', 'template', 'view', 'height', 'headless', 'lite'];
   }
 
+  /** Initialize the component. */
   public connectedCallback(): void {
     this._connected = true;
     this._scheduleUpdate();
     this.style.display = 'block';
   }
 
+  /** Destroy the component. */
   public disconnectedCallback(): void {
     this._connected = false;
     ++this._generation; // invalidate pending async callbacks
@@ -80,6 +96,7 @@ class LiveCodesElement extends HTMLElement {
     this._playground = undefined;
   }
 
+  /** Update the component. */
   public attributeChangedCallback(
     _name: string,
     oldValue: string | null,
@@ -95,6 +112,7 @@ class LiveCodesElement extends HTMLElement {
     return this._config;
   }
 
+  /** The config object or URL of the config file. */
   public set config(value: EmbedOptions['config']) {
     this._config = value;
     if (this._connected) {
@@ -107,6 +125,7 @@ class LiveCodesElement extends HTMLElement {
     return this._params;
   }
 
+  /** An object that represents URL Query parameters. */
   public set params(value: EmbedOptions['params']) {
     this._params = value;
     if (this._connected) {

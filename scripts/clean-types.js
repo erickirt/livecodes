@@ -24,18 +24,12 @@ const path = require('path');
 const cleanTypes = () => {
   console.log('\nCleaning types...');
 
-  const packageJsonPath = process.argv[2] || path.join('src', 'sdk', 'package.sdk.json');
-  const outDir = process.argv[3] || path.join('build', 'sdk', 'types');
+  const packageJsonPath = path.join('src', 'sdk', 'package.sdk.json');
+  const outDir = path.join('build', 'sdk', 'types');
 
-  const expectedDepsEnv = process.env.EXPECTED_DEPS;
-  const expectedDeps = expectedDepsEnv
-    ? expectedDepsEnv
-        .split(',')
-        .map((s) => s.trim())
-        .filter(Boolean)
-    : ['models.d.ts'];
+  const expectedDeps = ['models.d.ts'];
 
-  // ─── 1. Extract type paths from package.json ────────────────────────
+  // ─── Extract type paths from package.json ────────────────────────
 
   const pkg = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
 
@@ -64,7 +58,7 @@ const cleanTypes = () => {
     process.exit(1);
   }
 
-  // ─── 2. Map package.json paths to outDir-relative filenames ─────────
+  // ─── Map package.json paths to outDir-relative filenames ─────────
 
   const norm = (/** @type {string} */ p) => p.split(path.sep).join('/');
 
@@ -92,7 +86,7 @@ const cleanTypes = () => {
     ...new Set(stripped.map((p) => (commonDir ? p.slice(commonDir.length + 1) : p))),
   ];
 
-  // ─── 3. Validate public entries exist ───────────────────────────────
+  // ─── Validate public entries exist ───────────────────────────────
 
   const missing = publicFiles.filter((f) => !fs.existsSync(path.join(outDir, f)));
   if (missing.length > 0) {
@@ -104,7 +98,7 @@ const cleanTypes = () => {
     process.exit(1);
   }
 
-  // ─── 4. Collect all .d.ts files in outDir (recursive) ──────────────
+  // ─── Collect all .d.ts files in outDir (recursive) ──────────────
 
   /**
    * @param {fs.PathLike} dir
@@ -124,7 +118,7 @@ const cleanTypes = () => {
 
   const allFiles = collectDts(outDir);
 
-  // ─── 5. Walk transitive imports from public entries ─────────────────
+  // ─── Walk transitive imports from public entries ─────────────────
 
   /**
    * @param {fs.PathOrFileDescriptor} absPath
@@ -174,13 +168,13 @@ const cleanTypes = () => {
 
   const reachable = findReachable(publicFiles);
 
-  // ─── 6. Classify files ─────────────────────────────────────────────
+  // ─── Classify files ─────────────────────────────────────────────
 
   const publicSet = new Set(publicFiles);
   const sharedDeps = [...reachable].filter((f) => !publicSet.has(f)).sort();
   const internal = allFiles.filter((/** @type {any} */ f) => !reachable.has(f)).sort();
 
-  // ─── 7. Validate shared dependencies against allow-list ─────────────
+  // ─── Validate shared dependencies against allow-list ─────────────
 
   const expectedSet = new Set(expectedDeps);
   const unexpected = sharedDeps.filter((f) => !expectedSet.has(f));
@@ -202,7 +196,7 @@ const cleanTypes = () => {
     sharedDeps.forEach((f) => console.log(`  ${f}`));
   }
 
-  // ─── 8. Delete unreachable files ────────────────────────────────────
+  // ─── Delete unreachable files ────────────────────────────────────
 
   if (internal.length === 0) {
     console.log('No internal files to remove.');

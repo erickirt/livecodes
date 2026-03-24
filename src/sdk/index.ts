@@ -1,3 +1,12 @@
+/**
+ * LiveCodes SDK - A Code Playground That Just Works!
+ *
+ * This module is the main entry point for the LiveCodes SDK.
+ * It provides the core `createPlayground` and `getPlaygroundUrl` functions.
+ *
+ * @module
+ */
+
 /* eslint-disable no-redeclare */
 import { compressToEncodedURIComponent } from 'lz-string';
 import { getIframeAllowAttribute, type CustomEvents } from './internal';

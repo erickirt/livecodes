@@ -1,3 +1,11 @@
+/**
+ * LiveCodes React Component
+ *
+ * This module provides a React component wrapper for embedding LiveCodes playgrounds.
+ *
+ * @module
+ */
+
 // @ts-ignore
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React, { useEffect, useRef } from 'react';
@@ -5,10 +13,17 @@ import type { EmbedOptions, Playground } from './models';
 import { createUsePlayground } from './use-playground';
 export type { Code, Config, EmbedOptions, Language, Playground } from './models';
 
+/**
+ * Props for the LiveCodes React component.
+ */
 export interface Props extends EmbedOptions {
+  /** CSS class name for the container element. */
   className?: string;
+  /** CSS styles for the container element. */
   style?: Record<string, string>;
+  /** Height of the playground container. */
   height?: string;
+  /** Callback function that receives the SDK instance when ready. */
   sdkReady?: (sdk: Playground) => void;
 }
 

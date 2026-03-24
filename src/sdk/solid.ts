@@ -1,15 +1,29 @@
+/**
+ * LiveCodes SolidJS Component
+ *
+ * This module provides a SolidJS component wrapper for embedding LiveCodes playgrounds.
+ *
+ * @module
+ */
+
 import { createComponent } from '@live-codes/solid-sdk';
-// @ts-ignore
 import type { Component, JSX } from 'solid-js';
 import { createPlayground } from './index';
 // eslint-disable-next-line import/order
 import type { EmbedOptions, Playground } from './models';
 export type { Code, Config, EmbedOptions, Language, Playground } from './models';
 
+/**
+ * Props for the LiveCodes SolidJS component.
+ */
 export interface Props extends EmbedOptions {
+  /** CSS class name for the container element. */
   class?: string;
+  /** CSS styles for the container element. */
   style?: JSX.CSSProperties;
+  /** Height of the playground container. */
   height?: string;
+  /** Callback function that receives the SDK instance when ready. */
   sdkReady?: (sdk: Playground) => void;
 }
 
@@ -46,6 +60,8 @@ export interface Props extends EmbedOptions {
  * ```
  */
 
-const LiveCodes = createComponent(createPlayground as any) as Component<Props>;
+const LiveCodes: Component<Props> = createComponent(
+  createPlayground as Parameters<typeof createComponent>[0],
+) as Component<Props>;
 
 export default LiveCodes;

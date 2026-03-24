@@ -12,6 +12,9 @@ const bundleTypes = () => {
 
   // delete if exists
   try {
+    fs.unlinkSync(path.resolve(tempPath));
+  } catch {}
+  try {
     fs.unlinkSync(path.resolve(outPath));
   } catch {}
 

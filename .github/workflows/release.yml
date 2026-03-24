@@ -102,6 +102,13 @@ jobs:
         working-directory: ./build/sdk
         run: npm publish --access=public
 
+      - name: Publish SDK to JSR
+        if: startsWith(github.head_ref, 'releases/sdk-v')
+        run: |
+          node ./scripts/prepare-jsr.mts
+          cd dist/jsr
+          npx jsr publish
+
       - name: Create pull request to main (App)
         if: startsWith(github.head_ref, 'releases/v')
         run: gh pr create --title "release ${{steps.vars.outputs.version}}" --body "https://${{steps.vars.outputs.version}}.livecodes.io" --base main --head develop
