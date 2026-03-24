@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * LiveCodes SolidJS Component
  *
@@ -11,7 +12,7 @@ import type { Component, JSX } from 'solid-js';
 import { createPlayground } from 'livecodes';
 // eslint-disable-next-line import/order
 import type { EmbedOptions, Playground } from 'livecodes';
-export type { Code, Config, EmbedOptions, Language, Playground } from './models';
+export type { Code, Config, EmbedOptions, Language, Playground } from 'livecodes';
 
 /**
  * Props for the LiveCodes SolidJS component.
