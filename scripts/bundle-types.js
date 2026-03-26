@@ -4,11 +4,10 @@ const dts = require('dts-bundle');
 
 const bundleTypes = () => {
   const srcDir = 'build/sdk/types/';
-  const outDir = 'build/sdk/';
   const outFile = 'livecodes.d.ts';
   const tempFile = 'temp.d.ts';
   const tempPath = srcDir + tempFile;
-  const outPath = outDir + outFile;
+  const outPath = srcDir + outFile;
 
   // delete if exists
   try {
