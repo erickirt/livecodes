@@ -1628,7 +1628,7 @@ export interface Playground extends API {
 export type languageSelector = `${Language}-selector`;
 
 /**
- * Tool names concatenated with commas, for use in `UrlQueryParams`.
+ * Tool names concatenated with commas, for use in {@link UrlQueryParams}.
  */
 export type ToolNames =
   | `${ToolName}`
@@ -1636,7 +1636,7 @@ export type ToolNames =
   | `${ToolName},${ToolName},${ToolName}`;
 
 /**
- * Tools status string combining tool names with their status for use in `UrlQueryParams`.
+ * Tools status string combining tool names with their status for use in {@link UrlQueryParams}.
  */
 export type ToolsStatus = `${ToolNames}|${Config['tools']['status']}`;
 

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://jsr.io/schema/config-file.v1.json",
   "name": "@livecodes/sdk",
   "description": "A Code Playground That Just Works!",
   "version": "0.13.0",

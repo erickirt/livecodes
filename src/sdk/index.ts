@@ -4,7 +4,7 @@
  * This module is the main entry point for the LiveCodes SDK.
  * It provides the core `createPlayground` and `getPlaygroundUrl` functions.
  *
- * @module
+ * @module livecodes
  */
 
 /* eslint-disable no-redeclare */
