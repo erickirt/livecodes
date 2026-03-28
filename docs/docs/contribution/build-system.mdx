@@ -35,7 +35,7 @@ npm run start             # Runs: copy:assets, watch, serve in parallel
 
 ### Core Build Script
 
-The main build script is located at [`scripts/build.js`](../../../scripts/build.js). It orchestrates all build tasks:
+The main build script is located at `scripts/build.js`. It orchestrates all build tasks:
 
 ### Build Phases
 
@@ -72,7 +72,6 @@ and other lazy-loaded modules, including:
 - Import/export modules
 
 Configuration:
-- Target: `es2020`
 - Format: `esm`
 - Minification: enabled in production
 
@@ -101,7 +100,7 @@ Workers are wrapped in IIFE format for compatibility.
 
 #### 5. Styles Build (`stylesBuild`)
 
-Located in [`scripts/styles.js`](../../../scripts/styles.js):
+Located in `scripts/styles.js`:
 
 - Compiles SCSS files from `src/livecodes/styles/` to CSS
 - Uses Sass compiler
@@ -130,17 +129,17 @@ Type declarations are generated via TypeScript compiler (`tsconfig.sdk.json`), t
 
 #### 7. I18n Build (`buildI18n`)
 
-Located in[`scripts/i18n.js`](../../../scripts/i18n.js):
+Located in `scripts/i18n.js`:
 
 - Compiles locale files from `src/livecodes/i18n/locales/*/`
 - Outputs JSON files: `build/livecodes/i18n-{locale}-{namespace}.json`
 - Generates locale path loader for dynamic imports
 
-See [i18n.mdx](i18n.mdx) for details.
+See [i18n.mdx](./i18n.mdx) for details.
 
 ### Post-Build Processing
 
-#### Hash Application ([`scripts/hash.js`](../../../scripts/hash.js))
+#### Hash Application (`scripts/hash.js`)
 
 Applies content-based MD5 hashes to filenames for cache busting:
 
@@ -156,9 +155,9 @@ Benefits:
 - Aggressive caching (1 year) with cache invalidation on change
 - Consistent hashes for unchanged files across builds
 
-#### CSS Injection ([`scripts/inject-css.js`](../../../scripts/inject-css.js))
+#### CSS Injection (`scripts/inject-css.js`)
 
-- Inlines [`index.css`](../../../src/livecodes/styles/index.css) content directly into [`index.html`](../../../src/index.html)
+- Inlines `src/livecodes/styles/index.css` content directly into `src/index.html`
 - Reduces HTTP requests for critical CSS
 
 ## Output Structure
@@ -227,7 +226,7 @@ build/
 
 ## Environment Variables
 
-Build-time environment variables (set in [`getEnvVars()`](../../../scripts/utils.js)):
+Build-time environment variables (set in `getEnvVars()` in `scripts/utils.js`):
 
 | Variable | Description |
 |----------|-------------|
@@ -258,7 +257,6 @@ See [Docker Setup](https://livecodes.io/docs/advanced/docker#environment-variabl
 - Base options:
   - Bundle: `true`
   - Minify: `false` in dev, `true` in production
-  - Target: `es2020` (app), `es2018` (SDK)
   - Format: `esm` or `iife`
   - Loader: `.html` → `text`, `.ttf` → `file`
   - External: `codemirror`, `@codemirror/*`, `@lezer/*`, `@replit/codemirror-*`
@@ -308,10 +306,10 @@ npm run e2e              # Run Playwright e2e tests
 
 ## Type Bundling
 
-The SDK type declarations are processed by [`scripts/bundle-types.js`](../../../scripts/bundle-types.js):
+The SDK type declarations are processed by `scripts/bundle-types.js`:
 
 1. TypeScript generates `.d.ts` files
-2. `dts-bundle` merges them into single `livecodes.d.ts`
+2. `dts-bundle` merges them into single `build/sdk/types/livecodes.d.ts`
 3. Patches applied to fix module paths and remove unused exports
 
 ## CI/CD

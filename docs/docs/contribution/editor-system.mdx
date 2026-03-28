@@ -19,20 +19,20 @@ flowchart TD
     A[Mode?] --> B{Headless?}
     B -->|Yes| C[fake editor]
     B -->|No| D{Result mode<br/>non-console/compiled?}
-    
+
     D -->|Yes| C
     D -->|No| E{Simple mode?}
-    
+
     E -->|Yes| F{Active editor?}
     F -->|Yes| G[codemirror]
     F -->|No| C
-    
+
     E -->|No| H{Codeblock or Lite mode?}
     H -->|Yes| I[codejar]
-    
+
     H -->|No| J{Explicit selection?}
     J -->|Yes| K[Selected editor<br/>monaco/codemirror/codejar]
-    
+
     J -->|No| L{Mobile?}
     L -->|Yes| G
     L -->|No| M[monaco]
@@ -109,7 +109,7 @@ Uses a WebWorker loaded from the compiler iframe for TypeScript features:
 
 A [custom build](https://github.com/live-codes/codemirror) is used for CodeMirror editor, which allows:
 
-- Bundling and minification of the core modules (e.g. `state`, `view`, etc) and language support for common languages (`html`, `css`, `js`, `json`) to avoid unnecessary network requests and larger module size. Extensions in this bundle are marked as external during build of other modules. This allows all of them to point to the same URL using importmaps (see [app.html](../../../src/livecodes/html/app.html)).
+- Bundling and minification of the core modules (e.g. `state`, `view`, etc) and language support for common languages (`html`, `css`, `js`, `json`) to avoid unnecessary network requests and larger module size. Extensions in this bundle are marked as external during build of other modules. This allows all of them to point to the same URL using importmaps (see [app.html](https://github.com/live-codes/livecodes/blob/develop/src/livecodes/html/app.html)).
 - Other extensions are lazy-loaded on-demand.
 
 ---
