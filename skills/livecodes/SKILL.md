@@ -13,31 +13,34 @@ library_version: v0.13.0+
 
 LiveCodes is a feature-rich, open-source, client-side code playground that runs entirely in the browser. No server required. Supports 90+ languages/frameworks with a powerful SDK for embedding in any web application.
 
-> **CRITICAL**: LiveCodes runs CLIENT-SIDE. No server, no build step, no backend. Do not confuse with server-based playgrounds like CodeSandbox or StackBlitz.
+> **CRITICAL**: LiveCodes runs CLIENT-SIDE. No server, no build step, no backend. Do not confuse with server-based playgrounds.
 
-> **CRITICAL**: All SDK methods are async (return Promises). Always `await` them or use `.then()`. Forgetting to await is the #1 AI agent mistake.
+> **CRITICAL**: All SDK methods are async (return Promises). Always `await` them or use `.then()`.
 
 ## Sub-Skills
 
-| Task                                               | Sub-Skill                                                                  |
-| -------------------------------------------------- | -------------------------------------------------------------------------- |
-| Create embedded playgrounds                        | [livecodes/sdk-embedding/SKILL.md](./sdk-embedding/SKILL.md)               |
-| Use SDK methods (run, getCode, setConfig, watch)   | [livecodes/sdk-methods/SKILL.md](./sdk-methods/SKILL.md)                   |
-| Configure via Configobject, query params           | [livecodes/configuration/SKILL.md](./configuration/SKILL.md)               |
-| Choose display mode (full, simple, headless, etc.) | [livecodes/display-modes/SKILL.md](./display-modes/SKILL.md)               |
-| Run playgrounds without visible UI                 | [livecodes/headless-mode/SKILL.md](./headless-mode/SKILL.md)               |
-| Import/export code (GitHub, gists, files)          | [livecodes/import-export/SKILL.md](./import-export/SKILL.md)               |
-| Work with 90+ languages and processors             | [livecodes/language-support/SKILL.md](./language-support/SKILL.md)         |
-| Import npm packages without bundler                | [livecodes/module-resolution/SKILL.md](./module-resolution/SKILL.md)       |
-| Write and run tests in the playground              | [livecodes/testing/SKILL.md](./testing/SKILL.md)                           |
-| Use with React, Vue, Svelte, Solid, Preact         | [livecodes/framework-wrappers/SKILL.md](./framework-wrappers/SKILL.md)     |
-| Integrate with docs sites (Docusaurus, Astro)      | [livecodes/markdown-integration/SKILL.md](./markdown-integration/SKILL.md) |
-| Self-host on your own server                       | [livecodes/self-hosting/SKILL.md](./self-hosting/SKILL.md)                 |
-| Quick start for beginners                          | [livecodes/getting-started/SKILL.md](./getting-started/SKILL.md)           |
+| Task                                             | Sub-Skill                                                                  |
+| ------------------------------------------------ | -------------------------------------------------------------------------- |
+| Quick start for beginners                        | [livecodes/getting-started/SKILL.md](./getting-started/SKILL.md)           |
+| Create embedded playgrounds                      | [livecodes/sdk-embedding/SKILL.md](./sdk-embedding/SKILL.md)               |
+| Use SDK methods (run, getCode, setConfig, watch) | [livecodes/sdk-methods/SKILL.md](./sdk-methods/SKILL.md)                   |
+| Configure via Config object, query params        | [livecodes/configuration/SKILL.md](./configuration/SKILL.md)               |
+| Choose display mode (full, simple, result, etc.) | [livecodes/display-modes/SKILL.md](./display-modes/SKILL.md)               |
+| Run playgrounds without visible UI               | [livecodes/headless-mode/SKILL.md](./headless-mode/SKILL.md)               |
+| Import/export code (GitHub, gists, files)        | [livecodes/import-export/SKILL.md](./import-export/SKILL.md)               |
+| Work with 90+ languages and processors           | [livecodes/language-support/SKILL.md](./language-support/SKILL.md)         |
+| Import npm packages without bundler              | [livecodes/module-resolution/SKILL.md](./module-resolution/SKILL.md)       |
+| Write and run tests in the playground            | [livecodes/testing/SKILL.md](./testing/SKILL.md)                           |
+| Use with React, Vue, Svelte, Solid, Preact       | [livecodes/framework-wrappers/SKILL.md](./framework-wrappers/SKILL.md)     |
+| Integrate with docs sites (Docusaurus, Astro)    | [livecodes/markdown-integration/SKILL.md](./markdown-integration/SKILL.md) |
+| Self-host on your own server                     | [livecodes/self-hosting/SKILL.md](./self-hosting/SKILL.md)                 |
 
 ## Quick Decision Tree
 
 ```
+New to LiveCodes?
+  → livecodes/getting-started
+
 Need to embed a playground in your app?
   → livecodes/sdk-embedding
 
@@ -73,9 +76,6 @@ Need to add playgrounds to markdown docs?
 
 Need to host LiveCodes on your own server?
   → livecodes/self-hosting
-
-New to LiveCodes?
-  → livecodes/getting-started
 ```
 
 ## Minimal Working Example
@@ -91,7 +91,7 @@ New to LiveCodes?
   <body>
     <div id="container"></div>
     <script type="module">
-      import { createPlayground } from 'https://cdn.jsdelivr.net/npm/livecodes@0.13/livecodes.min.js';
+      import { createPlayground } from 'https://cdn.jsdelivr.net/npm/livecodes';
 
       createPlayground('#container', {
         config: {
@@ -128,9 +128,10 @@ const code = await playground.getCode();
 ### React
 
 ```jsx
-import { LiveCodes } from 'livecodes/react';
+import { useState } from 'react';
+import LiveCodes from 'livecodes/react';
 
-function App() {
+export default function App() {
   const [playground, setPlayground] = useState(null);
 
   return (
@@ -172,7 +173,7 @@ if (container) {
 }
 
 // OR use headless mode if no UI needed
-createPlayground({ view: 'headless', config });
+createPlayground({ headless: true, config });
 ```
 
 ### HIGH: Config vs EmbedOptions confusion
@@ -195,19 +196,6 @@ createPlayground('#container', {
 });
 ```
 
-### MEDIUM: Headless mode requires explicit load()
-
-```javascript
-// WRONG - calling methods before load()
-const playground = await createPlayground({ view: 'headless', config });
-const code = await playground.getCode(); // May fail!
-
-// CORRECT - call load() first
-const playground = await createPlayground({ view: 'headless', config });
-await playground.load(); // Wait for initialization
-const code = await playground.getCode(); // Now works
-```
-
 ### MEDIUM: Different CDN imports create separate module instances
 
 ```javascript
@@ -219,7 +207,3 @@ import { createRoot } from 'skypack:react-dom/client'; // Different React!
 import React from 'react';
 import { createRoot } from 'react-dom/client'; // Both from esm.sh (default)
 ```
-
-## Version Note
-
-This skill targets LiveCodes SDK v0.13.0+. APIs are stable. For self-hosted deployments, use `appUrl` embed option.
