@@ -7,7 +7,7 @@ description: >
   or retrieving compiled output.
 type: core
 library: livecodes
-library_version: v0.13.0+
+library_version: 0.13.0
 requires:
   - sdk-embedding
 sources:

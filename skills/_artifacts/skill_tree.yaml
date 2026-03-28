@@ -4,7 +4,7 @@
 
 library:
   name: 'livecodes'
-  version: 'v0.13.0+'
+  version: '0.13.0'
   repository: 'https://github.com/live-codes/livecodes'
   description: 'A feature-rich, open-source, client-side code playground supporting 90+ languages/frameworks with SDK for embedding'
 generated_from:
@@ -16,6 +16,22 @@ generated_at: '2025-03-28'
 # Using flat structure since skills are task-focused and there are 13 skills.
 
 skills:
+  # === Root Skill ===
+
+  - name: 'LiveCodes Overview'
+    slug: 'livecodes'
+    type: 'core'
+    domain: null
+    path: 'skills/livecodes/SKILL.md'
+    description: >
+      Open-source, client-side code playground supporting 90+ languages/frameworks.
+      Runs entirely in the browser with SDK for embedding. Entry point for all LiveCodes skills.
+    requires: []
+    sources:
+      - 'live-codes/livecodes:README.md'
+      - 'live-codes/livecodes:docs/docs/overview.mdx'
+      - 'live-codes/livecodes:docs/docs/getting-started.mdx'
+
   # === Core Skills ===
 
   - name: 'Create Embedded Playground'

@@ -15,6 +15,7 @@ LiveCodes is a feature-rich, open-source, client-side code playground that runs 
 
 | Skill                | Type        | Domain        | What it covers                                                               | Failure modes |
 | -------------------- | ----------- | ------------- | ---------------------------------------------------------------------------- | ------------- |
+| livecodes            | core        | -             | Overview, quick start, decision tree, key concepts, minimal examples         | 3             |
 | sdk-embedding        | core        | sdk-embedding | createPlayground, EmbedOptions, container setup, loading modes, appUrl       | 4             |
 | sdk-methods          | core        | sdk-embedding | run, getCode, setConfig, watch, runTests, format, getShareUrl, show, destroy | 3             |
 | framework-wrappers   | framework   | sdk-embedding | React, Vue, Svelte, Solid, Preact, Web Components SDK usage                  | 2             |
@@ -30,6 +31,14 @@ LiveCodes is a feature-rich, open-source, client-side code playground that runs 
 | getting-started      | lifecycle   | -             | Quick start for standalone, embedding, and self-hosting                      | 0             |
 
 ## Failure Mode Inventory
+
+### livecodes (3 failure modes)
+
+| #   | Mistake                                  | Priority | Source                       | Cross-skill   |
+| --- | ---------------------------------------- | -------- | ---------------------------- | ------------- |
+| 1   | SDK methods not awaited                  | HIGH     | Documentation: sdk/js-ts.mdx | sdk-methods   |
+| 2   | Container element not found throws error | HIGH     | Source code: sdk/index.ts    | sdk-embedding |
+| 3   | Config vs EmbedOptions confusion         | HIGH     | Documentation: sdk/js-ts.mdx | configuration |
 
 ### sdk-embedding (4 failure modes)
 

@@ -6,7 +6,7 @@ description: >
   when self-hosting LiveCodes or using a custom app URL.
 type: composition
 library: livecodes
-library_version: v0.13.0+
+library_version: 0.13.0
 requires:
   - sdk-embedding
 sources:
