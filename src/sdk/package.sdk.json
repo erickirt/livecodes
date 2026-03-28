@@ -15,7 +15,8 @@
     "svelte",
     "vue",
     "web-components",
-    "python"
+    "python",
+    "tanstack-intent"
   ],
   "private": false,
   "repository": {

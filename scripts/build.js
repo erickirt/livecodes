@@ -102,6 +102,13 @@ const sdkBuild = async () => {
     copyFile(sdkSrcDir + 'LiveCodes.svelte', sdkOutDir + 'LiveCodes.svelte'),
   ]);
 
+  if (!devMode) {
+    fs.promises.cp('skills', path.resolve(outDir, sdkOutDir, 'skills'), {
+      recursive: true,
+      filter: (srcPath) => !srcPath.includes('_artifacts'),
+    });
+  }
+
   const sdkOptions = {
     ...baseOptions,
     target: 'es2018',
