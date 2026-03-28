@@ -121,14 +121,18 @@ If you would like to contribute to the project for the first time, please consid
 
 Also, all questions are [welcomed](https://github.com/live-codes/livecodes/discussions).
 
-## Specific Topics
+## System Documentation
 
-- [Adding Languages](./docs/docs/contribution/adding-languages.mdx)
-- [i18n](./docs/docs/contribution/i18n.mdx)
-- [Compiler System](./docs/docs/contribution/compiler-system.mdx)
-- [Build System](./docs/docs/contribution/build-system.mdx)
-- [Storybook](./docs/docs/contribution/storybook.mdx)
-- [Release](./docs/docs/contribution/release.mdx)
+For detailed documentation on specific systems, see the [Contribution Guide](./docs/docs/contribution/README.md) which includes comprehensive documentation for:
+
+- **Core Systems**: Architecture, Compiler, Config, Storage
+- **Editor & UI**: Editor System, UI Design, Tools Pane
+- **Language Support**: Adding Languages, Type Loader
+- **Features**: Import/Export, Result Page, Code Formatting
+- **Services & Infrastructure**: Services, Build System
+- **Internationalization**: i18n workflow
+- **Testing & Development**: Storybook setup
+- **Release**: Release workflow and version management
 
 ## Funding
 
