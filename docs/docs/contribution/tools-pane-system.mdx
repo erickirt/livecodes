@@ -8,7 +8,31 @@ The tools pane is a resizable panel at the bottom of the LiveCodes UI that conta
 
 ## Architecture
 
-### Factory Pattern
+```mermaid
+graph TD
+    subgraph "ToolsPane"
+        A[createToolsPane] --> B[Tool Registry]
+        
+        B --> C[Console Tool<br/>Luna Console UI]
+        B --> D[Compiled Code Viewer<br/>Read-only editor]
+        B --> E[Test Viewer<br/>Jest test results]
+        
+        F[Split.js] --> G["Vertical split<br/>'#result' / '#tools-pane'"]
+        
+        H[Pane States]
+        H --> I[closed<br/>100% result]
+        H --> J[open<br/>60/40 split]
+        H --> K[full<br/>100% pane]
+        H --> L[none<br/>completely hidden]
+    end
+    
+    M[Result iframe] --> N["postMessage<br/>'console', 'testResults'"]
+    N --> C
+    N --> E
+    
+    O[Compilation] --> P["postMessage<br/>'compiled'"]
+    P --> D
+```
 
 Each tool is created by a factory function that returns a `Tool` interface:
 

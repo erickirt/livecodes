@@ -10,29 +10,15 @@ The type loader system provides IntelliSense/autocomplete for JavaScript and Typ
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        type-loader.ts                           │
-│  createTypeLoader(baseUrl) → { load }                           │
-└───────────────────────────┬─────────────────────────────────────┘
-                            │
-        ┌───────────────────┼───────────────────┐
-        │                   │                   │
-        ▼                   ▼                   ▼
-┌───────────────┐   ┌───────────────┐   ┌───────────────┐
-│  Types with   │   │  Types from   │   │   ATA         │
-│  URLs         │   │  imports      │   │   (jsDelivr)  │
-│  (config)     │   │  (no URLs)    │   │               │
-└───────┬───────┘   └───────┬───────┘   └───────┬───────┘
-        │                   │                   │
-        └───────────────────┼───────────────────┘
-                            │
-                            ▼
-                    ┌───────────────┐
-                    │ EditorLibrary │
-                    │ (added to     │
-                    │  editors)     │
-                    └───────────────┘
+```mermaid
+flowchart TD
+    A["type-loader.ts<br/>createTypeLoader(baseUrl) → { load }"]
+    
+    A --> B["Types with URLs<br/>(config)"]
+    A --> C["Types from imports<br/>(no URLs)"]
+    A --> D["ATA<br/>(jsDelivr)"]
+    
+    B & C & D --> E["EditorLibrary<br/>(added to editors)"]
 ```
 
 ## Core Components

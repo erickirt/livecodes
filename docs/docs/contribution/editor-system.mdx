@@ -14,14 +14,29 @@ All editors implement the `CodeEditor` interface defined in `models.ts`.
 
 ### Editor Selection
 
-- **Headless mode** → `fake` editor
-- **Result mode** (non-console/compiled) → `fake` editor
-- **Simple mode** (inactive editor) → `fake` editor
-- **Simple mode** (active editor) → `codemirror`
-- **Codeblock or Lite mode** → `codejar`
-- **Mobile** → `codemirror` (for auto)
-- **Desktop** → `monaco` (for auto)
-- **Explicit selection** → `monaco`, `codemirror`, or `codejar`
+```mermaid
+flowchart TD
+    A[Mode?] --> B{Headless?}
+    B -->|Yes| C[fake editor]
+    B -->|No| D{Result mode<br/>non-console/compiled?}
+    
+    D -->|Yes| C
+    D -->|No| E{Simple mode?}
+    
+    E -->|Yes| F{Active editor?}
+    F -->|Yes| G[codemirror]
+    F -->|No| C
+    
+    E -->|No| H{Codeblock or Lite mode?}
+    H -->|Yes| I[codejar]
+    
+    H -->|No| J{Explicit selection?}
+    J -->|Yes| K[Selected editor<br/>monaco/codemirror/codejar]
+    
+    J -->|No| L{Mobile?}
+    L -->|Yes| G
+    L -->|No| M[monaco]
+```
 
 ---
 

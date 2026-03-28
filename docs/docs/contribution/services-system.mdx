@@ -16,7 +16,42 @@ Each service is implemented as an object with methods that handle specific funct
 2. **Environment-aware** - Services configure themselves based on `process.env` flags
 3. **Self-contained** - Each service handles its own API interactions and error handling
 
-## Services
+### Service Overview
+
+```mermaid
+graph TD
+    subgraph "External Services"
+        A[auth.ts<br/>Firebase/GitHub OAuth]
+        B[share.ts<br/>Project sharing]
+        C[sandbox.ts<br/>Result/Compiler URLs]
+        D[broadcast.ts<br/>Real-time sharing]
+        E[modules.ts<br/>CDN resolution]
+    end
+    
+    subgraph "Utility Services"
+        F[cors.ts<br/>CORS proxy]
+        G[github.ts<br/>GitHub API]
+        H[google-fonts.ts<br/>Font loading]
+        I[pkgInfo.ts<br/>npm metadata]
+        J[permanent-url.ts<br/>Versioned URLs]
+    end
+    
+    subgraph "Legacy Services"
+        K[types.ts<br/>TypeScript types]
+    end
+    
+    A --> L[core.ts]
+    B --> L
+    C --> L
+    D --> L
+    E --> L
+    F --> L
+    G --> L
+    H --> L
+    I --> L
+    J --> L
+    K --> L
+```
 
 ### Authentication Service (`auth.ts`)
 

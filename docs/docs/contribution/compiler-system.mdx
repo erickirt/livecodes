@@ -18,21 +18,35 @@ The compiler system uses a **worker-based architecture** to perform compilation 
 
 ### Key Components
 
-```
-src/livecodes/compiler/
-├── index.ts              # Public API exports
-├── models.ts             # Type definitions
-├── create-compiler.ts    # Main compiler factory
-├── get-compiler.ts       # Compiler instance getter
-├── get-all-compilers.ts  # Compiler registry builder
-├── compile.worker.ts     # Web Worker for compilation
-├── compile.page.ts       # Page-level compilers
-├── compile-in-compiler.ts# Worker communication helper
-├── compile-blocks.ts     # SFC block compilation
-├── compiler-sandbox.ts   # iframe sandbox creation
-├── import-map.ts         # Import resolution utilities
-├── compiler-utils.ts     # iframe initialization
-└── utils.ts              # Utility functions
+```mermaid
+graph TD
+    subgraph "src/livecodes/compiler/"
+        A[index.ts] --> B[models.ts]
+        A --> C[create-compiler.ts]
+        A --> D[get-compiler.ts]
+        A --> E[get-all-compilers.ts]
+        A --> F[compile.worker.ts]
+        A --> G[compile.page.ts]
+        A --> H[compile-in-compiler.ts]
+        A --> I[compile-blocks.ts]
+        A --> J[compiler-sandbox.ts]
+        A --> K[import-map.ts]
+        A --> L[compiler-utils.ts]
+        A --> M[utils.ts]
+    end
+    
+    B["Type definitions"]
+    C["Main compiler factory"]
+    D["Compiler instance getter"]
+    E["Compiler registry builder"]
+    F["Web Worker for compilation"]
+    G["Page-level compilers"]
+    H["Worker communication helper"]
+    I["SFC block compilation"]
+    J["iframe sandbox creation"]
+    K["Import resolution utilities"]
+    L["iframe initialization"]
+    M["Utility functions"]
 ```
 
 ## Core Concepts
@@ -296,17 +310,19 @@ Workers and main thread communicate via typed messages:
 
 ### Example Message Flow
 
-```
-Main Thread                    Worker
-    |                             |
-    |-- init (config) ------------>|
-    |<-- init-success -------------|
-    |                             |
-    |-- load (typescript) -------->|
-    |<-- loaded (typescript) ------|
-    |                             |
-    |-- compile (code, language) ->|
-    |<-- compiled (result) --------|
+```mermaid
+sequenceDiagram
+    participant Main as Main Thread
+    participant Worker as Worker
+    
+    Main->>Worker: init (config)
+    Worker->>Main: init-success
+    
+    Main->>Worker: load (typescript)
+    Worker->>Main: loaded (typescript)
+    
+    Main->>Worker: compile (code, language)
+    Worker->>Main: compiled (result)
 ```
 
 ## Import Resolution (`import-map.ts`)

@@ -8,27 +8,18 @@ The result page is a single HTML document loaded in a [sandboxed iframe](https:/
 
 ## Architecture
 
-```
-┌────────────────────────────────────────────────────────────┐
-│                          core.ts                           │
-│             getResultPage() → createResultPage()           │
-└────────────────────────────────────────────────────────────┘
-                              │
-          ┌───────────────────┼────────────────────┐
-          │                   │                    │
-          ▼                   ▼                    ▼
-┌──────────────────┐ ┌──────────────────┐ ┌──────────────────┐
-│   compiler/      │ │  result/         │ │ compiler/        │
-│ - compile()      │ │- result-page.ts  │ │- import-map.ts   │
-│                  │ │- result-utils.ts │ │                  │
-└──────────────────┘ │- utils.ts        │ └──────────────────┘
-                     └──────────────────┘
-                              │
-                              ▼
-                     ┌──────────────────┐
-                     │  sandbox iframe  │
-                     │  (result page)   │
-                     └──────────────────┘
+```mermaid
+flowchart TD
+    A["core.ts<br/>getResultPage → createResultPage"]
+    
+    A --> B["compiler/<br/>compile()"]
+    A --> C["result/<br/>result-page.ts"]
+    A --> D["compiler/<br/>import-map.ts"]
+    
+    C --> E["result-utils.ts"]
+    C --> F["utils.ts"]
+    
+    E --> G["sandbox iframe<br/>(result page)"]
 ```
 
 ---

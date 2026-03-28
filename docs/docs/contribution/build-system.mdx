@@ -39,6 +39,17 @@ The main build script is located at [`scripts/build.js`](../../../scripts/build.
 
 ### Build Phases
 
+```mermaid
+flowchart LR
+    A[1. Preparation] --> B[2. ESM Build]
+    B --> C[3. IIFE Build]
+    C --> D[4. Workers Build]
+    D --> E[5. Styles Build]
+    E --> F[6. SDK Build]
+    F --> G[7. I18n Build]
+    G --> H[Post-Build<br/>Hash & CSS Injection]
+```
+
 #### 1. Preparation (`prepareDir`)
 
 - Creates output directories (`build/livecodes/`, `build/sdk/`, `build/tmp/`)

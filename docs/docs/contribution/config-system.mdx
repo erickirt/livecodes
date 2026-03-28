@@ -16,14 +16,21 @@ For individual configuration properties and their meanings, see the [Configurati
 
 ## Architecture
 
-```
-src/livecodes/config/
-├── index.ts           # Public API exports
-├── default-config.ts  # Default configuration values
-├── build-config.ts    # Configuration builder (merges defaults + user + params)
-├── config.ts          # Config getters/setters and helpers
-├── validate-config.ts # Configuration validation
-└── upgrade-config.ts  # Version upgrade migrations
+```mermaid
+graph TD
+    subgraph "src/livecodes/config/"
+        A[index.ts] --> B[default-config.ts]
+        A --> C[build-config.ts]
+        A --> D[config.ts]
+        A --> E[validate-config.ts]
+        A --> F[upgrade-config.ts]
+    end
+    
+    B["Default configuration values"]
+    C["Configuration builder"]
+    D["Config getters/setters"]
+    E["Configuration validation"]
+    F["Version upgrade migrations"]
 ```
 
 ## Configuration Types
@@ -49,6 +56,19 @@ interface Config extends ContentConfig, AppConfig, UserConfig {}
 [User preferences and editor settings](https://livecodes.io/docs/configuration/configuration-object#user-settings)
 
 ## Configuration Flow
+
+```mermaid
+flowchart TD
+    A[Default Configuration<br/>default-config.ts] --> B[merge]
+    C[Saved Project Configuration<br/>from storage] --> B
+    B --> D[merge]
+    E[User Configuration<br/>programmatic/SDK] --> D
+    D --> F[merge]
+    G[URL Query Parameters] --> F
+    F --> H[merge]
+    I[URL Hash Parameters] --> H
+    H --> J["Final Configuration<br/>fixLanguageNames()"]
+```
 
 ### 1. Default Configuration
 

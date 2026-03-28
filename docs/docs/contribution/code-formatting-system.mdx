@@ -8,19 +8,17 @@ LiveCodes uses [Prettier](https://prettier.io/) as the primary code formatter, w
 
 ## Architecture
 
-```
-┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐
-│     core.ts      │────▶│  get-formatter.ts │────▶│   formatter.ts   │
-│  (format call)   │     │  (factory)        │     │  (Web Worker)    │
-└──────────────────┘     └──────────────────┘     └──────────────────┘
-                                                          │
-                                                          ▼
-                                                 ┌──────────────────┐
-                                                 │ format.worker.ts │
-                                                 │  - Prettier      │
-                                                 │  - Custom parsers │
-                                                 │  - Custom formatters │
-                                                 └──────────────────┘
+```mermaid
+flowchart LR
+    A[core.ts<br/>format call] --> B[get-formatter.ts<br/>factory]
+    B --> C[formatter.ts<br/>Web Worker]
+    C --> D[format.worker.ts]
+    
+    subgraph "Worker Content"
+        D --> E[Prettier]
+        D --> F[Custom parsers]
+        D --> G[Custom formatters]
+    end
 ```
 
 ## Formatter Interface
