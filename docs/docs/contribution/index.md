@@ -2,7 +2,7 @@
 
 This directory contains comprehensive documentation for contributors working on the LiveCodes codebase. Each document covers a specific system or aspect of the application.
 
-**New to contributing?** Start with the [beginner-friendly introduction](../../../CONTRIBUTING.md), including setup instructions, pull request guidelines, and code of conduct.
+**New to contributing?** Start with the [beginner-friendly introduction](https://github.com/live-codes/livecodes/blob/develop/CONTRIBUTING.md), including setup instructions, pull request guidelines, and code of conduct.
 
 ## Quick Start
 
