@@ -124,8 +124,11 @@ Also, all questions are [welcomed](https://github.com/live-codes/livecodes/discu
 ## Specific Topics
 
 - [Adding Languages](./docs/docs/contribution/adding-languages.mdx)
-- [Release](./docs/docs/contribution/release.mdx)
 - [i18n](./docs/docs/contribution/i18n.mdx)
+- [Compiler System](./docs/docs/contribution/compiler-system.mdx)
+- [Build System](./docs/docs/contribution/build-system.mdx)
+- [Storybook](./docs/docs/contribution/storybook.mdx)
+- [Release](./docs/docs/contribution/release.mdx)
 
 ## Funding
 
