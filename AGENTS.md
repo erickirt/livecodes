@@ -6,6 +6,12 @@ Guidance for AI coding agents working in the LiveCodes repository.
 
 LiveCodes is a code playground that works in the browser. It's a TypeScript/JavaScript project that uses esbuild for bundling.
 
+## Documentation for AI Agents
+
+- **[skills/](./skills/)** — Intent skills for LiveCodes SDK. Start with [skills/livecodes/SKILL.md](./skills/livecodes/SKILL.md) for an overview and decision tree linking to all sub-skills.
+- **[docs/docs/contribution/](./docs/docs/contribution/)** — Internal architecture and system documentation for contributors (build system, compiler, config, editor, etc.)
+- **[llms-full.txt](./build/docs/llms-full.txt)** ([livecodes.io/docs/llms-full.txt](https://livecodes.io/docs/llms-full.txt)) — Generated list of all LiveCodes features and their descriptions.
+
 ## Build / Lint / Test Commands
 
 ```bash
@@ -195,7 +201,3 @@ Branch from `develop` (not `main`) for feature work.
 - Max one class per file
 - JSDoc alignment/indentation enforced when present (not required on all functions)
 - Text strings are exported for internationalization. Run `npm run i18n-export` after adding new user-facing text. See `./docs/docs/contribution/i18n.mdx` for details.
-
-## llms-full.txt
-
-[llms-full.txt](./build/docs/llms-full.txt) is a list of all LiveCodes features and their descriptions.
