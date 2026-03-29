@@ -22,7 +22,7 @@ skills:
     slug: 'livecodes'
     type: 'core'
     domain: null
-    path: 'skills/livecodes/SKILL.md'
+    path: '.agents/skills/livecodes/SKILL.md'
     description: >
       Open-source, client-side code playground supporting 90+ languages/frameworks.
       Runs entirely in the browser with SDK for embedding. Entry point for all LiveCodes skills.
@@ -38,7 +38,7 @@ skills:
     slug: 'sdk-embedding'
     type: 'core'
     domain: 'sdk-embedding'
-    path: 'skills/sdk-embedding/SKILL.md'
+    path: '.agents/skills/livecodes/sdk-embedding/SKILL.md'
     description: >
       Create and configure embedded playgrounds using createPlayground(),
       container setup, EmbedOptions, loading modes (eager/lazy/click),
@@ -53,7 +53,7 @@ skills:
     slug: 'sdk-methods'
     type: 'core'
     domain: 'sdk-embedding'
-    path: 'skills/sdk-methods/SKILL.md'
+    path: '.agents/skills/livecodes/sdk-methods/SKILL.md'
     description: >
       Use SDK methods to interact with playgrounds: run, getCode, setConfig,
       getConfig, watch, runTests, format, getShareUrl, show, destroy.
@@ -67,7 +67,7 @@ skills:
     slug: 'configuration'
     type: 'core'
     domain: 'configuration'
-    path: 'skills/configuration/SKILL.md'
+    path: '.agents/skills/livecodes/configuration/SKILL.md'
     description: >
       Configure playground behavior through Config object, query parameters,
       EmbedOptions, editor settings, processors, external resources, and custom settings.
@@ -81,7 +81,7 @@ skills:
     slug: 'language-support'
     type: 'core'
     domain: 'languages'
-    path: 'skills/language-support/SKILL.md'
+    path: '.agents/skills/livecodes/language-support/SKILL.md'
     description: >
       Work with 90+ supported languages, compilers, CSS processors,
       and WASM-compiled languages for markup, style, and script editors.
@@ -97,7 +97,7 @@ skills:
     slug: 'module-resolution'
     type: 'core'
     domain: 'languages'
-    path: 'skills/module-resolution/SKILL.md'
+    path: '.agents/skills/livecodes/module-resolution/SKILL.md'
     description: >
       Import npm, deno.land/x, jsr, and GitHub modules without build steps
       using automatic CDN resolution, custom import maps, and CDN provider prefixes.
@@ -110,7 +110,7 @@ skills:
     slug: 'testing'
     type: 'core'
     domain: 'languages'
-    path: 'skills/testing/SKILL.md'
+    path: '.agents/skills/livecodes/testing/SKILL.md'
     description: >
       Write and run automated tests with Jest and Testing Library
       in the browser, including importing code from script editor.
@@ -122,7 +122,7 @@ skills:
     slug: 'display-modes'
     type: 'core'
     domain: 'configuration'
-    path: 'skills/display-modes/SKILL.md'
+    path: '.agents/skills/livecodes/display-modes/SKILL.md'
     description: >
       Configure how the playground is displayed: full, focus, simple,
       lite, editor, codeblock, and result modes.
@@ -136,7 +136,7 @@ skills:
     slug: 'headless-mode'
     type: 'core'
     domain: 'sdk-embedding'
-    path: 'skills/headless-mode/SKILL.md'
+    path: '.agents/skills/livecodes/headless-mode/SKILL.md'
     description: >
       Run playground without visible UI using SDK methods for compiled
       code output, console watching, and programmatic control.
@@ -150,7 +150,7 @@ skills:
     slug: 'import-export'
     type: 'core'
     domain: 'configuration'
-    path: 'skills/import-export/SKILL.md'
+    path: '.agents/skills/livecodes/import-export/SKILL.md'
     description: >
       Import code from GitHub gists/files/repos, GitLab, URLs, DOM,
       and local files. Export projects as HTML, JSON, ZIP, or to external services.
@@ -165,7 +165,7 @@ skills:
     slug: 'framework-wrappers'
     type: 'framework'
     domain: 'sdk-embedding'
-    path: 'skills/framework-wrappers/SKILL.md'
+    path: '.agents/skills/livecodes/framework-wrappers/SKILL.md'
     description: >
       Use SDK with React, Vue, Svelte, Solid, Preact, and Web Components.
       sdkReady callback, reactive props, and framework-specific patterns.
@@ -188,7 +188,7 @@ skills:
     slug: 'getting-started'
     type: 'lifecycle'
     domain: null
-    path: 'skills/getting-started/SKILL.md'
+    path: '.agents/skills/livecodes/getting-started/SKILL.md'
     description: >
       Quick start for standalone app at livecodes.io, embedding playgrounds
       with CDN or npm, and self-hosting basics.
@@ -203,7 +203,7 @@ skills:
     slug: 'markdown-integration'
     type: 'composition'
     domain: 'integration'
-    path: 'skills/markdown-integration/SKILL.md'
+    path: '.agents/skills/livecodes/markdown-integration/SKILL.md'
     description: >
       Integrate LiveCodes with documentation sites using remark-livecodes,
       markdown-it-livecodes, gatsby-remark-livecodes, or marked-livecodes
@@ -217,7 +217,7 @@ skills:
     slug: 'self-hosting'
     type: 'composition'
     domain: 'integration'
-    path: 'skills/self-hosting/SKILL.md'
+    path: '.agents/skills/livecodes/self-hosting/SKILL.md'
     description: >
       Deploy LiveCodes to static file servers, GitHub Pages, or Docker.
       Configure SDK appUrl, BASE_URL for subdirectories, and handle services.
@@ -230,7 +230,7 @@ skills:
     slug: 'gh-action'
     type: 'composition'
     domain: 'integration'
-    path: 'skills/gh-action/SKILL.md'
+    path: '.agents/skills/livecodes/gh-action/SKILL.md'
     description: >
       Use the "Preview in LiveCodes" GitHub Action to generate preview playground links
       for pull request code changes. Automates playground creation and PR comments.

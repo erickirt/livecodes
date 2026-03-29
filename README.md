@@ -266,7 +266,7 @@ If you use an AI coding agent, run:
 npx @tanstack/intent@latest install
 ```
 
-This loads the Intent skills for LiveCodes SDK. See [skills/livecodes/SKILL.md](https://github.com/live-codes/livecodes/blob/HEAD/skills/livecodes/SKILL.md) for the skill index.
+This loads the Intent skills for LiveCodes SDK. See [.agents/skills/livecodes/SKILL.md](https://github.com/live-codes/livecodes/blob/HEAD/.agents/skills/livecodes/SKILL.md) for the skill index.
 
 ### System Documentation
 

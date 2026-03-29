@@ -8,7 +8,7 @@ LiveCodes is a code playground that works in the browser. It's a TypeScript/Java
 
 ## Documentation for AI Agents
 
-- **[skills/](./skills/)** — Intent skills for LiveCodes SDK. Start with [skills/livecodes/SKILL.md](./skills/livecodes/SKILL.md) for an overview and decision tree linking to all sub-skills.
+- **[skills/](./skills/)** — Intent skills for LiveCodes SDK. Start with [.agents/skills/livecodes/SKILL.md](./.agents/skills/livecodes/SKILL.md) for an overview and decision tree linking to all sub-skills.
 - **[docs/docs/contribution/](./docs/docs/contribution/)** — Internal architecture and system documentation for contributors (build system, compiler, config, editor, etc.)
 - **[llms-full.txt](./build/docs/llms-full.txt)** ([livecodes.io/docs/llms-full.txt](https://livecodes.io/docs/llms-full.txt)) — Generated list of all LiveCodes features and their descriptions.
 

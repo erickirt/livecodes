@@ -103,7 +103,7 @@ const sdkBuild = async () => {
   ]);
 
   if (!devMode) {
-    fs.promises.cp('skills', path.resolve(outDir, sdkOutDir, 'skills'), {
+    fs.promises.cp(path.resolve('.agents', 'skills'), path.resolve(outDir, sdkOutDir, 'skills'), {
       recursive: true,
       filter: (srcPath) => !srcPath.includes('_artifacts'),
     });
