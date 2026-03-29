@@ -205,6 +205,7 @@ const url = getPlaygroundUrl({
   },
 });
 
+// this URL can be shared
 console.log(url);
 ```
 
@@ -217,6 +218,8 @@ Comprehensive documentations for [features](https://livecodes.io/docs/features/)
 https://livecodes.io/docs/
 
 The documentations include demos, code samples, screenshots, [Storybook](https://livecodes.io/stories) and [TypeScript types](https://livecodes.io/docs/sdk/js-ts#typescript-types).
+
+See below for documentations for [contributors](#contribution) and [AI models](#for-ai-agents).
 
 ## Updates
 
@@ -246,13 +249,26 @@ Please refer to the [contribution guide](https://github.com/live-codes/livecodes
 
 ## For AI Agents
 
+### llms.txt
+
+For developers working with AI agents and language models, we provide specialized documentation files following the [llms.txt specification](https://llmstxt.org/):
+
+- [llms.txt](https://livecodes.io/docs/llms.txt) - Concise documentation optimized for LLM context windows
+- [llms-full.txt](https://livecodes.io/docs/llms-full.txt) - Comprehensive documentation including all referenced URLs
+
+These files provide LLM-friendly content in a standardized format, helping language models understand and work with LiveCodes documentation. The format is designed to be both human and LLM readable.
+
+### Intent Skills
+
 If you use an AI coding agent, run:
 
 ```bash
 npx @tanstack/intent@latest install
 ```
 
-This loads the Intent skills for LiveCodes. See [skills/livecodes/SKILL.md](https://github.com/live-codes/livecodes/blob/HEAD/skills/livecodes/SKILL.md) for the skill index.
+This loads the Intent skills for LiveCodes SDK. See [skills/livecodes/SKILL.md](https://github.com/live-codes/livecodes/blob/HEAD/skills/livecodes/SKILL.md) for the skill index.
+
+### System Documentation
 
 For internal architecture and system documentation, see [docs/docs/contribution/](https://github.com/live-codes/livecodes/blob/HEAD/docs/docs/contribution/README.md).
 
@@ -334,7 +350,7 @@ Packages used by LiveCodes and their licenses are [listed here](https://github.c
 
 [MIT](https://github.com/live-codes/livecodes/blob/HEAD/LICENSE) License © [Hatem Hosny](https://github.com/hatemhosny)
 
-## Sponsor
+## Sponsor 💚
 
 LiveCodes is free and open-source. The app does not contain ads or require subscription. It allows unlimited usage without any restrictions.
 
