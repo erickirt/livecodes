@@ -49,17 +49,22 @@ This directory contains comprehensive documentation for contributors working on 
 
 ### Services & Infrastructure
 
-| Document                                     | Description                                                 |
-| -------------------------------------------- | ----------------------------------------------------------- |
-| [services-system.mdx](./services-system.mdx) | External services: auth, share, CDN resolution, CORS proxy  |
-| [build-system.mdx](./build-system.mdx)       | Build scripts, outputs, and development workflow            |
-| [sdk.mdx](./sdk.mdx)                         | SDK architecture, framework wrappers, and API communication |
+| Document                                     | Description                                                |
+| -------------------------------------------- | ---------------------------------------------------------- |
+| [services-system.mdx](./services-system.mdx) | External services: auth, share, CDN resolution, CORS proxy |
+| [build-system.mdx](./build-system.mdx)       | Build scripts, outputs, and development workflow           |
 
 ### Internationalization
 
 | Document               | Description                                                      |
 | ---------------------- | ---------------------------------------------------------------- |
 | [i18n.mdx](./i18n.mdx) | Translation workflow, Lokalise integration, and script reference |
+
+### SDK
+
+| Document             | Description                                                 |
+| -------------------- | ----------------------------------------------------------- |
+| [sdk.mdx](./sdk.mdx) | SDK architecture, framework wrappers, and API communication |
 
 ### Testing & Development
 

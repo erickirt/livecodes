@@ -1,9 +1,9 @@
 # Contributing
 
-Contributions are always welcome, no matter how large or small. Before contributing,
+Contributions are always welcome. Before contributing,
 please read the [code of conduct](CODE_OF_CONDUCT.md).
 
-Some thoughts to help you contribute to this project
+Some thoughts to help you contribute to this project:
 
 ## General Recommendations
 
@@ -136,7 +136,7 @@ For detailed documentation on specific systems, see the [Contribution Guide](./d
 
 ## Funding
 
-LiveCodes is a part of GitHub Sponsors. If you would like to contribute, please note the [sponsor page](https://livecodes.io/docs/sponsor) for details.
+LiveCodes is a part of GitHub Sponsors. If you would like to support the project, please refer to the [sponsor page](https://livecodes.io/docs/sponsor) for details.
 
 ## License
 
