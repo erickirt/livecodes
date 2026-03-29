@@ -225,3 +225,16 @@ skills:
       - 'sdk-embedding'
     sources:
       - 'live-codes/livecodes:docs/docs/features/self-hosting.mdx'
+
+  - name: 'Use GitHub Action'
+    slug: 'gh-action'
+    type: 'composition'
+    domain: 'integration'
+    path: 'skills/gh-action/SKILL.md'
+    description: >
+      Use the "Preview in LiveCodes" GitHub Action to generate preview playground links
+      for pull request code changes. Automates playground creation and PR comments.
+    requires: []
+    sources:
+      - 'live-codes/preview-in-livecodes:README.md'
+      - 'live-codes/livecodes:docs/docs/gh-action.mdx'

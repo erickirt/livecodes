@@ -572,6 +572,81 @@ skills:
         status: 'active'
         skills: ['self-hosting']
 
+  - name: 'Use GitHub Action'
+    slug: 'gh-action'
+    domain: 'integration'
+    description: 'Use the "Preview in LiveCodes" GitHub Action to generate preview playground links for pull request code changes'
+    type: 'composition'
+    covers:
+      - 'Workflow file setup (livecodes-preview.yml)'
+      - 'Comment workflow (livecodes-post-comment.yml)'
+      - 'Playground configuration JSON files'
+      - 'Dynamic values (LC::REF, LC::SHA, etc.)'
+      - 'File placeholders (TO_URL, TO_DATA_URL)'
+      - 'Deploy preview strategies'
+    tasks:
+      - 'Set up GitHub Action workflow'
+      - 'Configure playground JSON files'
+      - 'Use dynamic values in configurations'
+      - 'Link deployed assets to playgrounds'
+    failure_modes:
+      - mistake: 'Workflow files not on default branch'
+        mechanism: 'GitHub Actions workflow_run event requires workflow files to be on default branch before PRs can trigger them'
+        wrong_pattern: |
+          # Creating PR with workflow files in same PR
+          # Action won't run until merged to default branch
+        correct_pattern: |
+          # First merge workflow files to default branch
+          git checkout main
+          git merge feature/add-gh-action
+          git push
+          # Now PRs can trigger the action
+        source: 'GitHub Actions documentation on workflow_run event'
+        priority: 'HIGH'
+        status: 'active'
+        skills: ['gh-action']
+
+      - mistake: 'Missing permissions for PR comments'
+        mechanism: 'Comment workflow needs pull-requests: write permission to post comments'
+        wrong_pattern: |
+          jobs:
+            upload:
+              runs-on: ubuntu-latest
+              # Missing permissions!
+        correct_pattern: |
+          jobs:
+            upload:
+              runs-on: ubuntu-latest
+              permissions:
+                pull-requests: write  # Required!
+        source: 'GitHub Actions permissions'
+        priority: 'MEDIUM'
+        status: 'active'
+        skills: ['gh-action']
+
+      - mistake: 'Using data URLs for large files'
+        mechanism: 'Data URLs stored at dpaste.com have 1M character limit; large builds will fail'
+        wrong_pattern: |
+          {
+            "imports": {
+              "my-lib": "{{LC::TO_DATA_URL(./dist/bundle.js)}}"  // Too large!
+            }
+          }
+        correct_pattern: |
+          # Use base-url and TO_URL for large files
+          # In workflow:
+          base-url: "https://{{LC::REF}}.my-project.pages.dev"
+          # In project JSON:
+          {
+            "imports": {
+              "my-lib": "{{LC::TO_URL(./dist/bundle.js)}}"
+            }
+          }
+        source: 'Action: dpaste.com limits'
+        priority: 'MEDIUM'
+        status: 'active'
+        skills: ['gh-action']
+
   - name: 'Import and Export Code'
     slug: 'import-export'
     domain: 'configuration'

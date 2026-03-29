@@ -34,6 +34,7 @@ LiveCodes is a feature-rich, open-source, client-side code playground that runs 
 | Use with React, Vue, Svelte, Solid, Preact       | [livecodes/framework-wrappers/SKILL.md](./framework-wrappers/SKILL.md)     |
 | Integrate with docs sites (Docusaurus, Astro)    | [livecodes/markdown-integration/SKILL.md](./markdown-integration/SKILL.md) |
 | Self-host on your own server                     | [livecodes/self-hosting/SKILL.md](./self-hosting/SKILL.md)                 |
+| Preview PRs in LiveCodes (GitHub Action)         | [livecodes/gh-action/SKILL.md](./gh-action/SKILL.md)                       |
 
 ## Quick Decision Tree
 
@@ -76,6 +77,9 @@ Need to add playgrounds to markdown docs?
 
 Need to host LiveCodes on your own server?
   → livecodes/self-hosting
+
+Need to preview PR changes in playgrounds?
+  → livecodes/gh-action
 ```
 
 ## Minimal Working Example

@@ -27,6 +27,7 @@ LiveCodes is a feature-rich, open-source, client-side code playground that runs 
 | testing              | core        | languages     | Jest, Testing Library, watch mode, running tests programmatically            | 0             |
 | markdown-integration | composition | integration   | remark-livecodes, markdown-it-livecodes, Docusaurus, Astro, VitePress        | 0             |
 | self-hosting         | composition | integration   | Deploying to static servers, Docker, BASE_URL, SDK appUrl config             | 1             |
+| gh-action            | composition | integration   | Preview in LiveCodes GitHub Action, PR comments, workflow setup              | 3             |
 | import-export        | core        | configuration | GitHub/GitLab imports, URL imports, DOM imports, export formats              | 0             |
 | getting-started      | lifecycle   | -             | Quick start for standalone, embedding, and self-hosting                      | 0             |
 
@@ -98,6 +99,14 @@ LiveCodes is a feature-rich, open-source, client-side code playground that runs 
 | #   | Mistake                                           | Priority | Source                                   | Cross-skill  |
 | --- | ------------------------------------------------- | -------- | ---------------------------------------- | ------------ |
 | 1   | Not configuring BASE_URL for subdirectory hosting | MEDIUM   | Documentation: features/self-hosting.mdx | self-hosting |
+
+### gh-action (3 failure modes)
+
+| #   | Mistake                              | Priority | Source                             | Cross-skill |
+| --- | ------------------------------------ | -------- | ---------------------------------- | ----------- |
+| 1   | Workflow files not on default branch | HIGH     | GitHub Actions: workflow_run event | gh-action   |
+| 2   | Missing permissions for PR comments  | MEDIUM   | GitHub Actions: permissions        | gh-action   |
+| 3   | Using data URLs for large files      | MEDIUM   | Action: dpaste.com limits          | gh-action   |
 
 ## Tensions
 
