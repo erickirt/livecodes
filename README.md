@@ -242,7 +242,7 @@ Contributions are welcome and highly appreciated.
 
 A huge shout-out to our wonderful [contributors](https://github.com/live-codes/livecodes/graphs/contributors)! Your hard work makes all the difference!
 
-Please refer to the [contribution guide](https://github.com/live-codes/livecodes/blob/HEAD/CONTRIBUTING.md) and [system documentation](./docs/docs/contribution/).
+Please refer to the [contribution guide](https://github.com/live-codes/livecodes/blob/HEAD/CONTRIBUTING.md) and [system documentation](./docs/docs/contribution/README.md).
 
 ## For AI Agents
 
@@ -254,7 +254,7 @@ npx @tanstack/intent@latest install
 
 This loads the Intent skills for LiveCodes. See [skills/livecodes/SKILL.md](./skills/livecodes/SKILL.md) for the skill index.
 
-For internal architecture and system documentation, see [docs/docs/contribution/](./docs/docs/contribution/).
+For internal architecture and system documentation, see [docs/docs/contribution/](./docs/docs/contribution/README.md).
 
 ## Credits
 

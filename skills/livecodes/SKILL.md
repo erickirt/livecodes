@@ -6,7 +6,7 @@ description: >-
   LiveCodes skills.
 type: core
 library: livecodes
-library_version: v0.13.0+
+library_version: 0.13.0
 ---
 
 # LiveCodes Overview
