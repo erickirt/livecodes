@@ -4,24 +4,11 @@
   "description": "A Code Playground That Just Works!",
   "author": "Hatem Hosny",
   "license": "MIT",
-  "keywords": [
-    "playground",
-    "code",
-    "repl",
-    "sdk",
-    "preact",
-    "react",
-    "solid",
-    "svelte",
-    "vue",
-    "web-components",
-    "python",
-    "tanstack-intent"
-  ],
-  "private": false,
+  "homepage": "https://livecodes.io",
   "repository": {
     "url": "https://github.com/live-codes/livecodes"
   },
+  "bugs": "https://github.com/live-codes/livecodes/issues",
   "type": "module",
   "main": "./livecodes.js",
   "module": "./livecodes.js",
@@ -61,11 +48,26 @@
     },
     "./package.json": "./package.json"
   },
+  "keywords": [
+    "playground",
+    "code",
+    "repl",
+    "sdk",
+    "preact",
+    "react",
+    "solid",
+    "svelte",
+    "vue",
+    "web-components",
+    "python",
+    "tanstack-intent"
+  ],
   "funding": [
     "https://github.com/sponsors/live-codes",
     "https://github.com/sponsors/hatemhosny",
     "https://ko-fi.com/hatemhosny",
     "https://paypal.me/hatemhosni",
     "https://livecodes.io/docs/sponsor"
-  ]
+  ],
+  "private": false
 }
