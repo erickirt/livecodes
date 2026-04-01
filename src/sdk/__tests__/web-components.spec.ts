@@ -453,3 +453,339 @@ describe('<live-codes> – config URL fetch', () => {
     (global.fetch as jest.Mock).mockRestore?.();
   });
 });
+
+// ---------------------------------------------------------------------------
+// Declarative children
+// ---------------------------------------------------------------------------
+
+describe('<live-codes> – declarative children (single-editor mode)', () => {
+  test('parses template/style/script children into config', async () => {
+    const el = document.createElement('live-codes');
+    el.innerHTML = `
+      <template>
+        <template lang="html"><h1>Hello</h1></template>
+        <style lang="scss">body { color: blue; }</style>
+        <script lang="ts">console.log('hi');</script>
+      </template>
+    `;
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    expect(createPlaygroundMock).toHaveBeenCalledTimes(1);
+    const options = createPlaygroundMock.mock.calls[0][1];
+    expect(options.config).toEqual(
+      expect.objectContaining({
+        markup: { language: 'html', content: '<h1>Hello</h1>' },
+        style: { language: 'scss', content: 'body { color: blue; }' },
+        script: { language: 'ts', content: "console.log('hi');" },
+      }),
+    );
+  });
+
+  test('children config is used when no config property is set', async () => {
+    const el = document.createElement('live-codes');
+    el.innerHTML = `
+      <template>
+        <style lang="css">h1 { color: red; }</style>
+      </template>
+    `;
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    const options = createPlaygroundMock.mock.calls[0][1];
+    expect(options.config.style).toEqual({ language: 'css', content: 'h1 { color: red; }' });
+  });
+
+  test('active attribute sets activeEditor', async () => {
+    const el = document.createElement('live-codes');
+    el.innerHTML = `
+      <template>
+        <template lang="html"><h1>Hello</h1></template>
+        <script lang="ts" active>console.log('hi');</script>
+      </template>
+    `;
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    const options = createPlaygroundMock.mock.calls[0][1];
+    expect(options.config.activeEditor).toBe('script');
+  });
+});
+
+describe('<live-codes> – declarative children (multi-file mode)', () => {
+  test('parses elements with filename into files array', async () => {
+    const el = document.createElement('live-codes');
+    el.innerHTML = `
+      <template>
+        <template filename="index.html"><h1>Hello</h1></template>
+        <style filename="styles.css">body { color: blue; }</style>
+        <script filename="app.ts">console.log('hi');</script>
+      </template>
+    `;
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    const options = createPlaygroundMock.mock.calls[0][1];
+    expect(options.config.files).toEqual([
+      { filename: 'index.html', content: '<h1>Hello</h1>', language: 'html' },
+      { filename: 'styles.css', content: 'body { color: blue; }', language: 'css' },
+      { filename: 'app.ts', content: "console.log('hi');", language: 'ts' },
+    ]);
+  });
+
+  test('active attribute in multi-file sets activeEditor to filename', async () => {
+    const el = document.createElement('live-codes');
+    el.innerHTML = `
+      <template>
+        <template filename="index.html"><h1>Hello</h1></template>
+        <script filename="app.ts" active>console.log('hi');</script>
+      </template>
+    `;
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    const options = createPlaygroundMock.mock.calls[0][1];
+    expect(options.config.activeEditor).toBe('app.ts');
+  });
+});
+
+describe('<live-codes> – config merge precedence', () => {
+  test('config property overrides children for matching editors', async () => {
+    const el = document.createElement('live-codes') as any;
+    el.config = {
+      markup: { language: 'html', content: 'from config prop' },
+      script: { language: 'js', content: 'from config prop' },
+    };
+    el.innerHTML = `
+      <template>
+        <template lang="html"><h1>from children</h1></template>
+      </template>
+    `;
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    const options = createPlaygroundMock.mock.calls[0][1];
+    // Config property wins for markup (explicit override)
+    expect(options.config.markup).toEqual({
+      language: 'html',
+      content: 'from config prop',
+    });
+    // Config property is used for script (no child for it either way)
+    expect(options.config.script).toEqual({
+      language: 'js',
+      content: 'from config prop',
+    });
+  });
+
+  test('children override config attribute for matching editors', async () => {
+    const el = document.createElement('live-codes') as any;
+    el.setAttribute(
+      'config',
+      JSON.stringify({
+        markup: { language: 'html', content: 'from attr' },
+        processors: ['tailwindcss'],
+      }),
+    );
+    el.innerHTML = `
+      <template>
+        <template lang="html"><h1>from children</h1></template>
+      </template>
+    `;
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    const options = createPlaygroundMock.mock.calls[0][1];
+    // Children win over config attribute for markup
+    expect(options.config.markup).toEqual({
+      language: 'html',
+      content: '<h1>from children</h1>',
+    });
+    // Non-content settings from config attribute are preserved
+    expect(options.config.processors).toEqual(['tailwindcss']);
+  });
+
+  test('children provide defaults that config property overrides', async () => {
+    const el = document.createElement('live-codes') as any;
+    el.innerHTML = `
+      <template>
+        <template lang="html"><h1>from children</h1></template>
+        <style lang="css">body { color: blue; }</style>
+      </template>
+    `;
+    el.config = {
+      markup: { language: 'html', content: '<h1>from prop</h1>' },
+    };
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    const options = createPlaygroundMock.mock.calls[0][1];
+    // Config property wins for markup
+    expect(options.config.markup).toEqual({
+      language: 'html',
+      content: '<h1>from prop</h1>',
+    });
+    // Children still provide style (no conflict)
+    expect(options.config.style).toEqual({
+      language: 'css',
+      content: 'body { color: blue; }',
+    });
+  });
+});
+
+// ---------------------------------------------------------------------------
+// config / params attributes (JSON)
+// ---------------------------------------------------------------------------
+
+describe('<live-codes> – config attribute (JSON)', () => {
+  test('config attribute is parsed as JSON and used', async () => {
+    const el = document.createElement('live-codes');
+    el.setAttribute('config', '{"processors": ["tailwindcss"], "title": "Test"}');
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    const options = createPlaygroundMock.mock.calls[0][1];
+    expect(options.config.processors).toEqual(['tailwindcss']);
+    expect(options.config.title).toBe('Test');
+  });
+
+  test('invalid JSON in config attribute is ignored', async () => {
+    const el = document.createElement('live-codes');
+    el.setAttribute('config', '{invalid json}');
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    const options = createPlaygroundMock.mock.calls[0][1];
+    // Should not crash, config should be empty or undefined
+    expect(options.config).toBeUndefined();
+  });
+
+  test('config property takes precedence over config attribute', async () => {
+    const el = document.createElement('live-codes') as any;
+    el.setAttribute('config', '{"title": "from attr", "processors": ["tailwindcss"]}');
+    el.config = { title: 'from prop' };
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    const options = createPlaygroundMock.mock.calls[0][1];
+    expect(options.config.title).toBe('from prop');
+    // Attribute's non-overlapping props are still present
+    expect(options.config.processors).toEqual(['tailwindcss']);
+  });
+
+  test('config property as URL string is used as-is (not merged)', async () => {
+    const el = document.createElement('live-codes') as any;
+    el.setAttribute('config', '{"title": "from attr"}');
+    el.config = 'https://example.com/config.json';
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    const options = createPlaygroundMock.mock.calls[0][1];
+    // URL string wins over everything
+    expect(options.config).toBe('https://example.com/config.json');
+  });
+
+  test('changing config attribute triggers update', async () => {
+    const el = document.createElement('live-codes');
+    el.setAttribute('config', '{"title": "first"}');
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    expect(createPlaygroundMock).toHaveBeenCalledTimes(1);
+
+    el.setAttribute('config', '{"title": "second"}');
+    await flushMicrotasks();
+
+    // Config-only change should call setConfig
+    expect(mockSetConfig).toHaveBeenCalledWith(expect.objectContaining({ title: 'second' }));
+  });
+});
+
+describe('<live-codes> – params attribute (JSON)', () => {
+  test('params attribute is parsed as JSON and used', async () => {
+    const el = document.createElement('live-codes');
+    el.setAttribute('params', '{"console": "open"}');
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    const options = createPlaygroundMock.mock.calls[0][1];
+    expect(options.params).toEqual({ console: 'open' });
+  });
+
+  test('params property overrides matching keys from params attribute', async () => {
+    const el = document.createElement('live-codes') as any;
+    el.setAttribute('params', '{"console": "open", "js": "from attr"}');
+    el.params = { js: 'console.log("hi")' };
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    const options = createPlaygroundMock.mock.calls[0][1];
+    // Property wins for overlapping key
+    expect(options.params.js).toBe('console.log("hi")');
+    // Attribute's non-overlapping key is preserved
+    expect(options.params.console).toBe('open');
+  });
+
+  test('invalid JSON in params attribute is ignored', async () => {
+    const el = document.createElement('live-codes');
+    el.setAttribute('params', 'not json');
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    const options = createPlaygroundMock.mock.calls[0][1];
+    expect(options.params).toBeUndefined();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// MutationObserver reactivity for children
+// ---------------------------------------------------------------------------
+
+describe('<live-codes> – children reactivity via MutationObserver', () => {
+  test('changing child content calls setConfig', async () => {
+    const el = document.createElement('live-codes') as any;
+    el.innerHTML = `
+      <template>
+        <style lang="css">h1 { color: blue; }</style>
+      </template>
+    `;
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    expect(createPlaygroundMock).toHaveBeenCalledTimes(1);
+    mockSetConfig.mockClear();
+
+    // Mutate the content inside the wrapper template
+    const wrapper = el.querySelector(':scope > template') as HTMLTemplateElement;
+    const style = wrapper.content.querySelector('style')!;
+    style.textContent = 'h1 { color: red; }';
+
+    // MutationObserver fires asynchronously
+    await flushMicrotasks();
+
+    expect(mockSetConfig).toHaveBeenCalledWith(
+      expect.objectContaining({
+        style: { language: 'css', content: 'h1 { color: red; }' },
+      }),
+    );
+  });
+
+  test('observer is disconnected when element is removed', async () => {
+    const el = document.createElement('live-codes') as any;
+    el.innerHTML = `
+      <template>
+        <style lang="css">h1 { color: blue; }</style>
+      </template>
+    `;
+    document.body.appendChild(el);
+    await flushMicrotasks();
+
+    expect(createPlaygroundMock).toHaveBeenCalledTimes(1);
+    mockSetConfig.mockClear();
+
+    el.remove();
+    await flushMicrotasks();
+
+    // Should not crash or call setConfig after disconnection
+    expect(mockSetConfig).not.toHaveBeenCalled();
+  });
+});

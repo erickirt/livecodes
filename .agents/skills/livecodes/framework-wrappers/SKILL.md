@@ -271,7 +271,7 @@ function App() {
 <!-- Basic usage -->
 <live-codes template="react"></live-codes>
 
-<!-- With config -->
+<!-- With config property -->
 <live-codes height="400px"></live-codes>
 
 <script>
@@ -279,6 +279,125 @@ function App() {
   playground.config = {
     markup: { language: 'markdown', content: '# Hello' },
   };
+</script>
+```
+
+### Web Components: Declarative Code via Children
+
+The web component supports providing code declaratively as child elements inside a wrapper `<template>`. This avoids JavaScript string escaping and enables IDE syntax highlighting.
+
+The outer `<template>` makes inner `<style>` and `<script>` elements inert (no side effects on the embedding page).
+
+#### Single-Editor Mode
+
+```html
+<live-codes height="400px">
+  <template>
+    <template lang="html">
+      <h1>Hello World</h1>
+      <p>Welcome to <strong>LiveCodes</strong></p>
+    </template>
+    <style lang="scss">
+      body {
+        font-family: sans-serif;
+        h1 {
+          color: royalblue;
+        }
+      }
+    </style>
+    <script lang="ts">
+      console.log('Hello from TypeScript!');
+    </script>
+  </template>
+</live-codes>
+```
+
+If `lang` is omitted, defaults are `html`, `css`, and `javascript`.
+
+<!--
+#### Multi-File Mode
+
+Use a `filename` attribute. Language is inferred from the file extension.
+
+```html
+<live-codes height="400px">
+  <template>
+    <template filename="index.html"><h1>Hello</h1></template>
+    <style filename="styles.scss">
+      h1 {
+        color: royalblue;
+      }
+    </style>
+    <script filename="app.ts">
+      import { greet } from './utils.ts';
+      console.log(greet('LiveCodes'));
+    </script>
+    <script filename="utils.ts">
+      export const greet = (name: string): string => `Hello, ${name}!`;
+    </script>
+  </template>
+</live-codes>
+```
+ -->
+
+#### Active Editor
+
+Use the `active` boolean attribute to set the initially focused editor:
+
+```html
+<live-codes>
+  <template>
+    <template lang="html"><h1>Hello</h1></template>
+    <script lang="ts" active>
+      console.log('focused');
+    </script>
+  </template>
+</live-codes>
+```
+
+#### Config and Params Attributes
+
+Use `config` and `params` HTML attributes as JSON strings for non-code settings:
+
+```html
+<live-codes config='{"processors": ["tailwindcss"]}' params='{"console": "open"}'>
+  <template>
+    <template lang="html"><h1 class="text-3xl">Hello</h1></template>
+  </template>
+</live-codes>
+```
+
+#### Merge Precedence
+
+When combining children, config attribute, and config property:
+
+1. **`config` property** (highest — explicit programmatic override)
+2. **Children** (declarative defaults)
+3. **`config` attribute** (lowest — inline JSON settings)
+
+Same for `params`: attribute is merged with property, property wins for overlapping keys.
+
+#### Reactivity
+
+Children content is reactive. Changing content inside the wrapper `<template>` programmatically triggers `setConfig()`:
+
+```html
+<live-codes id="demo">
+  <template>
+    <style lang="css">
+      h1 {
+        color: blue;
+      }
+    </style>
+  </template>
+</live-codes>
+
+<script>
+  function changeColor() {
+    const wrapper = document.querySelector('#demo > template');
+    wrapper.content.querySelector('style').textContent = 'h1 { color: red; }';
+    // MutationObserver detects this → setConfig() called
+  }
 </script>
 ```
 

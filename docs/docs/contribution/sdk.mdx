@@ -269,7 +269,29 @@ const usePlayground = createUsePlayground({ useEffect, useRef });
 
 ### Web Components (`web-components.ts`)
 
+The web component supports three ways to provide code, which can be combined:
+
+1. **Declarative children** — code as child elements inside a wrapper `<template>` (parsed by `parseChildren` in `internal.ts`)
+2. **`config` attribute** — JSON string, parsed and merged
+3. **`config` property** — object or URL string, set via JavaScript
+
+Merge precedence: `config` attribute (lowest) < children < `config` property (highest).
+
+The same pattern applies for `params` (attribute merged with property, property wins for overlapping keys).
+
+A `MutationObserver` watches the wrapper `<template>` content for changes and calls `setConfig()` reactively.
+
 ```html
+<!-- Declarative code via children -->
+<live-codes height="400px" config='{"processors": ["tailwindcss"]}'>
+  <template>
+    <template lang="html"><h1>Hello</h1></template>
+    <style lang="scss">h1 { color: royalblue; }</style>
+    <script lang="ts">console.log('Hi');</script>
+  </template>
+</live-codes>
+
+<!-- Config via properties -->
 <live-codes template="react"></live-codes>
 
 <script type="module">

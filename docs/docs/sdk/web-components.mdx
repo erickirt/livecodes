@@ -7,7 +7,7 @@ The Web Components SDK is a thin wrapper around the [JavaScript SDK](js-ts.mdx) 
 ## Demo
 
 export const webComponentsSDKDemo = {
-  html: `<live-codes height="60vh"></live-codes>\n\n<script type="module">\n  import "livecodes/web-components";\n\n  const playground = document.querySelector("live-codes");\n  playground.params = {\n    html: "<h1>Hello World!</h1>",\n    css: "h1 {color: blue;}",\n    js: 'console.log("Hello, World!")',\n    console: "open",\n  };\n</script>`,
+  html: `<live-codes height="80vh" params='{"console": "open"}'>\n  <template>\n    <template lang="html">\n      <h1>Hello World!</h1>\n    </template>\n    <style lang="scss">\n      h1 { color: royalblue; }\n    </style>\n    <script lang="ts" active>\n      console.log('hello!');\n    </script>\n  </template>\n</live-codes>\n\n<script src="https://cdn.jsdelivr.net/npm/livecodes@${process.env.SDK_VERSION}/web-components.js"></script>\n`,
 };
 
 <LiveCodes params={webComponentsSDKDemo} height="80vh" />
@@ -34,20 +34,16 @@ The custom element is registered by importing `livecodes/web-components`.
 
 Alternatively, you can load the web components SDK directly from a CDN using a script tag:
 
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import CodeBlock from '@theme/CodeBlock';
 
-export const UMDCode = () => {
-  const { siteConfig } = useDocusaurusContext();
-  return (
+export const UMDCode = () => (
     <CodeBlock title="HTML" language="html">
-      {`<script src="https://cdn.jsdelivr.net/npm/livecodes@${siteConfig.customFields.sdkVersion}/web-components.js"></script>
+      {`<script src="https://cdn.jsdelivr.net/npm/livecodes@${process.env.SDK_VERSION}/web-components.js"></script>
 
 <live-codes></live-codes>
 `}
     </CodeBlock>
   );
-};
 
 <UMDCode />
 
@@ -65,6 +61,171 @@ The following types are available:<br />
 
 TypeScript types are [documented here](../api/globals.md).
 
+### Declarative Code via Children \{#declarative-children}
+
+You can provide code for the playground declaratively using child elements inside a wrapper `<template>`. This avoids the need to set code in JavaScript strings and gives you full IDE syntax highlighting and autocomplete.
+
+The outer `<template>` element (highlighted in the example below) ensures that inner `<style>` and `<script>` elements are inert — the browser will not execute them or apply their styles to the embedding page. The code is trimmed and dedented automatically.
+
+{/* #### Single-Editor Mode */}
+
+Use `<template>`, `<style>`, and `<script>` elements with a `lang` attribute to set the language for each editor. These elements map to the corresponding editors (markup, style, script).
+
+```html {2,20} title="HTML"
+<live-codes height="400px">
+  <template>
+    <template lang="html">
+      <h1>Hello World</h1>
+      <p>Welcome to <strong>LiveCodes</strong></p>
+    </template>
+    <style lang="scss">
+      body {
+        font-family: sans-serif;
+        h1 { color: royalblue; }
+        p { font-size: 1.2em; }
+      }
+    </style>
+    <script lang="ts">
+      const btn = document.querySelector<HTMLButtonElement>('#btn');
+      btn?.addEventListener('click', () => {
+        btn.textContent = 'Clicked!';
+      });
+    </script>
+  </template>
+</live-codes>
+```
+
+If the `lang` attribute is omitted, the defaults are `html`, `css`, and `javascript`.
+{/*
+#### Multi-File Mode
+
+Use a `filename` attribute instead of `lang` to provide multiple files. The language is inferred from the file extension. The element type (`<template>`, `<style>`, `<script>`) does not matter in this mode, but using the matching element gives you IDE syntax highlighting.
+
+```html title="HTML"
+<live-codes height="400px">
+  <template>
+    <template filename="index.html">
+      <h1>Hello World</h1>
+      <script type="module" src="./app.ts"></script>
+    </template>
+    <style filename="styles.scss">
+      body { font-family: sans-serif; }
+      h1 { color: royalblue; }
+    </style>
+    <script filename="app.ts">
+      import { greet } from './utils.ts';
+      console.log(greet('LiveCodes'));
+    </script>
+    <script filename="utils.ts">
+      export const greet = (name: string): string => `Hello, ${name}!`;
+    </script>
+  </template>
+</live-codes>
+```
+*/}
+
+#### Active Editor
+
+Use the `active` boolean attribute on a code element to set the initially active editor:
+
+```html {5} title="HTML"
+<live-codes height="400px">
+  <template>
+    <template lang="html"><h1>Hello</h1></template>
+    <style lang="css">h1 { color: blue; }</style>
+    <script lang="ts" active>console.log('focused here');</script>
+  </template>
+</live-codes>
+```
+
+{/*
+In multi-file mode, `active` sets the active file:
+
+```html title="HTML"
+<live-codes height="400px">
+  <template>
+    <template filename="index.html"><h1>Hello</h1></template>
+    <script filename="app.ts" active>console.log('focused');</script>
+  </template>
+</live-codes>
+```
+*/}
+
+#### Combining Children with Config
+
+You can combine declarative children with `config` (attribute or property) and `params`. The merge precedence is:
+
+1. **`config` property** (highest — explicit programmatic override)
+2. **Children** (declarative defaults)
+3. **`config` attribute** (lowest — inline JSON settings)
+
+Children are best used for code content, while the `config` attribute is useful for non-code settings:
+
+```html title="HTML"
+<live-codes
+  height="400px"
+  config='{"processors": ["tailwindcss"]}'
+  params='{"console": "open"}'
+>
+  <template>
+    <template lang="html">
+      <h1 class="text-3xl font-bold text-blue-600">Hello Tailwind</h1>
+    </template>
+    <script lang="ts">console.log('Hello!');</script>
+  </template>
+</live-codes>
+```
+
+If the `config` property is set programmatically for the same editor, the property wins:
+
+```html title="HTML"
+<live-codes id="demo" height="400px">
+  <template>
+    <template lang="html"><h1>Default from children</h1></template>
+  </template>
+</live-codes>
+
+<script type="module">
+  import 'livecodes/web-components';
+
+  const el = document.getElementById('demo');
+  // This overrides the children's markup content
+  el.config = {
+    markup: { language: 'html', content: '<h1>Override from JS</h1>' },
+  };
+</script>
+```
+
+#### Reactivity
+
+Children content is reactive. Programmatically changing the content inside the wrapper `<template>` will trigger a call to [`setConfig`](js-ts.mdx#setconfig) on the existing playground.
+However, updating the [`config` property](#properties) is the preferred way to change the content.
+
+```html title="HTML"
+<live-codes id="demo" height="400px">
+  <template>
+    <template><h1>Hello World!</h1></template>
+    <style lang="css" active>h1 { color: blue; }</style>
+  </template>
+</live-codes>
+
+<button onclick="updateCode()">Change Color</button>
+
+<script type="module">
+  import 'livecodes/web-components';
+
+  function updateCode() {
+    const el = document.getElementById('demo');
+    const wrapper = el.querySelector(':scope > template');
+    const style = wrapper.content.querySelector('style');
+    style.textContent = 'h1 { color: red; }';
+  }
+
+  // expose to onclick
+  window.updateCode = updateCode;
+</script>
+```
+
 ### Attributes
 
 The following HTML attributes are supported and correspond to [embed options](js-ts.mdx#embed-options):
@@ -72,10 +233,12 @@ The following HTML attributes are supported and correspond to [embed options](js
 | Attribute              | Type      | Description                                                                                                           |
 | ---------------------- | --------- | --------------------------------------------------------------------------------------------------------------------- |
 | `app-url`              | `string`  | The URL of the LiveCodes app.                                                                                         |
+| `config`               | `string`  | A JSON string representing the [config object](../api/interfaces/Config.md).                                          |
 | `import`               | `string`  | A resource to [import](https://livecodes.io/docs/features/import).                                                    |
 | `loading`              | `string`  | When to load the playground (`"click"`, `"lazy"`, or `"eager"`).                                                      |
+| `params`               | `string`  | A JSON string representing [URL Query parameters](../configuration/query-params.md).                                  |
 | `template`             | `string`  | A [starter template](https://livecodes.io/docs/features/templates) to load.                                           |
-| `view`                 | `string`  | Deprecated! The `view` option has been moved to `config.view`. For headless mode use the `headless` attribute.         |
+| `view`                 | `string`  | Deprecated! The `view` option has been moved to `config.view`. For headless mode use the `headless` attribute.        |
 | `headless`             | `boolean` | Whether to use the headless mode of LiveCodes.                                                                        |
 | `lite`                 | `boolean` | Deprecated! Use `config.mode = "lite"` instead.                                                                       |
 | `height`               | `string`  | Sets the [height of playground container](js-ts.mdx#height) element.                                                  |
@@ -105,7 +268,7 @@ By default, the `<live-codes>` element is styled when the playground is initiali
 
 ### Properties
 
-For complex values that cannot be expressed as HTML attributes, use JavaScript properties on the element.
+For complex values it is recommended to use JavaScript properties on the element.
 
 - `config`
 
@@ -215,7 +378,7 @@ Changing any attribute or property will cause the playground to reload with the 
 However, changing the `config` property is an exception — it updates the playground in place using the SDK method [`setConfig`](js-ts.mdx#setconfig), without triggering a full reload.
 This allows for a smooth update experience when only the configuration changes.
 
-Similarly, changing the `height` attribute also updates the playground height without triggering a full reload.
+Similarly, changing the `height` attribute and [children content](#reactivity) also update the playground in place without triggering a full reload.
 
 Example:
 
