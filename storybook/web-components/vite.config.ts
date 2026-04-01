@@ -1,6 +1,5 @@
-/* eslint-disable import/order */
 /* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable import/no-unresolved */
+
 /// <reference types="vitest/config" />
 // import { playwright } from '@vitest/browser-playwright';
 import path from 'node:path';
