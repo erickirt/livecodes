@@ -234,10 +234,10 @@ The following HTML attributes are supported and correspond to [embed options](js
 | ---------------------- | --------- | --------------------------------------------------------------------------------------------------------------------- |
 | `app-url`              | `string`  | The URL of the LiveCodes app.                                                                                         |
 | `config`               | `string`  | A JSON string representing the [config object](../api/interfaces/Config.md).                                          |
-| `import`               | `string`  | A resource to [import](https://livecodes.io/docs/features/import).                                                    |
+| `import`               | `string`  | A resource to [import](../features/import.mdx).                                                    |
 | `loading`              | `string`  | When to load the playground (`"click"`, `"lazy"`, or `"eager"`).                                                      |
-| `params`               | `string`  | A JSON string representing [URL Query parameters](../configuration/query-params.md).                                  |
-| `template`             | `string`  | A [starter template](https://livecodes.io/docs/features/templates) to load.                                           |
+| `params`               | `string`  | A JSON string representing [URL Query parameters](../configuration/query-params.mdx).                                  |
+| `template`             | `string`  | A [starter template](../features/templates.mdx) to load.                                           |
 | `view`                 | `string`  | Deprecated! The `view` option has been moved to `config.view`. For headless mode use the `headless` attribute.        |
 | `headless`             | `boolean` | Whether to use the headless mode of LiveCodes.                                                                        |
 | `lite`                 | `boolean` | Deprecated! Use `config.mode = "lite"` instead.                                                                       |
@@ -274,7 +274,7 @@ For complex values it is recommended to use JavaScript properties on the element
 
   Type: `object | string`.
 
-  The [config object](https://livecodes.io/docs/api/interfaces/Config) for the playground or the URL of the config file.
+  The [config object](../api/interfaces/Config.md) for the playground or the URL of the config file.
 
   Example:
 
@@ -298,7 +298,7 @@ For complex values it is recommended to use JavaScript properties on the element
 
   Type: `object`.
 
-  An object that represents [URL Query parameters](https://livecodes.io/docs/configuration/query-params).
+  An object that represents [URL Query parameters](../configuration/query-params.mdx).
 
   Example:
 
