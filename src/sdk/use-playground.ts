@@ -69,8 +69,7 @@ export function createUsePlayground(hooks: Hooks): (props: Props) => PlaygroundH
         ...otherOptions
       } = props;
 
-      // avoid race conditions if props change while doing async operations
-      // (e.g. creating playground or fetching config json)
+      // avoid race conditions if props change while doing async operation (creating playground)
       const generation = ++generationRef.current;
       const isStale = () => generationRef.current !== generation || unmountedRef.current;
 
@@ -96,15 +95,7 @@ export function createUsePlayground(hooks: Hooks): (props: Props) => PlaygroundH
         const configStr = JSON.stringify(config);
         if (configCacheRef.current === configStr) return;
         configCacheRef.current = configStr;
-
-        if (typeof config === 'string') {
-          fetch(config)
-            .then((res) => res.json())
-            .then((json) => {
-              if (isStale()) return;
-              playgroundRef.current?.setConfig(json);
-            });
-        } else if (config) {
+        if (config) {
           playgroundRef.current.setConfig(config);
         }
       }

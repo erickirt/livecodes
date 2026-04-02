@@ -344,16 +344,7 @@ class LiveCodesElement extends HTMLElement {
     } else {
       if (this._configCache === configStr) return;
       this._configCache = configStr;
-
-      if (typeof config === 'string') {
-        const gen = this._generation;
-        fetch(config)
-          .then((res) => res.json())
-          .then((json) => {
-            if (this._generation !== gen) return;
-            this._playground?.setConfig(json);
-          });
-      } else if (config) {
+      if (config) {
         this._playground.setConfig(config);
       }
     }

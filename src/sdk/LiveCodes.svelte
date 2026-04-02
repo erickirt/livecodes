@@ -65,8 +65,7 @@
     const configStr = JSON.stringify(currentConfig || '');
     const currentGeneration = ++generation;
 
-    // avoid race conditions if props change while doing async operations
-    // (e.g. creating playground or fetching config json)
+    // avoid race conditions if props change while doing async operation (creating playground)
     const isStale = () => currentGeneration !== generation;
 
     if (!playground || otherOptionsCache !== otherOptionsStr) {
@@ -88,15 +87,7 @@
     } else {
       if (configCache === configStr) return;
       configCache = configStr;
-
-      if (typeof currentConfig === 'string') {
-        fetch(currentConfig)
-          .then((res) => res.json())
-          .then((json) => {
-            if (isStale()) return;
-            playground?.setConfig(json);
-          });
-      } else if (currentConfig) {
+      if (currentConfig) {
         playground.setConfig(currentConfig);
       }
     }

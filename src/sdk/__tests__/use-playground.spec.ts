@@ -294,7 +294,7 @@ describe('usePlayground – config changes', () => {
     expect(createPlaygroundMock).toHaveBeenCalledTimes(2);
   });
 
-  test('config as URL string fetches JSON and calls setConfig', async () => {
+  test('config as URL string calls setConfig', async () => {
     const hooks = createFakeHooks();
     const usePlayground = createUsePlayground(hooks);
 
@@ -306,21 +306,12 @@ describe('usePlayground – config changes', () => {
     hooks.flushEffects();
     await flushMicrotasks();
 
-    // Second render – config as URL
-    const fetchedConfig = { title: 'from-url' };
-    global.fetch = jest.fn().mockResolvedValue({
-      json: () => Promise.resolve(fetchedConfig),
-    }) as any;
-
     hooks.resetRefCounter();
     usePlayground({ config: 'https://example.com/config.json' });
     hooks.flushEffects();
     await flushMicrotasks();
 
-    expect(global.fetch).toHaveBeenCalledWith('https://example.com/config.json');
-    expect(mockSetConfig).toHaveBeenCalledWith(fetchedConfig);
-
-    (global.fetch as jest.Mock).mockRestore?.();
+    expect(mockSetConfig).toHaveBeenCalledWith('https://example.com/config.json');
   });
 });
 

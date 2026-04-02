@@ -5392,8 +5392,18 @@ const createApi = (): API => {
     return JSON.parse(JSON.stringify(config));
   };
 
-  const apiSetConfig = async (newConfig: Partial<Config>): Promise<Config> => {
+  const apiSetConfig = async (newConfig: Partial<Config> | string): Promise<Config> => {
     const currentConfig = getConfig();
+    if (typeof newConfig === 'string') {
+      try {
+        newConfig = (await fetch(newConfig).then((r) => r.json())) as Partial<Config>;
+      } catch {
+        return { error: 'Invalid config URL.' } as any;
+      }
+    }
+    if (!newConfig || typeof newConfig !== 'object') {
+      return { error: 'Invalid config.' } as any;
+    }
     const newAppConfig = buildConfig({ ...currentConfig, ...newConfig });
     const hasNewAppLanguage =
       newConfig.appLanguage && newConfig.appLanguage !== i18n?.getLanguage();

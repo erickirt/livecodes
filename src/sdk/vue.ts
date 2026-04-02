@@ -109,8 +109,7 @@ const LiveCodes: LiveCodesComponent = {
     let otherOptionsCache = JSON.stringify(otherOptions);
     let generation = 0;
 
-    // avoid race conditions if props change while doing async operations
-    // (e.g. creating playground or fetching config json)
+    // avoid race conditions if props change while doing async operation (creating playground)
     const isStale = (gen: number) => gen !== generation;
 
     onMounted(() => {
@@ -151,12 +150,7 @@ const LiveCodes: LiveCodesComponent = {
         });
       } else if (JSON.stringify(config) !== configCache) {
         configCache = JSON.stringify(config);
-
-        if (typeof config === 'string') {
-          const json = await fetch(config).then((res) => res.json());
-          if (isStale(currentGeneration)) return;
-          playground.value?.setConfig(json);
-        } else if (config) {
+        if (config) {
           playground.value.setConfig((clone(config) as any) || {});
         }
       }

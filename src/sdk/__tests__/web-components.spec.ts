@@ -432,25 +432,17 @@ describe('<live-codes> – generation-based staleness', () => {
 });
 
 describe('<live-codes> – config URL fetch', () => {
-  test('config set to URL string fetches JSON and calls setConfig', async () => {
+  test('config set to URL string calls setConfig', async () => {
     const el = document.createElement('live-codes') as any;
     document.body.appendChild(el);
     await flushMicrotasks();
 
     expect(createPlaygroundMock).toHaveBeenCalledTimes(1);
 
-    const fetchedConfig = { title: 'fetched' };
-    global.fetch = jest.fn().mockResolvedValue({
-      json: () => Promise.resolve(fetchedConfig),
-    }) as any;
-
     el.config = 'https://example.com/config.json';
     await flushMicrotasks();
 
-    expect(global.fetch).toHaveBeenCalledWith('https://example.com/config.json');
-    expect(mockSetConfig).toHaveBeenCalledWith(fetchedConfig);
-
-    (global.fetch as jest.Mock).mockRestore?.();
+    expect(mockSetConfig).toHaveBeenCalledWith('https://example.com/config.json');
   });
 });
 

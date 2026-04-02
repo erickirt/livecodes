@@ -287,6 +287,10 @@ Type: [`(config: Partial<Config>) => Promise<Config>`](../api/interfaces/Playgro
 
 Loads a new project using the passed configuration object.
 
+If it is a string, it is assumed to be a URL to a JSON file that contains the configuration object.
+
+It throws an error if the config object (or URL) is invalid.
+
 ```js
 import { createPlayground } from 'livecodes';
 

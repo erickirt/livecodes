@@ -1455,6 +1455,10 @@ export interface API {
 
   /**
    * Loads a new project using the passed configuration object.
+   * If the config is a string, it is assumed to be a URL to a JSON file that contains the configuration object.
+   *
+   * @throws It throws an error if the config object (or URL) is invalid.
+   *
    * @example
    * ```ts
    * import { createPlayground } from "livecodes";
@@ -1471,7 +1475,7 @@ export interface API {
    * });
    * ```
    */
-  setConfig: (config: Partial<Config>) => Promise<Config>;
+  setConfig: (config: Partial<Config> | string) => Promise<Config>;
 
   /**
    * Gets the playground code (including source code, source language and compiled code) for each editor (markup, style, script), in addition to result page HTML.
