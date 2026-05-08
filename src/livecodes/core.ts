@@ -601,7 +601,7 @@ const showMode = (mode?: Config['mode'], view?: Config['view']) => {
   }
 
   if (mode === 'editor' || mode === 'codeblock' || mode === 'result') {
-    split?.destroy();
+    split?.destroy(true);
     split = null;
   } else {
     if (view === 'editor') {
@@ -1438,6 +1438,9 @@ const loadConfig = async (
 const applyConfig = async (newConfig: Partial<Config>, reload = false, oldConfig?: Config) => {
   const currentConfig = oldConfig || getConfig();
   const combinedConfig: Config = { ...currentConfig, ...newConfig };
+  if (newConfig.mode || newConfig.view) {
+    window.deps?.showMode?.(combinedConfig.mode, combinedConfig.view);
+  }
   if (reload) {
     await updateEditors(editors, getConfig());
   }
@@ -1447,9 +1450,6 @@ const applyConfig = async (newConfig: Partial<Config>, reload = false, oldConfig
 
   if (!isEmbed) {
     loadSettings(combinedConfig);
-  }
-  if (newConfig.mode || newConfig.view) {
-    window.deps?.showMode?.(combinedConfig.mode, combinedConfig.view);
   }
   if (newConfig.tools) {
     configureToolsPane(newConfig.tools, combinedConfig.mode);
@@ -5072,7 +5072,6 @@ const extraHandlers = async () => {
 
 const configureEmbed = (eventsManager: EventsManager) => {
   document.body.classList.add('embed');
-  handleResultModeDrawer();
 
   const logoLink = UI.getLogoLink();
   logoLink.title = window.deps.translateString('generic.embed.logoHint', 'Edit on LiveCodes 🡕');
@@ -5125,8 +5124,11 @@ const configureModes = ({
   if (isLite) {
     configureLite();
   }
-  if (isEmbed || config.mode === 'result') {
+  if (isEmbed) {
     configureEmbed(eventsManager);
+  }
+  if (config.mode === 'result') {
+    handleResultModeDrawer();
   }
   if (config.mode === 'simple') {
     configureSimpleMode(config);
