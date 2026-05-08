@@ -4635,6 +4635,7 @@ const handleResultLoading = () => {
   const showResultModeDrawer = (event: MessageEvent) => {
     const iframe = UI.getResultIFrameElement();
     if (
+      isEmbed ||
       !iframe ||
       event.source !== iframe.contentWindow ||
       event.data.type !== 'loading' ||
