@@ -77,7 +77,7 @@ async function processFiles(dir: string): Promise<void> {
     let content = await readFile(fullPath, 'utf-8');
 
     // Remove `// @ts-ignore` comment lines (including optional trailing text)
-    content = content.replace(/^\s*\/\/\s*@ts-ignore\b.*\r?\n/gm, '');
+    content = content.replace(/^\s{0,5}\/\/\s{0,5}@ts-ignore\b.{0,25}\r?\n/gm, '');
 
     // Add file extensions to relative imports and exports
     content = addExtensions(content, fullPath);
