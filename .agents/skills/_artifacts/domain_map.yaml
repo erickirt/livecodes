@@ -97,12 +97,18 @@ skills:
     type: 'core'
     covers:
       - 'createPlayground function'
+      - 'getPlaygroundUrl function'
+      - 'compress utility function'
+      - 'decompress utility function'
       - 'EmbedOptions interface'
       - 'Container element setup'
       - 'Loading modes (eager, lazy, click)'
       - 'appUrl for self-hosted instances'
     tasks:
       - 'Create a basic embedded playground'
+      - 'Generate a shareable playground URL'
+      - 'Compress config for sharing or storage'
+      - 'Decompress config from URL or storage'
       - 'Configure loading behavior'
       - 'Use a self-hosted LiveCodes instance'
       - 'Set up playground with template or config'

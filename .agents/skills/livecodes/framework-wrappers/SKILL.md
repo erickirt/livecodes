@@ -314,32 +314,6 @@ The outer `<template>` makes inner `<style>` and `<script>` elements inert (no s
 
 If `lang` is omitted, defaults are `html`, `css`, and `javascript`.
 
-<!--
-#### Multi-File Mode
-
-Use a `filename` attribute. Language is inferred from the file extension.
-
-```html
-<live-codes height="400px">
-  <template>
-    <template filename="index.html"><h1>Hello</h1></template>
-    <style filename="styles.scss">
-      h1 {
-        color: royalblue;
-      }
-    </style>
-    <script filename="app.ts">
-      import { greet } from './utils.ts';
-      console.log(greet('LiveCodes'));
-    </script>
-    <script filename="utils.ts">
-      export const greet = (name: string): string => `Hello, ${name}!`;
-    </script>
-  </template>
-</live-codes>
-```
- -->
-
 #### Active Editor
 
 Use the `active` boolean attribute to set the initially focused editor:

@@ -111,6 +111,32 @@ const url = getPlaygroundUrl({
 // url = "https://livecodes.io/#config/..."
 ```
 
+### Compress config for sharing
+
+Compress a stringified config object for use in URL hashes or compact storage.
+
+```javascript
+import { compress } from 'livecodes';
+
+const config = {
+  markup: { language: 'html', content: '<h1>Hello World</h1>' },
+};
+const compressed = compress(JSON.stringify(config));
+```
+
+### Decompress config
+
+Decompress a string that was compressed with `compress`. Returns `null` if decompression fails.
+
+```javascript
+import { decompress } from 'livecodes';
+
+const decompressed = decompress(compressedString);
+if (decompressed) {
+  const config = JSON.parse(decompressed);
+}
+```
+
 ## Common Mistakes
 
 ### HIGH Container element not found throws error

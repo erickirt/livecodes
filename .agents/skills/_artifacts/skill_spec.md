@@ -16,7 +16,7 @@ LiveCodes is a feature-rich, open-source, client-side code playground that runs 
 | Skill                | Type        | Domain        | What it covers                                                               | Failure modes |
 | -------------------- | ----------- | ------------- | ---------------------------------------------------------------------------- | ------------- |
 | livecodes            | core        | -             | Overview, quick start, decision tree, key concepts, minimal examples         | 3             |
-| sdk-embedding        | core        | sdk-embedding | createPlayground, EmbedOptions, container setup, loading modes, appUrl       | 4             |
+| sdk-embedding        | core        | sdk-embedding | createPlayground, getPlaygroundUrl, compress, decompress, EmbedOptions, container setup, loading modes, appUrl | 4             |
 | sdk-methods          | core        | sdk-embedding | run, getCode, setConfig, watch, runTests, format, getShareUrl, show, destroy | 3             |
 | framework-wrappers   | framework   | sdk-embedding | React, Vue, Svelte, Solid, Preact, Web Components SDK usage                  | 2             |
 | headless-mode        | core        | sdk-embedding | Creating playgrounds without UI, load() requirement, compiled output         | 1             |

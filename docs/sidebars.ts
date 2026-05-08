@@ -126,7 +126,11 @@ const sidebars: SidebarsConfig = {
             type: 'doc',
             id: 'tutorials/index',
           },
-          items: ['tutorials/getting-started-guide', 'tutorials/building-your-first-app'],
+          items: [
+            'tutorials/getting-started-guide',
+            'tutorials/building-your-first-app',
+            'tutorials/creating-shareable-urls',
+          ],
         },
         'bookmarklet',
         'gh-action',

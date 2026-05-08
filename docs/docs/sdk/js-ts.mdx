@@ -112,6 +112,48 @@ export const getPlaygroundUrlDemo = {
 
 <RunInLiveCodes params={getPlaygroundUrlDemo} />
 
+## `compress`
+
+Type: `(uncompressed: string) => string`
+
+A utility function that allows compressing the stringified config object (e.g. for [sharing in URL hash](../tutorials/creating-shareable-urls.mdx)). It encodes it in base64 with a few tweaks to make it URI safe.
+
+This is the `compressToEncodedURIComponent` function re-exported from [`lz-string`](https://www.npmjs.com/package/lz-string) for convenience.
+
+```js
+import { compress } from 'livecodes';
+
+const config = {
+  markup: {
+    language: 'html',
+    content: '<h1>Hello World!</h1>',
+  },
+};
+
+const compressed = compress(JSON.stringify(config));
+```
+
+## `decompress`
+
+Type: `(compressed: string) => string | null`
+
+A utility function that allows decompressing the config object (compressed by [`compress`](#compress)). It decodes it to a string that should be `JSON.parse`d.
+
+This is the `decompressFromEncodedURIComponent` function re-exported from [`lz-string`](https://www.npmjs.com/package/lz-string) for convenience.
+
+```js
+import { decompress } from 'livecodes';
+
+const decompressed = decompress(compressedString);
+if (decompressed) {
+  try {
+    const config = JSON.parse(decompressed);
+  } catch {
+    // invalid JSON
+  }
+}
+```
+
 ## Embed Options
 
 Type: [`EmbedOptions`](../api/interfaces/EmbedOptions.md)

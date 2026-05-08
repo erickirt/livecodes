@@ -41,7 +41,8 @@ skills:
     path: '.agents/skills/livecodes/sdk-embedding/SKILL.md'
     description: >
       Create and configure embedded playgrounds using createPlayground(),
-      container setup, EmbedOptions, loading modes (eager/lazy/click),
+      getPlaygroundUrl(), compress(), decompress(), container setup,
+      EmbedOptions, loading modes (eager/lazy/click),
       and appUrl for self-hosted instances.
     requires: []
     sources:
