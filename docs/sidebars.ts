@@ -137,7 +137,7 @@ const sidebars: SidebarsConfig = {
         'gh-action',
         'markdown-to-livecodes',
         'contribution',
-        'ai-agents',
+        'ai-guide',
         'credits',
         'license',
         'sponsor',

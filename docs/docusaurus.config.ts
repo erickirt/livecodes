@@ -168,8 +168,8 @@ const config: Config = {
               to: '/bookmarklet',
             },
             {
-              label: 'For AI Agents',
-              to: '/ai-agents',
+              label: 'AI Guide',
+              to: '/ai-guide',
             },
           ],
         },
