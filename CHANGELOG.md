@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file. See [standa
 
 ---
 
+## [sdk-v0.14.1](https://github.com/live-codes/livecodes/compare/sdk-v0.14.0...0.0.0) (2026-05-08)
+
+
+
+
+---
+
 ## [sdk-v0.14.0](https://github.com/live-codes/livecodes/compare/sdk-v0.13.0...sdk-v0.14.0) (2026-05-08)
 
 ### Highlights for this release
