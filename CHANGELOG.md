@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file. See [standa
 ### Highlights for this release
 
 - The SDK now, in addition to React and Vue, provides support for Svelte, Solid, Preact, and Web Components. See [docs](https://livecodes.io/docs/sdk).
+- The SDK is now also published to [jsr.io](https://jsr.io/@livecodes/sdk) as `@livecodes/sdk`. See [docs](https://livecodes.io/docs/sdk/jsr).
+- Skills are published with SDK for use with AI agents. See [AI guide](https://livecodes.io/docs/ai-guide).
 - The SDK exports new utility functions for compressing and decompressing code (URI-friendly base64-encoded). This is useful for allowing users to provide share links (using URL hash) for embedded playgrounds. See [guide](https://livecodes.io/docs/tutorials/creating-shareable-urls).
 - `setConfig` SDK method can now accept a config URL.
 - "Prefill from DOM" is fixed. See [docs](https://livecodes.io/docs/features/code-prefill#auto-pre-fill-from-page-dom).
