@@ -22,14 +22,15 @@ A web page that:
 
 The LiveCodes SDK exports two standalone utility functions:
 
-- **[`compress(string)`](../sdk/js-ts.mdx#compress)** — Compresses a string into a URI-safe base64 format
-- **[`decompress(string)`](../sdk/js-ts.mdx#decompress)** — Decompresses it back to the original string
+- **[`compress(string)`](../sdk/js-ts.mdx#compress)**: Compresses a string into a URI-safe base64 format
+- **[`decompress(string)`](../sdk/js-ts.mdx#decompress)**: Decompresses it back to the original string
 
 These are re-exports from `lz-string` and are useful when you want to:
 
 - Build your own share URL logic
 - Store compressed configs in `localStorage` or a database
 - Modify the config object before loading it
+- Add custom data to the URL hash
 - Create bookmarklets or browser extensions
 
 :::info
@@ -212,10 +213,10 @@ document.getElementById('shareBtn').addEventListener('click', async () => {
 
 ## Testing Your App
 
-1. Open the page — it shows the default starter code
+1. Open the page: it shows the default starter code
 2. Edit the code in the playground
-3. Click **Share** — the URL is copied to clipboard
-4. Paste the URL in a new tab — it loads the exact code you edited
+3. Click **Share**: the URL is copied to clipboard
+4. Paste the URL in a new tab: it loads the exact code you edited
 
 ## Challenge: Enhance Your App
 
@@ -228,9 +229,9 @@ Try adding these features:
 
 ## Next Steps
 
-- [SDK Methods](../sdk/js-ts.mdx) — Learn more about the LiveCodes SDK
-- [Configuration](../configuration/configuration-object.mdx) — Explore the full config object
-- [Import/Export](../features/import.mdx) — Import and export projects
+- [SDK Methods](../sdk/js-ts.mdx): Learn more about the LiveCodes SDK
+- [Configuration](../configuration/configuration-object.mdx): Explore the full config object
+- [Import/Export](../features/import.mdx): Import and export projects
 
 ## Complete Code Summary
 

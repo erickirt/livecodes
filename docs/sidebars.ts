@@ -129,6 +129,7 @@ const sidebars: SidebarsConfig = {
           items: [
             'tutorials/getting-started-guide',
             'tutorials/building-your-first-app',
+            'tutorials/embedding-playgrounds',
             'tutorials/creating-shareable-urls',
           ],
         },
