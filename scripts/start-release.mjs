@@ -238,7 +238,10 @@ const changeSDKVersion = async (releaseNotes) => {
 };
 
 const changeVersionInStorybook = () => {
-  execSync(`cd storybook && npm run install-all`);
+  execSync('npm run install-all', {
+    cwd: 'storybook',
+    stdio: 'inherit',
+  });
 };
 
 const changeVersion = async (releaseNotes) =>
