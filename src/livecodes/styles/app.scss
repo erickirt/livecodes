@@ -542,7 +542,7 @@ kbd {
   }
 
   #logo {
-    margin: 0 var(--s4);
+    margin: var(--s4) var(--s4) 0;
     padding: 0;
     text-align: center;
     width: 32px;
@@ -1554,7 +1554,7 @@ a.editor-title {
     justify-content: space-between;
 
     #logo {
-      inset-block-start: var(--s6); /* top */
+      inset-block-start: var(--s2); /* top */
       inset-inline-end: var(--s6); /* right */
       position: absolute;
 

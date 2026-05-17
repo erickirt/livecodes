@@ -37,10 +37,6 @@
 
   </defs>
 
-  <!-- Background -->
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <rect width="512" height="512" rx="80" fill="url(#dots)"/>
-
   <!-- Code glyph </> with cyan glow -->
   <g filter="url(#glow)" stroke-linecap="round" stroke-linejoin="round" fill="none">
     <polyline points="146,176 86,256 146,336"    stroke="#00c8ff" stroke-width="44"/>
