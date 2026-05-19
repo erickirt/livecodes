@@ -78,7 +78,7 @@ body,
 /* --- Loading text animation --- */
 
 #loading:not(.click-to-load) #loading-text {
-  animation: loadingTextPulse 2s ease-in-out infinite;
+  animation: loadingTextPulse 2.5s ease-in-out infinite;
 }
 
 @keyframes loadingTextPulse {
