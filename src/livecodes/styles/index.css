@@ -47,12 +47,6 @@ body,
   align-items: center;
 }
 
-.livecodes-logo-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
 #loading-text,
 .noscript {
   font-family:
@@ -81,29 +75,12 @@ body,
   padding-right: 0.5em;
 }
 
-/* --- Dedicated Recording Dot Glow System --- */
-
-#loading:not(.click-to-load) .live-dot {
-  animation: liveIndicatorGlow 2s ease-in-out infinite;
-}
+/* --- Loading text animation --- */
 
 #loading:not(.click-to-load) #loading-text {
   animation: loadingTextPulse 2s ease-in-out infinite;
 }
 
-/* Smooth alpha pulse on the red filter asset */
-@keyframes liveIndicatorGlow {
-  0%,
-  100% {
-    opacity: 0.4;
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
-/* Text pulse matches the speed of the camera rhythm */
 @keyframes loadingTextPulse {
   0%,
   100% {

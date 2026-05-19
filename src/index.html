@@ -68,17 +68,16 @@
     <div id="livecodes"></div>
     <div id="loading">
       <div class="logo-wrapper">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="livecodes-logo-svg">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+          role="img"
+          aria-label="LiveCodes icon animated draw"
+        >
           <defs>
-            <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#0d1825" />
-              <stop offset="100%" stop-color="#080d16" />
-            </linearGradient>
-
             <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
               <circle cx="1" cy="1" r=".75" fill="rgba(255,255,255,.04)" />
             </pattern>
-
             <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
               <feGaussianBlur stdDeviation="14" result="b" />
               <feFlood flood-color="#00c8ff" flood-opacity=".32" result="c" />
@@ -88,7 +87,6 @@
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-
             <filter id="dot-glow" x="-120%" y="-120%" width="340%" height="340%">
               <feGaussianBlur stdDeviation="7" result="b" />
               <feFlood flood-color="#ff4d4d" flood-opacity=".7" result="c" />
@@ -99,24 +97,91 @@
               </feMerge>
             </filter>
           </defs>
-
-          <rect width="512" height="512" rx="80" fill="url(#bg)" />
-          <rect width="512" height="512" rx="80" fill="url(#dots)" />
-
-          <g filter="url(#glow)" stroke-linecap="round" stroke-linejoin="round" fill="none">
-            <polyline points="146,176 86,256 146,336" stroke="#00c8ff" stroke-width="44" />
-            <line x1="310" y1="160" x2="202" y2="352" stroke="#00e5c8" stroke-width="44" />
-            <polyline points="366,176 426,256 366,336" stroke="#00c8ff" stroke-width="44" />
+          <!-- Master group fades out at the end of each cycle -->
+          <g>
+            <animate
+              attributeName="opacity"
+              values="1;1;0;0"
+              keyTimes="0;0.7;0.82;1"
+              dur="5s"
+              repeatCount="indefinite"
+            />
+            <rect width="512" height="512" rx="80" fill="url(#dots)" opacity="0">
+              <animate
+                attributeName="opacity"
+                values="0;1;1"
+                keyTimes="0;0.12;1"
+                dur="5s"
+                repeatCount="indefinite"
+              />
+            </rect>
+            <!-- Drawn strokes with glow filter -->
+            <g filter="url(#glow)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+              <!-- Left bracket -->
+              <path
+                d="M146 176 L86 256 L146 336"
+                stroke="#00c8ff"
+                stroke-width="44"
+                pathLength="1"
+                stroke-dasharray="1"
+                stroke-dashoffset="1"
+              >
+                <animate
+                  attributeName="stroke-dashoffset"
+                  values="1;1;0;0;1"
+                  keyTimes="0;0.13;0.25;0.9;1"
+                  dur="5s"
+                  repeatCount="indefinite"
+                />
+              </path>
+              <!-- Slash -->
+              <path
+                d="M310 160 L202 352"
+                stroke="#00e5c8"
+                stroke-width="44"
+                pathLength="1"
+                stroke-dasharray="1"
+                stroke-dashoffset="1"
+              >
+                <animate
+                  attributeName="stroke-dashoffset"
+                  values="1;1;0;0;1"
+                  keyTimes="0;0.26;0.38;0.9;1"
+                  dur="5s"
+                  repeatCount="indefinite"
+                />
+              </path>
+              <!-- Right bracket -->
+              <path
+                d="M366 176 L426 256 L366 336"
+                stroke="#00c8ff"
+                stroke-width="44"
+                pathLength="1"
+                stroke-dasharray="1"
+                stroke-dashoffset="1"
+              >
+                <animate
+                  attributeName="stroke-dashoffset"
+                  values="1;1;0;0;1"
+                  keyTimes="0;0.39;0.51;0.9;1"
+                  dur="5s"
+                  repeatCount="indefinite"
+                />
+              </path>
+            </g>
+            <!-- Live dot -->
+            <g filter="url(#dot-glow)">
+              <circle cx="395" cy="100" r="26" fill="#ff4d4d" opacity="0">
+                <animate
+                  attributeName="opacity"
+                  values="0;0;1;1"
+                  keyTimes="0;0.52;0.556;1"
+                  dur="5s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+            </g>
           </g>
-
-          <circle
-            class="live-dot"
-            cx="395"
-            cy="100"
-            r="26"
-            fill="#ff4d4d"
-            filter="url(#dot-glow)"
-          />
         </svg>
       </div>
 
