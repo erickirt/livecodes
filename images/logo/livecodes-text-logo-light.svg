@@ -37,5 +37,5 @@
   </g>
   <circle cx="118" cy="52" r="7" fill="#ff4d4d" filter="url(#ltl-dot-glow)"/>
   <!-- Wordmark -->
-  <text x="170" y="130" font-family="'Helvetica Neue', Arial, sans-serif" font-size="100" font-weight="700" fill="#F8FAFC" letter-spacing="-2" filter="url(#ltl-text-glow)">LiveCodes</text>
+  <text x="170" y="130" font-family="'Helvetica Neue', Arial, sans-serif" font-size="100" font-weight="700" fill="#f8fAfc" letter-spacing="-2" filter="url(#ltl-text-glow)">LiveCodes</text>
 </svg>
