@@ -78,118 +78,52 @@
             <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
               <circle cx="1" cy="1" r=".75" fill="rgba(255,255,255,.04)" />
             </pattern>
+
             <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="8" result="b" />
-              <feMerge>
-                <feMergeNode in="b" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-            <filter id="dot-glow" x="-80%" y="-80%" width="260%" height="260%">
               <feGaussianBlur stdDeviation="4" result="b" />
               <feMerge>
                 <feMergeNode in="b" />
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
+            <filter id="dot-glow" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="8" result="b" />
+              <feMerge>
+                <feMergeNode in="b" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
           </defs>
-          <!-- Master group fades out at the end of each cycle -->
-          <g>
-            <animate
-              attributeName="opacity"
-              values="1;1;0;0"
-              keyTimes="0;0.767;0.933;1"
-              dur="5s"
-              repeatCount="indefinite"
-              fill="freeze"
-            />
-            <rect width="512" height="512" rx="80" fill="url(#dots)" />
-            <!-- Strokes -->
-            <g filter="url(#glow)" stroke-linecap="round" stroke-linejoin="round" fill="none">
-              <!-- Left bracket -->
-              <path
-                d="M146 176 L86 256 L146 336"
-                stroke="#00c8ff"
-                stroke-width="44"
-                pathLength="1"
-                stroke-dasharray="1"
-                stroke-dashoffset="1"
-              >
-                <animate
-                  attributeName="stroke-dashoffset"
-                  values="1;0;0;1"
-                  keyTimes="0;0.167;0.95;1"
-                  dur="5s"
-                  repeatCount="indefinite"
-                  fill="freeze"
-                />
-              </path>
-              <!-- Slash -->
-              <path
-                d="M310 160 L202 352"
-                stroke="#00e5c8"
-                stroke-width="44"
-                pathLength="1"
-                stroke-dasharray="1"
-                stroke-dashoffset="1"
-              >
-                <animate
-                  attributeName="stroke-dashoffset"
-                  values="1;1;0;0;1"
-                  keyTimes="0;0.167;0.333;0.95;1"
-                  dur="5s"
-                  repeatCount="indefinite"
-                  fill="freeze"
-                />
-              </path>
-              <!-- Right bracket -->
-              <path
-                d="M366 176 L426 256 L366 336"
-                stroke="#00c8ff"
-                stroke-width="44"
-                pathLength="1"
-                stroke-dasharray="1"
-                stroke-dashoffset="1"
-              >
-                <animate
-                  attributeName="stroke-dashoffset"
-                  values="1;1;0;0;1"
-                  keyTimes="0;0.333;0.5;0.95;1"
-                  dur="5s"
-                  repeatCount="indefinite"
-                  fill="freeze"
-                />
-              </path>
-            </g>
-            <!-- Live dot -->
-            <g filter="url(#dot-glow)">
-              <circle cx="395" cy="100" r="26" fill="#ff4d4d" opacity="0">
-                <!-- Fade-in + opacity pulse -->
-                <animate
-                  attributeName="opacity"
-                  values="0;0;1;0.8;1;0.8;1"
-                  keyTimes="0;0.5;0.567;0.667;0.767;0.867;1"
-                  dur="5s"
-                  repeatCount="indefinite"
-                  fill="freeze"
-                />
-                <!-- Radius pulse (breathing effect) -->
-                <animate
-                  attributeName="r"
-                  values="20;22;26;26;26;30;26"
-                  keyTimes="0;0.5;0.567;0.667;0.767;0.867;1"
-                  dur="5s"
-                  repeatCount="indefinite"
-                  fill="freeze"
-                />
-              </circle>
-            </g>
+
+          <rect width="512" height="512" rx="80" fill="url(#dots)" />
+
+          <g
+            class="brackets"
+            filter="url(#glow)"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            fill="none"
+          >
+            <polyline points="146,176 86,256 146,336" stroke="#00c8ff" stroke-width="44" />
+            <line x1="310" y1="160" x2="202" y2="352" stroke="#00e5c8" stroke-width="44" />
+            <polyline points="366,176 426,256 366,336" stroke="#00c8ff" stroke-width="44" />
           </g>
+
+          <circle
+            class="live-dot"
+            cx="395"
+            cy="100"
+            r="26"
+            fill="#ff4d4d"
+            filter="url(#dot-glow)"
+          />
         </svg>
       </div>
 
       <div id="loading-text" hidden>Loading LiveCodes…</div>
-      <noscript><div class="noscript">Please enable JavaScript to use LiveCodes</div></noscript>
+      <noscript>
+        <div class="noscript">Please enable JavaScript to use LiveCodes</div>
+      </noscript>
       <script>
         document.querySelector('#loading-text').hidden = false;
       </script>
