@@ -68,6 +68,14 @@ html[data-theme='dark'] .rowDark {
   background-color: #0d1825;
 }
 
+html[data-theme='dark'] .steps {
+  background-color: #111b2c;
+}
+
+html[data-theme='dark'] .border {
+  background-color: #111b2c;
+}
+
 html[data-theme='dark'] .features img[src$='.svg'] {
   filter: invert(0.9);
 }

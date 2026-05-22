@@ -115,6 +115,8 @@ The light-theme variant (`inc-light.scss`) gets the same brand-token shape but w
   - Code sample color changed from `dodgerblue` to `#00c8ff`.
   - `.steps` and `.border` borders: brand-tinted cyan instead of `grey`.
   - `.rowDark` in dark mode: background set to brand elevated `#0d1825`.
+  - `.steps` and `.border` backgrounds in dark mode: overridden from Docusaurus default grey
+    to brand elevated-2 `#111b2c`.
 - [x] Storybook (`storybook/*/.storybook/manager.ts`): all 6 framework variants updated
       with `colorPrimary: '#00c8ff'`, `colorSecondary: '#00e5c8'`, `brandImage`.
 - [ ] Share social card image / code-to-image watermark: already uses new SVG asset.
@@ -133,6 +135,14 @@ The light-theme variant (`inc-light.scss`) gets the same brand-token shape but w
 - [x] Docs site (Docusaurus): `custom.css` primary palette shifted to brand cyan; status dot
       changed to live red.
 - [x] Storybook theme: all 6 framework storybooks now use brand cyan primary + teal secondary.
+- [x] Storybook landing page (`storybook/index.html`):
+  - Logo replaced with new icon SVG.
+  - Header background: deep navy `#080d16` + cyan halo gradient + dot pattern.
+  - Typography: DM Sans added to font stack.
+  - Body background: `#f4f7fb` (brand light).
+  - Card hover: brand cyan glow instead of Storybook blue `#1ea7fd`.
+  - Badge: cyan outline style instead of pink solid.
+  - Link accents throughout: `#00c8ff`.
 - [ ] README and marketing assets (`livecodes-text-logo*`): out of scope for code rebrand;
       requires graphic design work.
 
