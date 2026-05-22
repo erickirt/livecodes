@@ -772,15 +772,18 @@ a#result-button {
 
   #result-mode-drawer {
     align-items: center;
-    background-color: rgb(250, 251, 255);
-    border: 0.5px solid rgb(233, 235, 237);
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    background-color: var(--brand-bg-elevated-2);
+    border: 1px solid var(--brand-border);
+    border-bottom: 0;
+    border-top-left-radius: var(--rs-lg, 12px);
+    border-top-right-radius: var(--rs-lg, 12px);
     bottom: 0;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 0 6px;
+    box-shadow:
+      rgba(0, 0, 0, 0.25) 0 -4px 24px,
+      0 0 0 1px var(--brand-border) inset;
     box-sizing: border-box;
     display: flex;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-ui, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
     height: 42px;
     justify-content: space-between;
     left: 50%;
@@ -797,21 +800,22 @@ a#result-button {
 
     a {
       align-items: center;
-      border-top-left-radius: 6px;
-      color: rgb(77, 86, 95);
+      border-top-left-radius: var(--rs-lg, 12px);
+      color: var(--brand-text);
       display: flex;
       flex-grow: 1;
       gap: 10px;
       height: 42px;
       justify-content: center;
       text-decoration: none;
+      transition: background-color 180ms ease;
 
       &:hover {
-        background-color: rgb(246, 246, 247);
+        background-color: var(--brand-bg-deep);
       }
 
       &::after {
-        background: #e9ebed;
+        background: var(--brand-border);
         content: '';
         height: 26px;
         position: absolute;
@@ -832,13 +836,14 @@ a#result-button {
     }
 
     #drawer-text {
+      color: var(--brand-muted);
       font-size: 14px;
       font-weight: 600;
       line-height: 20px;
 
       svg {
         display: inline-block;
-        fill: rgb(119, 128, 137);
+        fill: var(--brand-muted);
         height: 12px;
         transform: translateX(2px) translateY(2px);
       }
@@ -848,15 +853,18 @@ a#result-button {
       align-items: center;
       background-color: transparent;
       border: 0;
+      border-radius: var(--rs);
+      color: var(--brand-muted);
       cursor: pointer;
       display: flex;
       height: 30px;
       justify-content: center;
       margin-left: 5px;
+      transition: background-color 180ms ease;
       width: 30px;
 
       &:hover {
-        background-color: rgb(246, 246, 247);
+        background-color: var(--brand-bg-deep);
       }
 
       svg {

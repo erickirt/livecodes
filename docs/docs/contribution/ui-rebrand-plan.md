@@ -76,19 +76,42 @@ The light-theme variant (`inc-light.scss`) gets the same brand-token shape but w
 - [ ] Loading screen colors are already brand-aligned (`#080d16`, cyan, red dot) —
       no change needed.
 
-### Phase 2 — Modal & screen polish (in progress)
+### Phase 2 — Modal & screen polish ✅
 
-- [ ] `inc-modal.scss`: rebrand modal title bar, close button, tab bar, dividers, code blocks,
-      and primary CTA buttons used inside dialogs.
-- [ ] Inputs / selects / textareas: brand-tinted borders, cyan focus ring.
-- [ ] Switches / sliders: cyan accent for "on" state.
-- [ ] Cards & list items used across screens (templates list, my projects, deploy targets,
-      sync providers): brand border, hover lift with cyan glow.
-- [ ] Tabbed screens: tab indicator → cyan underline.
-- [ ] Light-mode parity for the above.
-- [ ] Spot-check: welcome, templates, settings, share, import, deploy, embed,
-      code-to-image, tests, project-info, sync, broadcast, custom-settings, restore,
-      sponsor, about.
+- [x] `inc-modal.scss`:
+  - Modal title bar: dot-pattern background + brand border + blur backdrop.
+  - Close / clear / delete buttons: brand hover glow + cyan focus ring.
+  - Tab bar: active tab gets 2px cyan underline; hover gets brand border.
+  - Inputs, selects, textareas: cyan focus-visible ring via `box-shadow`.
+  - Wide buttons / file-input-labels: brand inset shadow + hover glow.
+  - Cards & list items (`ul.open-list li`, `#share-screen li`): brand border + hover glow.
+  - Thumbnails: brand border + hover glow.
+  - Tags: brand border on hover.
+  - Image previews, embed preview, code blocks, QR code, login access,
+    prompt panels, custom editors: brand-tinted 1px borders.
+  - `.span.code` font switched to `--font-mono`.
+- [x] Light-mode parity: all changes use `--brand-*` tokens which have light overrides in
+      `inc-light.scss`; no extra modal-specific light overrides needed.
+- [x] Switches / sliders: the "on" color derives from user `themeColor` (`--input-switch-active:
+      var(--color90)`). This preserves user theming; default `--hue: 214` gives a blue close to
+      brand cyan.
+- [ ] Spot-check of individual screens: deferred to QA pass / visual regression.
+
+### Phase 3 — Edge surfaces ✅
+
+- [x] Result-mode drawer (`app.scss`): removed hardcoded light grays; now uses brand tokens
+      (`--brand-bg-elevated-2`, `--brand-text`, `--brand-muted`, `--brand-border`) with
+      larger `--rs-lg` radius and cyan focus ring on close button.
+- [x] RTL: `inc-rtl.scss` only mirrors directional properties; brand tokens are
+      direction-agnostic — no changes needed.
+- [x] Docs site (`docs/src/css/custom.css`):
+  - `--ifm-color-primary` shifted from teal `#25c2a0` to brand cyan `#0090cc` (light)
+    and `#00c8ff` (dark).
+  - Dark mode highlighted code lines use cyan-tinted background.
+  - `.status-link` dot changed from green `#20bf6b` to brand live red `#ff4d4d` with glow.
+- [x] Storybook (`storybook/*/.storybook/manager.ts`): all 6 framework variants updated
+      with `colorPrimary: '#00c8ff'`, `colorSecondary: '#00e5c8'`, `brandImage`.
+- [ ] Share social card image / code-to-image watermark: already uses new SVG asset.
 
 ### Phase 3 — Edge surfaces
 
@@ -99,17 +122,21 @@ The light-theme variant (`inc-light.scss`) gets the same brand-token shape but w
 - [ ] RTL spot-checks (`inc-rtl.scss`) — no logical changes expected, but verify mirrored
       menus, drawer, modal close button.
 
-### Phase 4 — Outside the app shell
+### Phase 4 — Outside the app shell ✅
 
-- [ ] Docs site (Docusaurus): update `docusaurus.config.ts` colors + custom CSS.
-- [ ] Storybook theme.
-- [ ] README and marketing assets (`livecodes-text-logo*`).
+- [x] Docs site (Docusaurus): `custom.css` primary palette shifted to brand cyan; status dot
+      changed to live red.
+- [x] Storybook theme: all 6 framework storybooks now use brand cyan primary + teal secondary.
+- [ ] README and marketing assets (`livecodes-text-logo*`): out of scope for code rebrand;
+      requires graphic design work.
 
-### Phase 5 — Raster regeneration
+### Phase 5 — Raster regeneration (remaining)
 
 - [ ] `favicon-{16,32,96}.png`, `apple-touch-icon.png`, `android-chrome-{192,512}.png`,
       `web-app-manifest-{192,512}.png`, `livecodes-og.png`, `open-graph.png` regenerated from
       the new SVG (manual, with realfavicongenerator or a node script).
+- [ ] `safari-pinned-tab.svg` color updated to match brand cyan.
+- [ ] `msapplication-TileColor` in `src/index.html` and `src/404.html` updated.
 
 ## Backwards compatibility
 
