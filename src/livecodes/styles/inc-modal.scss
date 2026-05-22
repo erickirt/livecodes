@@ -253,7 +253,7 @@
     display: inline-block;
     height: 100%;
     margin: 0 auto;
-    overflow: auto;
+    // overflow: auto;
     scrollbar-gutter: stable;
     width: 100%;
   }
@@ -436,6 +436,7 @@
 
       img {
         margin-bottom: 1rem;
+        margin-inline-start: calc(1rem - 6px);
       }
     }
 
