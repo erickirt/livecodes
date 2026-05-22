@@ -43,8 +43,11 @@
 #modal {
   animation: fadeIn 0.4s forwards;
   background-color: var(--modal-bg-color);
-  border: 0;
-  border-radius: var(--rs);
+  border: 1px solid var(--brand-border);
+  border-radius: var(--rs-lg, 12px);
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.55),
+    0 0 0 1px var(--brand-border) inset;
   color: var(--modal-text-color);
   flex-direction: column;
   margin: auto;
