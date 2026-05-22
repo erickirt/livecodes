@@ -251,14 +251,18 @@
   --brand-glow-cyan-soft: 0 0 12px rgba(0, 200, 255, 0.1);
 
   /* Subtle dot texture used on toolbar / modal headers (matches the icon). */
-  --brand-dot-pattern: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.04) 0.75px, transparent 1px);
+  --brand-dot-pattern: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.04) 0.75px,
+    transparent 1px
+  );
   --brand-dot-size: 28px 28px;
 
   /* Typography */
-  --font-ui:
-    'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
-    Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+  --font-ui: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas,
+    monospace;
 
   /* Larger radius for cards / modals (kept distinct from --rs which controls small chrome). */
   --rs-lg: calc(var(--unit) * 0.75); /* 12px */

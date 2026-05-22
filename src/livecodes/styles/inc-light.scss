@@ -94,7 +94,11 @@
   --brand-dim: #97a4b6;
   --brand-glow-cyan: 0 0 24px rgba(0, 150, 204, 0.15);
   --brand-glow-cyan-soft: 0 0 12px rgba(0, 150, 204, 0.08);
-  --brand-dot-pattern: radial-gradient(circle at 1px 1px, rgba(13, 24, 37, 0.04) 0.75px, transparent 1px);
+  --brand-dot-pattern: radial-gradient(
+    circle at 1px 1px,
+    rgba(13, 24, 37, 0.04) 0.75px,
+    transparent 1px
+  );
 
   #logo img {
     filter: drop-shadow(1px 1px 1px var(--color50));
