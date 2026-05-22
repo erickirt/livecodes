@@ -912,6 +912,7 @@ a#result-button {
     .toolbar-render {
       justify-content: space-between;
       place-items: center;
+      padding-top: var(--s4);
     }
 
     #select-editor {
