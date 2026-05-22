@@ -109,6 +109,12 @@ The light-theme variant (`inc-light.scss`) gets the same brand-token shape but w
     and `#00c8ff` (dark).
   - Dark mode highlighted code lines use cyan-tinted background.
   - `.status-link` dot changed from green `#20bf6b` to brand live red `#ff4d4d` with glow.
+- [x] Docs homepage (`HomepageFeatures.tsx` + `.module.css`):
+  - Embedded playground glow switched from generic `--ifm-color-secondary-darkest` to
+    brand cyan `rgba(0, 200, 255, 0.35)`.
+  - Code sample color changed from `dodgerblue` to `#00c8ff`.
+  - `.steps` and `.border` borders: brand-tinted cyan instead of `grey`.
+  - `.rowDark` in dark mode: background set to brand elevated `#0d1825`.
 - [x] Storybook (`storybook/*/.storybook/manager.ts`): all 6 framework variants updated
       with `colorPrimary: '#00c8ff'`, `colorSecondary: '#00e5c8'`, `brandImage`.
 - [ ] Share social card image / code-to-image watermark: already uses new SVG asset.
