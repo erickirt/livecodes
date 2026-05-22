@@ -5,10 +5,6 @@
   aria-label="LiveCodes loading icon"
 >
   <defs>
-    <linearGradient id="lci-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0d1825"/>
-      <stop offset="100%" stop-color="#080d16"/>
-    </linearGradient>
     <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
       <circle cx="1" cy="1" r=".75" fill="rgba(255,255,255,.04)" />
     </pattern>
@@ -27,10 +23,6 @@
       </feMerge>
     </filter>
   </defs>
-
-  <!-- Background rectangles fade in before the logo animation starts -->
-  <rect width="512" height="512" rx="80" fill="url(#lci-bg)" />
-  <rect width="512" height="512" rx="80" fill="url(#lci-dots)" />
   <!-- Master group fades out at the end of each cycle -->
   <g>
     <animate
