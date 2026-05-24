@@ -5,12 +5,12 @@
   inset-inline-start: anchor(start) !important;
   margin-inline-start: -15px; // to avoid cutting off the shadow (visible in light mode)
   top: anchor(bottom) !important;
-  width: 290px;
+  width: calc(var(--dropdown-menu-width) + 30px);
 }
 
 #app-menu-container-project {
   position-anchor: --app-menu-project;
-  width: 600px;
+  width: calc(var(--dropdown-menu-width) * 2 + 60px); // has submenus
 }
 
 #app-menu-container-settings {
@@ -23,7 +23,7 @@
 
 #app-menu-container-i18n {
   position-anchor: --app-menu-i18n;
-  width: 370px;
+  width: calc(var(--dropdown-menu-width) * 1.2 + 30px); // 2 columns
 }
 
 #app-menu-button-project {
@@ -93,13 +93,12 @@
 #app-menu-settings,
 #app-menu-project,
 #app-menu-i18n {
-  --label-max-width: 188px; // used in js to reduce label font size
   column-count: 1;
   left: 0;
   margin-inline-start: 15px;
   margin-top: 0;
   top: 0;
-  width: 255px; // for font-size 14px
+  width: var(--dropdown-menu-width);
 
   span {
     display: inline-block;
@@ -110,7 +109,7 @@
 #app-menu-i18n {
   column-count: 2;
   column-rule: 1px solid var(--menu-split-color);
-  width: 340px;
+  width: calc(var(--dropdown-menu-width) * 1.2);
 
   span {
     flex-grow: 1;
@@ -162,19 +161,19 @@
 .menu-scroller-markup {
   max-width: 50vw;
   right: -180%;
-  width: 400%;
+  width: var(--language-menu-width);
 }
 
 .menu-scroller-style {
   max-width: 50vw;
   right: -180%;
-  width: 400%;
+  width: var(--language-menu-width);
 }
 
 .menu-scroller-script {
   right: 0;
   transform: translateX(50%);
-  width: 900%;
+  width: calc(var(--language-menu-width) * 2);
 }
 
 .dropdown-menu-markup,
@@ -236,7 +235,7 @@
   color: var(--dropdown-color);
   -moz-column-break-inside: avoid;
   display: flex;
-  height: var(--dropdown-height, 32px);
+  height: var(--dropdown-item-height, 32px);
   justify-content: space-between;
   position: relative; // for submenu
 
@@ -318,7 +317,8 @@
   position: absolute !important;
   right: unset;
   top: 0;
-  width: 275px;
+  width: auto !important;
+  min-width: calc(var(--dropdown-menu-width) * 0.9);
 
   &:hover {
     display: block !important;
