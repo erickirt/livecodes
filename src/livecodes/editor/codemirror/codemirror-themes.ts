@@ -457,7 +457,7 @@ const liveCodesLightTheme = EditorView.theme(
       backgroundColor: '#ffffff',
     },
     '.cm-tooltip-autocomplete': {
-      '& tube > li[aria-selected]': {
+      '& > ul > li[aria-selected]': {
         backgroundColor: '#0073a81f',
         color: '#0a2433',
       },
