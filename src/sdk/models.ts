@@ -1320,7 +1320,8 @@ export type WatchFns =
   | WatchCode
   | WatchConsole
   | WatchTests
-  | WatchDestroy;
+  | WatchDestroy
+  | WatchRun;
 
 /**
  * Called when the playground first loads.
@@ -1377,6 +1378,11 @@ export type WatchTests = (
  * Called when the playground is destroyed.
  */
 export type WatchDestroy = (event: 'destroy', fn: () => void) => { remove: () => void };
+
+/**
+ * Called when the playground is run
+ */
+export type WatchRun = (event: 'run', fn: () => void) => { remove: () => void };
 
 /**
  * The event name type for SDK watch functions.

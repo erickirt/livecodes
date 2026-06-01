@@ -14,4 +14,5 @@ export const customEvents: CustomEvents = {
   resizeEditor: 'livecodes-resize-editor',
   apiResponse: 'livecodes-api-response',
   i18n: 'livecodes-i18n',
+  run: 'livecodes-run',
 };

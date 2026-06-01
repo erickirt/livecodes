@@ -135,6 +135,7 @@ export const livecodes = (container: string, config: Partial<Config> = {}): Prom
         registerSDKEvent(customEvents.testResults, true);
         registerSDKEvent(customEvents.console, true);
         registerSDKEvent(customEvents.destroy);
+        registerSDKEvent(customEvents.run);
       }
 
       let api: API | null = null;

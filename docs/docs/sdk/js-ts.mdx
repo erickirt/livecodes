@@ -434,7 +434,8 @@ Type: [docs](../api/interfaces/Playground.md#watch)
 ((event: 'code', fn: (data: { code: Code; config: Config }) => void) => { remove: () => void }) &
 ((event: 'console', fn: (data: { method: string; args: any[] }) => void) => { remove: () => void }) &
 ((event: 'tests', fn: (data: { results: TestResult[]; error?: string }) => void) => { remove: () => void }) &
-((event: 'destroy', fn: () => void) => { remove: () => void });
+((event: 'destroy', fn: () => void) => { remove: () => void }) &
+((event: 'run', fn: () => void) => { remove: () => void });
 ```
 
 Allows to watch for various playground events. It takes 2 arguments: event name and a callback function that will be called on every event.
@@ -536,6 +537,14 @@ These are the events that can be watched and the description of their callback f
   ```ts
   (
     event: "destroy",
+    fn: () => void
+  ) => { remove: () => void }
+  ```
+
+- `"run": Called when the playground is run.
+  ```ts
+  (
+    event: "run",
     fn: () => void
   ) => { remove: () => void }
   ```
