@@ -497,6 +497,8 @@ export type MonacoTheme =
   | 'krtheme'
   | 'kuroir'
   | 'lazy'
+  | 'livecodes-dark'
+  | 'livecodes-light'
   | 'magicwb-amiga'
   | 'merbivore-soft'
   | 'merbivore'
