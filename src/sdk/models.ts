@@ -557,6 +557,8 @@ export type CodemirrorTheme =
   | 'github-light'
   | 'gruvbox-dark'
   | 'gruvbox-light'
+  | 'livecodes-dark'
+  | 'livecodes-light'
   | 'material-dark'
   | 'material-light'
   | 'monochrome'
