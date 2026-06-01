@@ -607,6 +607,8 @@ export type CodejarTheme =
   | 'holi-theme'
   | 'hopscotch'
   | 'laserwave'
+  | 'livecodes-dark'
+  | 'livecodes-light'
   | 'lucario'
   | 'material-dark'
   | 'material-light'
