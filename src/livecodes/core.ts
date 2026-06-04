@@ -1252,17 +1252,19 @@ const run = async (editorId?: EditorId, runTests?: boolean) => {
   if (editorId !== 'style') {
     toolsPane?.console?.clear(/* silent= */ true);
   }
-  if (sdkWatchers.run.hasSubscribers()) {
-    const runEvent = new CustomEvent(customEvents.run);
-    document.dispatchEvent(runEvent);
-    parent.dispatchEvent(runEvent);
-  }
 
   const config = getConfig();
   const shouldRunTests = (runTests ?? config.autotest) && Boolean(config.tests?.content?.trim());
   const result = await getResultPage({ sourceEditor: editorId, runTests: shouldRunTests });
   await createIframe(UI.getResultElement(), result);
   updateCompiledCode();
+  if (sdkWatchers.run.hasSubscribers()) {
+    const runEvent = new CustomEvent(customEvents.run, {
+      detail: { code: getCachedCode(), config },
+    });
+    document.dispatchEvent(runEvent);
+    parent.dispatchEvent(runEvent);
+  }
 };
 
 const runTests = () => run(/* editorId= */ undefined, /* runTests= */ true);

@@ -432,10 +432,10 @@ Type: [docs](../api/interfaces/Playground.md#watch)
 ((event: 'load', fn: () => void) => { remove: () => void }) &
 ((event: 'ready', fn: (data: { config: Config }) => void) => { remove: () => void }) &
 ((event: 'code', fn: (data: { code: Code; config: Config }) => void) => { remove: () => void }) &
+((event: 'run', fn: () => void) => { remove: () => void }) &
 ((event: 'console', fn: (data: { method: string; args: any[] }) => void) => { remove: () => void }) &
 ((event: 'tests', fn: (data: { results: TestResult[]; error?: string }) => void) => { remove: () => void }) &
-((event: 'destroy', fn: () => void) => { remove: () => void }) &
-((event: 'run', fn: () => void) => { remove: () => void });
+((event: 'destroy', fn: () => void) => { remove: () => void });
 ```
 
 Allows to watch for various playground events. It takes 2 arguments: event name and a callback function that will be called on every event.
@@ -513,6 +513,16 @@ These are the events that can be watched and the description of their callback f
     event: "code",
     fn: (data: { code: Code; config: Config }) => void
   ) => { remove: () => void }
+
+  ```
+
+- `"run"`: Called when the playground is run.
+
+  ```ts
+  (
+    event: "run",
+    fn: (data: { code: Code; config: Config }) => void
+  ) => { remove: () => void }
   ```
 
 - `"console"`: Called when the playground console gets new outputs. The callback method is passed an object with 2 properties: `"method"` (e.g. `"log"`, `"error"`, etc.) and `"args"` (the arguments passed to the method, as an array).
@@ -537,14 +547,6 @@ These are the events that can be watched and the description of their callback f
   ```ts
   (
     event: "destroy",
-    fn: () => void
-  ) => { remove: () => void }
-  ```
-
-- `"run": Called when the playground is run.
-  ```ts
-  (
-    event: "run",
     fn: () => void
   ) => { remove: () => void }
   ```

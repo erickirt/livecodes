@@ -20,13 +20,13 @@ export interface CustomEvents {
   appLoaded: 'livecodes-app-loaded';
   ready: 'livecodes-ready';
   change: 'livecodes-change';
+  run: 'livecodes-run';
   testResults: 'livecodes-test-results';
   console: 'livecodes-console';
   destroy: 'livecodes-destroy';
   resizeEditor: 'livecodes-resize-editor';
   apiResponse: 'livecodes-api-response';
   i18n: 'livecodes-i18n';
-  run: 'livecodes-run';
 }
 
 // https://blog.codepen.io/2025/10/20/google-chrome-iframe-allow-permissions-problems/

@@ -88,6 +88,11 @@ const codeWatcher = playground.watch('code', ({ code, config }) => {
   console.log('Code changed:', code.script.content);
 });
 
+// Watch for code execution
+const runWatcher = playground.watch('run', ({ code, config }) => {
+  console.log('Playground ran. Result HTML:', code.result);
+});
+
 // Watch for console output
 const consoleWatcher = playground.watch('console', ({ method, args }) => {
   console[method](...args);
@@ -217,6 +222,11 @@ playground.watch('code', ({ code, config }) => {
   console.log(code.markup.content);
   console.log(code.style.content);
   console.log(code.script.content);
+  console.log(code.result); // Result page HTML
+});
+
+// 'run' event provides { code, config }
+playground.watch('run', ({ code, config }) => {
   console.log(code.result); // Result page HTML
 });
 

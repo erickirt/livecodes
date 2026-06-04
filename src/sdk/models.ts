@@ -1318,10 +1318,10 @@ export type WatchFns =
   | WatchLoad
   | WatchReady
   | WatchCode
+  | WatchRun
   | WatchConsole
   | WatchTests
-  | WatchDestroy
-  | WatchRun;
+  | WatchDestroy;
 
 /**
  * Called when the playground first loads.
@@ -1359,6 +1359,14 @@ export type WatchCode = (
 ) => { remove: () => void };
 
 /**
+ * Called when the playground is run
+ */
+export type WatchRun = (
+  event: 'run',
+  fn: (data: { code: Code; config: Config }) => void,
+) => { remove: () => void };
+
+/**
  * Called when console methods are called in the result page.
  */
 export type WatchConsole = (
@@ -1378,11 +1386,6 @@ export type WatchTests = (
  * Called when the playground is destroyed.
  */
 export type WatchDestroy = (event: 'destroy', fn: () => void) => { remove: () => void };
-
-/**
- * Called when the playground is run
- */
-export type WatchRun = (event: 'run', fn: () => void) => { remove: () => void };
 
 /**
  * The event name type for SDK watch functions.
@@ -1553,7 +1556,7 @@ export interface API {
    * Allows to watch for various playground events.
    * It takes 2 arguments: event name and a callback function that will be called on every event.
    *
-   * event name can be one of: `"load" | "ready" | "code" | "console" | "tests" | "destroy"`
+   * event name can be one of: `"load" | "ready" | "code" | "run" | "console" | "tests" | "destroy"`
    *
    * In some events, the callback function will be called with an object that supplies relevant data to the callback function (e.g. code, console output, test results).
    *
