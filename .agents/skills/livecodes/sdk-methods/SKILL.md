@@ -105,7 +105,9 @@ const testsWatcher = playground.watch('tests', ({ results, error }) => {
 
 // Remove watchers when done
 codeWatcher.remove();
+runWatcher.remove();
 consoleWatcher.remove();
+testsWatcher.remove();
 ```
 
 ### Run tests programmatically

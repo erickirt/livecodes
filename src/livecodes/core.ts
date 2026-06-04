@@ -240,10 +240,10 @@ const sdkWatchers = {
   load: createPub<void>(),
   ready: createPub<void>(),
   code: createPub<{ code: Code; config: Config }>(),
+  run: createPub<{ code: Code; config: Config }>(),
   tests: createPub<{ results: TestResult[]; error?: string }>(),
   console: createPub<{ method: string; args: any[] }>(),
   destroy: createPub<void>(),
-  run: createPub<void>(),
 } as const satisfies Record<SDKEvent, ReturnType<typeof createPub<any>>>;
 
 const getEditorLanguage = (editorId: EditorId = 'markup') => editorLanguages?.[editorId];
@@ -1252,7 +1252,6 @@ const run = async (editorId?: EditorId, runTests?: boolean) => {
   if (editorId !== 'style') {
     toolsPane?.console?.clear(/* silent= */ true);
   }
-
   const config = getConfig();
   const shouldRunTests = (runTests ?? config.autotest) && Boolean(config.tests?.content?.trim());
   const result = await getResultPage({ sourceEditor: editorId, runTests: shouldRunTests });

@@ -1337,7 +1337,7 @@ export type WatchReady = (
 ) => { remove: () => void };
 
 /**
- * Called when the playground "content" is changed (see [`getCode`](https://livecodes.io/docs/sdk/js-ts#getcode) and [`getConfig`](https://livecodes.io/docs/sdk/js-ts#getcode)).
+ * Called when the playground code is changed (see [`getCode`](https://livecodes.io/docs/sdk/js-ts#getcode) and [`getConfig`](https://livecodes.io/docs/sdk/js-ts#getcode)).
  *
  * This includes changes in:
  * - Code (in editors)
@@ -1349,17 +1349,13 @@ export type WatchReady = (
  * - Project title
  * - [Test](https://livecodes.io/docs/features/tests) code
  */
-
-/**
- * Watch function type for code changes in the playground.
- */
 export type WatchCode = (
   event: 'code',
   fn: (data: { code: Code; config: Config }) => void,
 ) => { remove: () => void };
 
 /**
- * Called when the playground is run
+ * Called when running the playground code.
  */
 export type WatchRun = (
   event: 'run',
