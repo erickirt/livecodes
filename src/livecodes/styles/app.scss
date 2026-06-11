@@ -1220,6 +1220,10 @@ a.tools-pane-title {
 #console {
   overflow: auto;
 
+  &.luna-console-theme-dark {
+    background-color: hsl(214, 14%, 11%);
+  }
+
   .luna-object-viewer {
     overflow: hidden;
   }
