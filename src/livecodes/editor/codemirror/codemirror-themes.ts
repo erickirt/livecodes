@@ -456,8 +456,10 @@ const liveCodesLightTheme = EditorView.theme(
       color: '#8693a3',
     },
     '.cm-tooltip': {
-      border: '1px solid #d6e0ea',
       backgroundColor: '#ffffff',
+      border: '1px solid #d6e0ea',
+      borderRadius: '3px',
+      padding: '6px 10px',
     },
     '.cm-tooltip-autocomplete': {
       '& > ul > li[aria-selected]': {
