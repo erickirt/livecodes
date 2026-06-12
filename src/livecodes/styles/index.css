@@ -9,10 +9,6 @@ html {
   height: 100vh;
 }
 
-body {
-  display: none; /* avoid FOUC: light/dark, embed scale */
-}
-
 body,
 #livecodes {
   background-color: #080d16;
@@ -21,8 +17,9 @@ body,
   overflow: hidden;
 }
 
-body.light {
-  background-color: hsl(210, 40%, 98%);
+body.light,
+body.light #livecodes {
+  background-color: #f8fafc;
   color: #080d16;
 }
 

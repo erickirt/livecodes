@@ -9,7 +9,7 @@ const loadingEl = document.querySelector<HTMLElement>('#loading')!;
 const loadingText = document.querySelector<HTMLElement>('#loading-text')!;
 const loadingHTML = loadingEl.innerHTML;
 
-document.body.style.display = 'unset';
+document.documentElement.style.display = 'unset';
 
 if (params.get('theme') === 'light') {
   document.body.classList.add('light');
