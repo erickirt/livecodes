@@ -2478,19 +2478,15 @@ const handleResize = () => {
 };
 
 const handleIframeResize = () => {
-  const gutter = UI.getGutterElement();
-  if (!gutter) return;
-
-  const sizeLabel = document.createElement('div');
-  sizeLabel.id = 'size-label';
-  gutter.appendChild(sizeLabel);
+  const sizeLabel = UI.getSizeLabel();
+  if (!sizeLabel) return;
 
   const hideLabel = debounce(() => {
     setTimeout(() => {
       sizeLabel.classList.remove('visible');
       setTimeout(() => {
         sizeLabel.style.display = 'none';
-      }, 100);
+      }, 200);
     }, 1000);
   }, 1000);
 

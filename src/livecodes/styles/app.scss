@@ -1127,6 +1127,7 @@ a#result-button {
   background-color: var(--toolbar-bg-color);
   height: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 #result {
@@ -1358,7 +1359,6 @@ a.tools-pane-title {
   display: flex !important;
   justify-content: center;
   overflow: hidden;
-  position: relative;
 
   &.gutter-vertical {
     cursor: ns-resize;
@@ -1376,7 +1376,7 @@ a.tools-pane-title {
   }
 }
 
-#editor-container .gutter #size-label {
+#output #size-label {
   background-color: var(--size-label-background);
   border: 1px solid var(--size-label-border);
   border-radius: var(--rs);
@@ -1384,19 +1384,18 @@ a.tools-pane-title {
   cursor: auto;
   font-family: var(--font-mono, ui-monospace, monospace);
   font-size: var(--s12);
-  left: 15px !important;
+  left: 5px !important;
   max-height: calc(100vh - var(--toolbar-height));
   opacity: 0;
   padding: 2px;
   position: absolute;
   top: 5px !important;
-  transition: opacity 0.1s;
+  transition: opacity 0.2s;
   white-space: nowrap;
-  z-index: 10;
 
   &.visible {
     opacity: 100%;
-    transition: opacity 0.1s;
+    transition: opacity 0.2s;
   }
 }
 
