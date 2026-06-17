@@ -130,7 +130,7 @@ const createEscapeHandler = (deps: KeyboardShortcutDeps) => (e: KeyboardEvent) =
         UI.getConsoleButton()?.focus();
       } else {
         // first visible button in editor toolbar (focus button is hidden in embeds)
-        Array.from(UI.getEditorToolbar()?.querySelectorAll('button'))
+        Array.from(UI.getEditorToolbar()?.querySelectorAll('button') || [])
           .find((el) => el.checkVisibility())
           ?.focus();
       }
