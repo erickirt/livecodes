@@ -1650,8 +1650,11 @@ a.editor-title {
     justify-content: space-between;
 
     #logo {
+      align-self: unset;
+      height: 28px;
       inset-inline-end: var(--s6); /* right */
       position: absolute;
+      top: var(--s2);
 
       img {
         width: 28px;

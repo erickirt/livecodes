@@ -2812,7 +2812,8 @@ const handleI18nMenu = () => {
 const handleEditorTools = () => {
   if (!configureEditorTools(getActiveEditor().getLanguage())) return;
   const originalMode = getConfig().mode;
-  eventsManager.addEventListener(UI.getFocusButton(), 'click', () => {
+  const focusButton = UI.getFocusButton();
+  eventsManager.addEventListener(focusButton, 'click', () => {
     const config = getConfig();
     const currentMode = config.mode;
     const newMode = currentMode === originalMode ? 'focus' : originalMode;
@@ -2826,6 +2827,7 @@ const handleEditorTools = () => {
       config.tools.enabled == null;
     if (newMode === 'focus' && consoleIsEnabled) {
       toolsPane?.setActiveTool('console');
+      requestAnimationFrame(() => focusButton.focus()); // avoid moving focus to console editor
     }
     window.deps?.showMode?.(newMode, config.view);
   });
