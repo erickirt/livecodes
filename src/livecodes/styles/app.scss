@@ -901,11 +901,6 @@ a#result-button {
 .layout-vertical {
   #editor-container {
     flex-direction: column;
-
-    .gutter #size-label {
-      left: 5px !important;
-      top: 15px !important;
-    }
   }
 
   .gutter.gutter-vertical {
