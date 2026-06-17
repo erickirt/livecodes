@@ -900,8 +900,6 @@
   .modal-title {
     backdrop-filter: blur(8px);
     background: var(--modal-title-bg);
-    background-image: var(--brand-dot-pattern);
-    background-size: var(--brand-dot-size);
     border: 1px solid var(--brand-border);
     border-radius: var(--rs);
     box-sizing: border-box;

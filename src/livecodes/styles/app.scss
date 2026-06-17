@@ -225,8 +225,8 @@
   --text-success-border: 1px solid rgb(85, 255, 0);
   --text-success-color: rgb(153, 255, 102);
 
-  --outline-color: var(--brand-cyan);
-  --outline-shadow: var(--brand-glow-cyan);
+  --outline-color: hsl(calc(var(--hue) - 20), 100%, 50%); // --brand-cyan
+  --outline-shadow: hsla(calc(var(--hue) - 20), 100%, 50%, 0.18); // --brand-glow-cyan
   --outline-width: 2px;
 
   --icon-filter: invert(0.8);
@@ -255,14 +255,6 @@
   --brand-dim: hsl(214, 23%, 24%);
   --brand-glow-cyan: 0 0 24px hsla(193, 100%, 50%, 0.18);
   --brand-glow-cyan-soft: 0 0 12px hsla(193, 100%, 50%, 0.1);
-
-  /* Subtle dot texture used on toolbar / modal headers (matches the icon). */
-  --brand-dot-pattern: radial-gradient(
-    circle at 1px 1px,
-    hsla(0, 0%, 100%, 0.04) 0.75px,
-    transparent 1px
-  );
-  --brand-dot-size: 28px 28px;
 
   /* Typography */
   --font-ui: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
@@ -565,8 +557,6 @@ kbd {
 #toolbar {
   align-items: center;
   background-color: var(--toolbar-bg-color);
-  background-image: var(--brand-dot-pattern);
-  background-size: var(--brand-dot-size);
   border-bottom: 1px solid var(--brand-border);
   color: var(--toolbar-color);
   display: flex;
