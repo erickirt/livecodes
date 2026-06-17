@@ -328,19 +328,21 @@ describe('Keyboard Shortcuts Handler', () => {
       expect(mockConsoleButton.focus).toHaveBeenCalled();
     });
 
-    // it('should focus focus button on second escape when tools pane is closed', () => {
-    //   mockToolsPane.getStatus.mockReturnValue('closed');
-    //   const mockFocusButton = { focus: jest.fn() };
-    //   (UI.getFocusButton as jest.Mock).mockReturnValue(mockFocusButton);
+    it('should focus first visible toolbar button on second escape when tools pane is closed', () => {
+      mockToolsPane.getStatus.mockReturnValue('closed');
+      const hiddenButton = { checkVisibility: jest.fn().mockReturnValue(false), focus: jest.fn() };
+      const visibleButton = { checkVisibility: jest.fn().mockReturnValue(true), focus: jest.fn() };
+      const mockToolbar = {
+        querySelectorAll: jest.fn().mockReturnValue([hiddenButton, visibleButton]),
+      };
+      (UI.getEditorToolbar as jest.Mock).mockReturnValue(mockToolbar);
 
-    //   // First escape
-    //   simulateKeydown({ code: 'Escape' });
-    //   // Second escape
-    //   const event = simulateKeydown({ code: 'Escape' });
+      simulateKeydown({ code: 'Escape' });
+      const event = simulateKeydown({ code: 'Escape' });
 
-    //   expect(event.preventDefault).toHaveBeenCalled();
-    //   expect(mockFocusButton.focus).toHaveBeenCalled();
-    // });
+      expect(event.preventDefault).toHaveBeenCalled();
+      expect(visibleButton.focus).toHaveBeenCalled();
+    });
 
     it('should focus logo link on third escape', () => {
       const mockLogoLink = { focus: jest.fn() };
