@@ -418,7 +418,7 @@ export type TemplateName =
 /**
  * Tools in the tools pane.
  */
-export type ToolName = 'console' | 'compiled' | 'tests' | 'zoom';
+export type ToolName = 'console' | 'compiled' | 'tests';
 
 /**
  * Status of the tools pane.
@@ -1070,8 +1070,8 @@ export interface AppConfig {
    * ```
    */
   tools: Partial<{
-    enabled: ToolName[] | 'all';
-    active: Exclude<ToolName, 'zoom'> | '';
+    enabled: Array<ToolName | 'zoom'> | 'all';
+    active: ToolName | '';
     status: ToolsPaneStatus;
   }>;
 
