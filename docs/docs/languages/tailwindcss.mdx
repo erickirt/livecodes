@@ -21,7 +21,7 @@ export const tailwindcssDemo = {
   processors: ['tailwindcss'],
 };
 
-[Tailwind CSS](https://tailwindcss.com/) is an open-source CSS framework that provides utility CSS classes that can be used to style each element by mixing and matching
+[Tailwind CSS](https://tailwindcss.com/) is an open-source CSS framework that provides utility CSS classes that can be composed to build any design, directly in the markup.
 
 ## Demo
 
@@ -29,14 +29,7 @@ export const tailwindcssDemo = {
 
 ## Usage
 
-Tailwind CSS is enabled as a [CSS processor](../features/css.mdx#css-processors). Once enabled from the style editor menu, all Tailwind utility classes are available immediately in your markup.
-
-:::info note
-
-There is no need to add `@tailwind` directives to the style editor.
-LiveCodes automatically injects them when the Tailwind CSS processor is enabled.
-
-:::
+Tailwind CSS is enabled as a [CSS processor](../features/css.mdx#css-processors). Once enabled from the style editor menu or in [`processors`](../configuration/configuration-object.mdx#processors) property of the [configuration object](../configuration/configuration-object.mdx), all Tailwind utility classes are available immediately in your markup.
 
 <RunInLiveCodes
   params={basicDemo}
@@ -45,38 +38,49 @@ LiveCodes automatically injects them when the Tailwind CSS processor is enabled.
   formatCode={false}
 />
 
+:::info note
+
+Tailwind CSS is imported using `@import "tailwindcss";` directive in the [style editor](../features/projects.mdx#style-editor).
+
+If no `@import` is added to the style editor, LiveCodes automatically injects it when the Tailwind CSS processor is enabled.
+
+:::
+
 ### Usage with CSS Frameworks in JSX/SFCs
 
-CSS Frameworks supported in LiveCodes (e.g. Tailwind CSS, [UnoCSS](./unocss.mdx), [WindiCSS](./windicss.mdx)) can detect class names added in JSX and framework SFCs such as [React](./react.mdx), [Vue](./vue.mdx) and [Svelte](./svelte.mdx). Make sure that the Tailwind CSS processor is enabled (from style editor menu or in [`processors`](../configuration/configuration-object.mdx#processors) property of [configuration object](../configuration/configuration-object.mdx)).
+CSS Frameworks supported in LiveCodes (e.g. Tailwind CSS, [UnoCSS](./unocss.mdx), [WindiCSS](./windicss.mdx)) can detect class names added in JSX and framework SFCs such as [React](./react.mdx), [Vue](./vue.mdx) and [Svelte](./svelte.mdx). Make sure that the Tailwind CSS processor is enabled.
 
 <RunInLiveCodes
   params={tailwindcssDemo}
   code={tailwindcssDemo.script.content}
-  language="react"
-  formatCode={false}
+  language="jsx"
 />
 
-## Language Info
+### Tailwind CSS Plugins
+
+Tailwind CSS plugins can be imported in the [style editor](../features/projects.mdx#style-editor).
+
+```css
+@import "@tailwindcss/forms";
+@import "@tailwindcss/typography";
+@import "@tailwindcss/aspect-ratio";
+@import "@tailwindcss/line-clamp";
+```
+
+
+## Processor Info
 
 ### Name
 
 `tailwindcss`
 
-### Extensions
-
-`.css`
-
-### Editor
-
-`style`
-
 ## Compiler
 
-[Tailwind CSS JIT compiler](https://tailwindcss.com/docs/just-in-time-mode), running client-side in the browser. The JIT compiler generates styles on-demand, so only the classes used in your markup are included in the output.
+Tailwind CSS official compiler, running client-side in the browser. The compiler generates styles on-demand, so only the classes used in your markup are included in the output.
 
-## Code Formatting
+### Version
 
-Using [Prettier](https://prettier.io/).
+`tailwindcss`: v4.1.16
 
 ## Starter Template
 
